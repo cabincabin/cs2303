@@ -15,10 +15,23 @@ void printLifeArray(int rSize, int cSize,int **gen);
 void centerFile(int **genA, int rSize, int cSize, int **genAppend,
 	int rFileSize, int cFileSize);
 
-/**
-
+///////////////////////////////////////////////////////////////
+/** prints out the game of life for a given file and generation count
+*@param argc the size of the input values, if less than five
+				an error should be thrown.
+				if 7, pause and play parameters are allowed
+*@param char *argv[5 or 7] is an array holding
+				@param x, the number of columns for the playing board
+				@param y, the number of rows for the playing board
+				@param gens, the number of generations to play if no end state hit
+				@param input, the file to place in the center of the playing board
+				@param print, whether the intermediate generations should be played
+											from the first gen to the end condition (y/n)
+				@param pause, if a key stroke should be pressed to advance gens(y/n)
 */
 int main(int argc, char *argv[]){
+	//initialize everything
+	//*******************************************************//
 	if(argc < 5){
 		printf("not enough inputs, must be of size 5 or more\n");
 		fflush(stdout);
@@ -46,7 +59,7 @@ int main(int argc, char *argv[]){
 	int repeatGenBA = 0;
 	int repeatGenBC = 0;
 
-	if(argc<=7){
+	if(argc>=7){
 		if (strcmp(argv[5],"y") == 0)
 			print = 'y';
 		if (strcmp(argv[6],"y") == 0)
@@ -78,7 +91,11 @@ int main(int argc, char *argv[]){
 			}
 		}
 
+
+
    centerFile(genA, rSize, cSize, arrAPPGen, rFileSize, cFileSize);
+	 //play the game
+	 //*******************************************************//
 
 	for(r=0;r<rSize;r++){
 		for(c=0;c<cSize;c++){
@@ -107,19 +124,24 @@ int main(int argc, char *argv[]){
 		if(print == 'y'){
 			printf("\n Generation %d\n", genComplete);
 			printLifeArray(rSize, cSize, genB);
+
 		}
 
 		for(r=0;r<rSize;r++){
 			for(c=0;c<cSize;c++){
-				if(genB[r][c]==genA[r][c])
+				if(genA[r][c]==genB[r][c]){
 					repeatGenBA++;
-				if(genB[r][c]==genC[r][c])
+				}
+				if(genB[r][c]==genC[r][c]){
 					repeatGenBC++;
+				}
 				allDead = allDead + genB[r][c];
 				genC[r][c]=genA[r][c];
 				genA[r][c]=genB[r][c];
 			}
 		}
+
+		//printf("%d", repeatGenBA);
 		if(pause == 'y' && i+1<numGen && !(allDead == 0) && !(repeatGenBA>=rSize*cSize)&&
 				!(repeatGenBC>=rSize*cSize))
 			getchar();
@@ -132,13 +154,13 @@ int main(int argc, char *argv[]){
 	if(allDead == 0){
 		printf("\nReason for termination: Death\n");
 	}
-	else if(repeatGenBA>=rSize*cSize||repeatGenBC>=rSize*cSize){
+	if(repeatGenBA>=rSize*cSize||repeatGenBC>=rSize*cSize){
 		printf("\nReason for termination: Steady State\n");
 	}
-	else{
+	if(genComplete == numGen){
 		printf("\nReason for termination: End of Generations\n");
 	}
-	printf("\n Generations complete:  %d\n", genComplete);
+	printf("\nGenerations complete:  %d\n\n", genComplete);
 	fflush(stdout);
 	free(genA);
 	free(genB);
@@ -148,6 +170,12 @@ int main(int argc, char *argv[]){
 
 /////////////////////////////////////////////////////////////////
 
+/**generates the next generation of life from the given gen
+@param rSize, the row size of the array
+@param cSize, the column size of the array
+@param genA,  the current generation
+@param genB, the array where whe next generation should be produced into
+*/
 void nextgen(int rSize, int cSize, int ** genA, int ** genB){
 	int r;
 	int c;
@@ -199,6 +227,18 @@ void nextgen(int rSize, int cSize, int ** genA, int ** genB){
 	}
 }
 
+///////////////////////////////////////////////////////////////
+
+/**places a life set onto the approxamate center of a play board,
+	 if the life array does not go into the board evenly, it is placced at the
+	 left apprxamation
+*@param genA the empty playboard, must be larger than the life array
+*@param rSize, the row size of the playerboard
+*@param cSize, the column size of the playerboard
+*@param genAppend the life array to be cented on the board.
+*@param rFileSize, the row size of the playerboard
+*@param cFileSize, the column size of the playerboard
+*/
 void centerFile(int **genA, int rSize, int cSize, int **genAppend,
 	int rFileSize, int cFileSize){
 		int rDisp = (rSize-rFileSize)/2;
@@ -206,12 +246,18 @@ void centerFile(int **genA, int rSize, int cSize, int **genAppend,
 		int r=0;
 		int c=0;
 		for(r=0;r<rFileSize;r++){
-			for(c=0;c<cFileSize;c++){
+			for(c=0;c<cFileSize-1;c++){
 				genA[r+rDisp][c+cDisp]=genAppend[r][c];
 			}
 		}
 }
 
+///////////////////////////////////////////////////////////////
+/*prints out the life array as given, translating 0s to os and 1s to xs
+*@param rSize, the row size of the array passed
+*@param cSize, the column size of the array passed
+*@param gen, the generation array to be printed on the screen
+*/
 void printLifeArray(int rSize, int cSize,int **gen){
 	int i;
 	int j;
@@ -222,7 +268,7 @@ void printLifeArray(int rSize, int cSize,int **gen){
 			if(gen[i][j] == 1){
 				printf("x");
 			}
-			else{
+			else if(gen[i][j] == 0){
 				printf("o"); //change this to a dot to see more clearly
 			}
 		}
