@@ -8,15 +8,22 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
+#include "readFile.h"
 
 void nextgen(int rSize, int cSize, int **genA, int **genB);
 void printLifeArray(int rSize, int cSize,int **gen);
 
 int main(int argc, char *argv[]){
+	if(argc < 5){
+		printf("Input is too small, must be of size 5 or more\n");
+		fflush(stdout);
+		exit(-0);
+	}
+
+	int** ArrAPPGen = getArrToAppend(argv[4]);
 	int rSize = atoi(argv[2]);
 	int cSize = atoi(argv[1]);
 	int numGen = atoi(argv[3]);
-	printf("%s\n", argv[5]);
 	int genComplete = 0;
 	int i;
 	int r;
@@ -50,6 +57,15 @@ int main(int argc, char *argv[]){
 			if (!genC[i]) exit(-1);
 		}
 
+
+		for(r=0;r<rSize;r++){
+			for(c=0;c<cSize;c++){
+				genA[r][c]=0;
+				genB[r][c]=0;
+				genC[r][c]=0;
+			}
+		}
+
 	genA[0][0]=0;
 	genA[1][0]=1;
 	genA[2][0]=1;
@@ -66,13 +82,17 @@ int main(int argc, char *argv[]){
 		}
 	}
 
+	printLifeArray(rSize, cSize, genA);
+	if(pause == 'y'  && !(allDead == 0)){
+		getchar();
+	}
+
 	for(i=0;i<numGen && !(allDead == 0) && !(repeatGenBA>=rSize*cSize)&&
 			!(repeatGenBC>=rSize*cSize);i++){
 		repeatGenBA = 0;
 		repeatGenBC = 0;
 		allDead = 0;
-		if(pause == 'y')
-			getchar();
+
 		nextgen(rSize, cSize, genA, genB);
 		if(print == 'y')
 			printLifeArray(rSize, cSize, genB);
@@ -88,6 +108,9 @@ int main(int argc, char *argv[]){
 				genA[r][c]=genB[r][c];
 			}
 		}
+		if(pause == 'y' && i+1<numGen && !(allDead == 0) && !(repeatGenBA>=rSize*cSize)&&
+				!(repeatGenBC>=rSize*cSize))
+			getchar();
 	genComplete++;
 	}
 	if(print == 'n')
@@ -161,9 +184,14 @@ void printLifeArray(int rSize, int cSize,int **gen){
 	printf("\n");
 	for(i = 0; i<3; i++){
 		printf("\n");
-		for(j = 0; j<3; j++)
-			printf("%d", gen[i][j]);
+		for(j = 0; j<3; j++){
+			if(gen[i][j] == 1){
+				printf("x");
+			}
+			else{
+				printf("o");
+			}
+		}
 	}
 	printf("\n");
-
 }
