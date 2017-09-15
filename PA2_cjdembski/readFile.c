@@ -62,10 +62,8 @@ int** getArrToAppend(char fileName[]){
   int c;
 
   int rSize = getArrRow(fileName);
-  printf("%d",rSize);
   fflush(stdout);
   int cSize = getArrCol(fileName)-1;
-  printf("%d",cSize);
   fflush(stdout);
   int** genAppend = (int **)malloc(rSize*sizeof(int *));
 	if (genAppend) for (i=0; i<rSize; i++){
@@ -80,21 +78,6 @@ int** getArrToAppend(char fileName[]){
   }
 
   updateArray(fileName, genAppend);
-
-  int j;
-  printf("\n");
-  for(i = 0; i<rSize; i++){
-    printf("\n");
-    for(j = 0; j<cSize; j++){
-      if(genAppend[i][j] == 1){
-        printf("x");
-      }
-      else{
-        printf("o");
-      }
-    }
-  }
-  printf("\n");
 
   return genAppend;
 }

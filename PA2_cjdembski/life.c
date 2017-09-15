@@ -15,6 +15,9 @@ void printLifeArray(int rSize, int cSize,int **gen);
 void centerFile(int **genA, int rSize, int cSize, int **genAppend,
 	int rFileSize, int cFileSize);
 
+/**
+
+*/
 int main(int argc, char *argv[]){
 	if(argc < 5){
 		printf("not enough inputs, must be of size 5 or more\n");
@@ -83,20 +86,28 @@ int main(int argc, char *argv[]){
 		}
 	}
 
+	printf("\n Conway's Game Of Life \n");
+
+	printf("\n Generation 0\n");
 	printLifeArray(rSize, cSize, genA);
+
 	if(pause == 'y'  && !(allDead == 0)){
 		getchar();
 	}
 
 	for(i=0;i<numGen && !(allDead == 0) && !(repeatGenBA>=rSize*cSize)&&
 			!(repeatGenBC>=rSize*cSize);i++){
+
 		repeatGenBA = 0;
 		repeatGenBC = 0;
 		allDead = 0;
+		genComplete++;
 
 		nextgen(rSize, cSize, genA, genB);
-		if(print == 'y')
+		if(print == 'y'){
+			printf("\n Generation %d\n", genComplete);
 			printLifeArray(rSize, cSize, genB);
+		}
 
 		for(r=0;r<rSize;r++){
 			for(c=0;c<cSize;c++){
@@ -112,11 +123,22 @@ int main(int argc, char *argv[]){
 		if(pause == 'y' && i+1<numGen && !(allDead == 0) && !(repeatGenBA>=rSize*cSize)&&
 				!(repeatGenBC>=rSize*cSize))
 			getchar();
-	genComplete++;
+
 	}
-	if(print == 'n')
+	if(print == 'n'){
+		printf("\n Generation %d\n", genComplete);
 		printLifeArray(rSize, cSize, genB);
-	printf("%d\n", genComplete);
+	}
+	if(allDead == 0){
+		printf("\nReason for termination: Death\n");
+	}
+	else if(repeatGenBA>=rSize*cSize||repeatGenBC>=rSize*cSize){
+		printf("\nReason for termination: Steady State\n");
+	}
+	else{
+		printf("\nReason for termination: End of Generations\n");
+	}
+	printf("\n Generations complete:  %d\n", genComplete);
 	fflush(stdout);
 	free(genA);
 	free(genB);
@@ -172,8 +194,6 @@ void nextgen(int rSize, int cSize, int ** genA, int ** genB){
 					genB[r][c] = 0;
 				}
 			}
-			//printf("%d\n", nghbrs);
-			//printLifeArray(rSize, cSize, genB);
 
 		}
 	}
@@ -203,7 +223,7 @@ void printLifeArray(int rSize, int cSize,int **gen){
 				printf("x");
 			}
 			else{
-				printf("o");
+				printf("o"); //change this to a dot to see more clearly
 			}
 		}
 	}
