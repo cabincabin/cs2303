@@ -14,7 +14,16 @@ void printLifeArray(int rSize, int cSize,int **gen);
 int main(){
 	int rSize = 3;
 	int cSize = 3;
+	int numGen = 3;
+	int genComplete = 0;
 	int i;
+	int r;
+	int c;
+	char print = 'y';
+	char pause = 'y';
+	int allDead = 0;
+	int repeatGenBA = 0;
+	int repeatGenBC = 0;
 
 	int** genA = (int **)malloc(rSize*sizeof(int *));
 	if (genA) for (i=0; i<rSize; i++){
@@ -42,8 +51,38 @@ int main(){
 	genA[1][2]=1;
 	genA[2][2]=1;
 
-	nextgen(rSize, cSize, genA, genB);
-	printLifeArray(rSize, cSize,genB);
+	for(r=0;r<rSize;r++){
+		for(c=0;c<cSize;c++){
+				allDead = allDead + genA[r][c];
+		}
+	}
+
+	for(i=0;i<numGen && !(allDead == 0) && !(repeatGenBA>=rSize*cSize)&&
+			!(repeatGenBC>=rSize*cSize);i++){
+		repeatGenBA = 0;
+		repeatGenBC = 0;
+		allDead = 0;
+		if(pause == 'y')
+			getchar();
+		nextgen(rSize, cSize, genA, genB);
+		if(print == 'y')
+			printLifeArray(rSize, cSize, genB);
+
+		for(r=0;r<rSize;r++){
+			for(c=0;c<cSize;c++){
+				if(genB[r][c]==genA[r][c])
+					repeatGenBA++;
+				if(genB[r][c]==genC[r][c])
+					repeatGenBC++;
+				allDead = allDead + genB[r][c];
+				genC[r][c]=genA[r][c];
+				genA[r][c]=genB[r][c];
+			}
+		}
+	genComplete++;
+	}
+
+	printf("%d\n", genComplete);
 	free(genA);
 	free(genB);
 	free(genC);
@@ -83,7 +122,6 @@ void nextgen(int rSize, int cSize, int ** genA, int ** genB){
 					}
 				}
 			}
-			fflush(stdout);
 			if(genA[r][c] == 1){
 				if(!(nghbrs == 2 || nghbrs == 3)){
 					genB[r][c] = 0;
@@ -92,12 +130,16 @@ void nextgen(int rSize, int cSize, int ** genA, int ** genB){
 					genB[r][c] = 1;
 			}
 			else if(genA[r][c] == 0){
-				if(nghbrs == 3)
+				if(nghbrs == 3){
 					genB[r][c] = 1;
+				}
+				else{
+					genB[r][c] = 0;
+				}
 			}
-			printf("%d\n", nghbrs);
+			//printf("%d\n", nghbrs);
 			//printLifeArray(rSize, cSize, genB);
-			fflush(stdout);
+
 		}
 	}
 }
