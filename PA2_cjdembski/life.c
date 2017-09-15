@@ -7,23 +7,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <string.h>
 
 void nextgen(int rSize, int cSize, int **genA, int **genB);
 void printLifeArray(int rSize, int cSize,int **gen);
 
-int main(){
-	int rSize = 3;
-	int cSize = 3;
-	int numGen = 3;
+int main(int argc, char *argv[]){
+	int rSize = atoi(argv[2]);
+	int cSize = atoi(argv[1]);
+	int numGen = atoi(argv[3]);
+	printf("%s\n", argv[5]);
 	int genComplete = 0;
 	int i;
 	int r;
 	int c;
-	char print = 'y';
-	char pause = 'y';
+	char print = 'n';
+	char pause = 'n';
 	int allDead = 0;
 	int repeatGenBA = 0;
 	int repeatGenBC = 0;
+
+	if(argc<=7){
+		if (strcmp(argv[5],"y") == 0)
+			print = 'y';
+		if (strcmp(argv[6],"y") == 0)
+			pause = 'y';
+	}
 
 	int** genA = (int **)malloc(rSize*sizeof(int *));
 	if (genA) for (i=0; i<rSize; i++){
@@ -41,15 +50,15 @@ int main(){
 			if (!genC[i]) exit(-1);
 		}
 
-	genA[0][0]=1;
+	genA[0][0]=0;
 	genA[1][0]=1;
 	genA[2][0]=1;
 	genA[0][1]=1;
 	genA[1][1]=1;
-	genA[2][1]=1;
-	genA[0][2]=1;
+	genA[2][1]=0;
+	genA[0][2]=0;
 	genA[1][2]=1;
-	genA[2][2]=1;
+	genA[2][2]=0;
 
 	for(r=0;r<rSize;r++){
 		for(c=0;c<cSize;c++){
@@ -81,8 +90,10 @@ int main(){
 		}
 	genComplete++;
 	}
-
+	if(print == 'n')
+		printLifeArray(rSize, cSize, genB);
 	printf("%d\n", genComplete);
+	fflush(stdout);
 	free(genA);
 	free(genB);
 	free(genC);
