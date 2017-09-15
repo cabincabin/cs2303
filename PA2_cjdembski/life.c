@@ -21,7 +21,8 @@ int main(int argc, char *argv[]){
 	}
 
 	int** arrAPPGen = getArrToAppend(argv[4]);
-	printLifeArray(4, 3, arrAPPGen);
+	int rFileSize = getArrRow(argv[4]);
+	int cFileSize = getArrCol(argv[4]);
 	int rSize = atoi(argv[2]);
 	int cSize = atoi(argv[1]);
 	int numGen = atoi(argv[3]);
@@ -183,9 +184,9 @@ void printLifeArray(int rSize, int cSize,int **gen){
 	int i;
 	int j;
 	printf("\n");
-	for(i = 0; i<3; i++){
+	for(i = 0; i<rSize; i++){
 		printf("\n");
-		for(j = 0; j<3; j++){
+		for(j = 0; j<cSize; j++){
 			if(gen[i][j] == 1){
 				printf("x");
 			}

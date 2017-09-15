@@ -70,17 +70,23 @@ int** getArrToAppend(char fileName[]){
 		genAppend[i] = (int*)malloc(cSize * sizeof(int));
 		if (!genAppend[i]) exit(-1);
   }
+
   for(r=0;r<rSize;r++){
     for(c=0;c<cSize;c++){
       genAppend[r][c]=0;
     }
   }
+
+  updateArray(fileName, genAppend);
+
   return genAppend;
 }
 
 void updateArray(char fileName[], int ** genAppend){
   FILE *input;
-
+  int r=0;
+  int c=0;
+  char scroll = 0;
 
   input = fopen(fileName, "r");
   if (!input){
@@ -92,8 +98,18 @@ void updateArray(char fileName[], int ** genAppend){
   while(scroll!=EOF){
     scroll = fgetc(input);
     if(scroll == '\n'){
-      r++;
+        r++;
+        c=0;
     }
+    else if (scroll == 'x'){
+      genAppend[r][c] = 1;
+    }
+    else if (scroll == 'o'){
+      genAppend[r][c] = 0;
+    }
+    c++;
   }
+
+
   fclose(input);
 }
