@@ -12,19 +12,26 @@
 
 void nextgen(int rSize, int cSize, int **genA, int **genB);
 void printLifeArray(int rSize, int cSize,int **gen);
+void centerFile(int **genA, int rSize, int cSize, int **genAppend,
+	int rFileSize, int cFileSize);
 
 int main(int argc, char *argv[]){
 	if(argc < 5){
-		printf("Input is too small, must be of size 5 or more\n");
+		printf("not enough inputs, must be of size 5 or more\n");
 		fflush(stdout);
-		exit(-0);
+		exit(0);
 	}
 
 	int** arrAPPGen = getArrToAppend(argv[4]);
 	int rFileSize = getArrRow(argv[4]);
 	int cFileSize = getArrCol(argv[4]);
-	int rSize = atoi(argv[2]);
-	int cSize = atoi(argv[1]);
+	int rSize = atoi(argv[2]);//r=y axis
+	int cSize = atoi(argv[1]);//c = x axis
+	if(rSize < rFileSize || cSize < cFileSize){
+		printf("Given r and c size is too small for file r and c\n");
+		fflush(stdout);
+		exit(0);
+	}
 	int numGen = atoi(argv[3]);
 	int genComplete = 0;
 	int i;
@@ -68,15 +75,7 @@ int main(int argc, char *argv[]){
 			}
 		}
 
-	genA[0][0]=0;
-	genA[1][0]=1;
-	genA[2][0]=1;
-	genA[0][1]=1;
-	genA[1][1]=1;
-	genA[2][1]=0;
-	genA[0][2]=0;
-	genA[1][2]=1;
-	genA[2][2]=0;
+   centerFile(genA, rSize, cSize, arrAPPGen, rFileSize, cFileSize);
 
 	for(r=0;r<rSize;r++){
 		for(c=0;c<cSize;c++){
@@ -178,6 +177,19 @@ void nextgen(int rSize, int cSize, int ** genA, int ** genB){
 
 		}
 	}
+}
+
+void centerFile(int **genA, int rSize, int cSize, int **genAppend,
+	int rFileSize, int cFileSize){
+		int rDisp = (rSize-rFileSize)/2;
+		int cDisp = (cSize-cFileSize)/2;
+		int r=0;
+		int c=0;
+		for(r=0;r<rFileSize;r++){
+			for(c=0;c<cFileSize;c++){
+				genA[r+rDisp][c+cDisp]=genAppend[r][c];
+			}
+		}
 }
 
 void printLifeArray(int rSize, int cSize,int **gen){
