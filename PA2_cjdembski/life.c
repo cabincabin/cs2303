@@ -20,7 +20,8 @@ int main(int argc, char *argv[]){
 		exit(-0);
 	}
 
-	int** ArrAPPGen = getArrToAppend(argv[4]);
+	int** arrAPPGen = getArrToAppend(argv[4]);
+	printLifeArray(4, 3, arrAPPGen);
 	int rSize = atoi(argv[2]);
 	int cSize = atoi(argv[1]);
 	int numGen = atoi(argv[3]);

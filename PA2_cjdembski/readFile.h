@@ -1,12 +1,11 @@
 #ifndef READFILE_H_
 #define READFILE_H
 
-int isValidFile();
 
-int getArrRow(FILE *input);
-int getArrCol(FILE *input);
+int getArrRow(char fileName[]);
+int getArrCol(char fileName[]);
 
 int** getArrToAppend(char *fileName);
-
+void updateArray(char fileName[], int ** genAppend);
 
 #endif
