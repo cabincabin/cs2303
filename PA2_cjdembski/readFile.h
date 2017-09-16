@@ -1,3 +1,12 @@
+/**
+ *@file life.h
+ *@Author Clayton Dembski
+ *@date Sep 15, 2017
+ *the headerfile for readFile.C,
+ * when the program getArrtoAppend is run with a given file in the format x, o,
+ * an array is created of the file, this is passed back.
+ */
+
 #ifndef READFILE_H_
 #define READFILE_H
 

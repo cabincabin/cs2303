@@ -1,3 +1,11 @@
+/**
+ *@file readFile.c
+ *@Author Clayton Dembski
+ *@date Sep 15, 2017
+ * when the program getArrtoAppend is run with a given file in the format x, o,
+ * an array is created of the file, this is passed back.
+ */
+
 #include "readFile.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,8 +19,8 @@
 */
 int getArrRow(char fileName[]){
   FILE *input;
-  int r=0;
-  char scroll=0;
+  int r=0; //max row of the file
+  char scroll=0;//current value in current position of file
 
   input = fopen(fileName, "r");
   if (!input){
@@ -21,11 +29,14 @@ int getArrRow(char fileName[]){
     exit(-0);
   }
 
+//precondition: the given file has been opened and is at the first index.
   while(scroll!=EOF){
     scroll = fgetc(input);
     if(scroll == '\n'){
       r++;
     }
+    //loopInvariant: the max row size has been found
+                      //scroll is at the end of the file
   }
   fclose(input);
   return r;
@@ -38,11 +49,12 @@ int getArrRow(char fileName[]){
 *@param fileName[] The name of the file to extract the row size from
 *@return the max column length of the given file.
 */
+
 int getArrCol(char fileName[]){
   FILE *input;
-  int c=0;
-  int cMax = 0;
-  char scroll=0;
+  int c=0;//relitive column  value for row
+  int cMax = 0; //max column row for file
+  char scroll=0;//current value in current position of file
 
   input = fopen(fileName, "r");
   if (!input){
@@ -50,7 +62,7 @@ int getArrCol(char fileName[]){
     fflush(stdout);
     exit(-0);
   }
-
+//precondition: the given file has been opened and is at the first index.
   while(scroll!=EOF){
     fflush(stdout);
     scroll = fgetc(input);
@@ -58,7 +70,8 @@ int getArrCol(char fileName[]){
     if(scroll=='\n'){
       if(c>cMax)
         cMax = c;
-      c=0;
+      c=0;//loop invariant: the max column size has been found,
+                            //scroll is at the end of the file
     }
 
   }
@@ -75,25 +88,29 @@ int getArrCol(char fileName[]){
 *@return a 2 dimentional array of the given file
 */
 int** getArrToAppend(char fileName[]){
-  int i;
-  int r;
-  int c;
+  int i;//indexor
+  int r;//row indexer of life array
+  int c;//column indexer of life array
 
-  int rSize = getArrRow(fileName);
+  int rSize = getArrRow(fileName);//max size of r
   fflush(stdout);
-  int cSize = getArrCol(fileName)-1;
+  int cSize = getArrCol(fileName)-1;//maxsize of c
   fflush(stdout);
-  int** genAppend = (int **)malloc(rSize*sizeof(int *));
+  int** genAppend = (int **)malloc(rSize*sizeof(int *));//life array from file
+  //precondition: genAppend is a 2d array allocated to store arrays of pointers
+                  //in each row.
 	if (genAppend) for (i=0; i<rSize; i++){
 		genAppend[i] = (int*)malloc(cSize * sizeof(int));
 		if (!genAppend[i]) exit(-1);
-  }
+  }//loopInvariant: genAppend will be a 2d array of pointers.
 
+//precondition: all three boards are empty
   for(r=0;r<rSize;r++){
     for(c=0;c<cSize;c++){
       genAppend[r][c]=0;
     }
   }
+//loop invariant all three boards are filled with 0s
 
   updateArray(fileName, genAppend);
 
@@ -121,6 +138,7 @@ void updateArray(char fileName[], int ** genAppend){
     exit(-0);
   }
 
+//precondition: the given file has been opened and is at the first index.
   while(scroll!=EOF){
     scroll = fgetc(input);
     if(scroll == '\n'){
@@ -137,7 +155,7 @@ void updateArray(char fileName[], int ** genAppend){
       genAppend[r][c] = 0;
     }
 
-  }
+  }//loopInvariant: the life array has been filled with life from the given file
 
   fclose(input);
 }
