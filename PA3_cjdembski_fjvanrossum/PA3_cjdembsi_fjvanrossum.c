@@ -8,15 +8,9 @@
 //Floris' comments
 //Clayton's Replies
 
-<<<<<<< HEAD
 //a great comment
-=======
-
-
-
 
 ///YOLOSADASDAS
 
 
 
->>>>>>> trivial
