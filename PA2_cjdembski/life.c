@@ -317,7 +317,7 @@ void printLifeArray(int rSize, int cSize,int **gen){
 				printf("x");
 			}
 			else if(gen[i][j] == 0){//translate  0s to os
-				printf("o"); //change this to a dot to see more clearly
+				printf("."); //change this to a dot to see more clearly
 			}
 
 		}
