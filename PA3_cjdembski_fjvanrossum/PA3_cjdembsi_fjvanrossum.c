@@ -5,13 +5,15 @@
  *      Author: student
  */
 
-//Floris' comments
-//Clayton's Replies
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+#include "readWords.h"
 
-//a great comment
-
-///YOLOSADASDAS
-
-
-
-
+int main(){
+  int i;
+  i = initFileGetSize("Obama.txt");
+  printf("%d\n",i);
+  return 0;
+}
