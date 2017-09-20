@@ -4,50 +4,58 @@
 #include <string.h>
 #include "readWords.h"
 
-static char fName[];
+static FILE *input;
+static char scroll;
 
 ///////////////////////////////////////////////////////////////
-int initFileGetSize(char fileName[]){
-  char scroll;
-  int sizeOfFile = 0;
-  char wordBool = ' ';
-  char prevchar = ' ';
+void initFile(char fileName[]){
+
   //fName[] = fileName;
-  FILE *input;
   input = fopen(fileName, "r");
   if (!input){
     printf("Unable to open file\n");
     exit(-0);
   }
   printf("opened file\n");
+  scroll = fgetc(input);
 
-    while(scroll!=EOF){
-      scroll = fgetc(input);
-      printf("%c",scroll);
-      if(wordBool == ' '){
-          if(scroll!= ' ' && scroll != '\n' && scroll != '\t' && scroll != EOF
-           && scroll != '.'&& scroll!='-'&&scroll!='"'){
-             printf("%c",178);
-            sizeOfFile++;
-            wordBool = 'c';
-          }
-      }
-
-      else if(wordBool == 'c'){
-          if(scroll== ' '||scroll=='\n'||scroll=='.'||scroll== '\t'||(prevchar == '-' && scroll=='-')||scroll=='"'){
-            wordBool = ' ';
-          }
-      }
-      prevchar = scroll;
-    }
-    fclose(input);
-    return sizeOfFile;
 }
-
 
 ///////////////////////////////////////////////////////////////
 char getNextWord(){
- return 'a';
+  int sizeOfFile = 0;
+  int wordGet = 0;
+  char prevchar = ' ';
+  char word[100];
+  if(scroll==EOF){
+    closeFile();
+    return EOF;
+    printf("%d\n", sizeOfFile);
+    //exit(-0);
+  }
+  for(;!(scroll>=(char)48 && scroll <= (char)57)&&!(scroll>=(char)65 && scroll <= (char)90)&&
+  !(scroll >= (char)97 && scroll <=(char)122) && scroll!=(char)39; scroll = fgetc(input)){
+  //printf("%c",scroll);
+  }
+  sizeOfFile++;
+  printf("%c",178);
+
+  for(;(scroll>=(char)48 && scroll <= (char)57)||(scroll>=(char)65 && scroll <=(char)90)||
+  (scroll >= (char)97 && scroll <=(char)122) || scroll==(char)39 || (prevchar == '-'
+   && scroll!='-'); scroll = fgetc(input)){
+    printf("%c",scroll);
+    word[wordGet]=scroll;
+    fflush(stdout);
+    prevchar = scroll;
+    wordGet++;
+    //printf("%c",scroll);
+  }
+  return 'n';
 }
 
 ///////////////////////////////////////////////////////////////
+void closeFile(){
+  if (input){
+    fclose(input);
+  }
+}
