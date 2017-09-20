@@ -12,8 +12,9 @@
 #include "readWords.h"
 
 int main(){
-  int i;
-  i = initFileGetSize("Obama.txt");
-  printf("%d\n",i);
+  int i = 0;
+  initFile("Obama.txt");
+  while(getNextWord()!=EOF){
+  }
   return 0;
 }

@@ -6,7 +6,9 @@
 #ifndef READWORDS_H_
 #define READWORDS_H_
 
-int initFileGetSize(char fileName[]);
+void initFile(char fileName[]);
 
 char getNextWord();
+
+void closeFile();
 #endif
