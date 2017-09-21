@@ -12,6 +12,8 @@
 //RIGHT IS HIGHER IN ALPHABET (B IS HIGHER THAN A SO RIGHT)
 //LEFT IS LOWER IN ALPHABET (A IS LOWER THAN B SO LEFT)
 struct node * getWord(char * word, struct node* node);
+void derefTree(struct node * node);
+
 //This is a node that contains the string as well as a left and right node
 struct node {
 	char * word; //pointer to the char string
@@ -104,17 +106,43 @@ struct node * getWord(char * word, struct node* node){
 	return NULL;
 }
 
-//This function lists the tree below it, don't know what to return yet here
+//This function lists the tree below it
 void listTree(struct node * node){
 	if( node->left != NULL){
 		//do something for the left tree
 		listTree(node->left);
 	}
+	else if(node->left == NULL){
+		printf("%s -- %d\n", node->word , node->cnt);
+		fflush(stdout);
+	}
 	//do something for the center node
 	if(node->right != NULL){
+		if( node->left != NULL){
+			printf("%s -- %d\n", node->word , node->cnt);
+			fflush(stdout);
+		}
 		//do something for the right node
 		listTree(node->right);
 	}
+	else if(node->right == NULL && node->left != NULL){
+		printf("%s -- %d\n", node->word , node->cnt);
+		fflush(stdout);
+	}
+}
 
-	//return something here that will allow us to print out the whole thing
+void derefTree(struct node * node){
+	if( node->left != NULL){
+		//do something for the left tree
+		derefTree(node->left);
+	}
+
+	//do something for the center node
+	if(node->right != NULL){
+		//do something for the right node
+		derefTree(node->right);
+	}
+
+	free(node->word);
+	free(node);
 }

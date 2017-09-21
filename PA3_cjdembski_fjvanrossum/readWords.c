@@ -6,6 +6,7 @@
 
 static FILE *input;
 static int scroll;
+static int sizeOfFile = 0;
 
 ///////////////////////////////////////////////////////////////
 void initFile(char fileName[]){
@@ -23,13 +24,13 @@ void initFile(char fileName[]){
 
 ///////////////////////////////////////////////////////////////
 void getNextWord(char word[]){
-  int sizeOfFile = 0;
+
   int wordGet = 0;
   char prevchar = ' ';
   /*if(scroll==EOF){
     closeFile();
     return EOF;
-    printf("%d\n", sizeOfFile);
+
     //exit(-0);
   }*/
 
@@ -72,4 +73,5 @@ void closeFile(){
   if (input){
     fclose(input);
   }
+  	printf("\n%d", sizeOfFile);
 }

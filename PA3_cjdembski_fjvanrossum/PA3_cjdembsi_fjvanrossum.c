@@ -19,12 +19,13 @@ int main(){
   int a = 0;
   int i = 0;
   initFile("Obama.txt");
+  //causes size to be a+1
   getNextWord(word);
   struct node * rootNode = newNode(word);
-  //for(;a<5;a++){
+  for(;a<5;a++){
 
 
-  while(word[0]!=-1){
+  //while(word[0]!=-1){
 
     printf("%s ",word);
 
@@ -35,6 +36,12 @@ int main(){
     getNextWord(word);
     insertWord(word,rootNode);
   }
+
+  printf("\n");
+  fflush(stdout);
+  listTree(rootNode);
+  derefTree(rootNode);
   closeFile();
+  printf("\n");
   return 0;
 }
