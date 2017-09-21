@@ -97,3 +97,17 @@ struct node * getWord(char * word, struct node* node){
 	}
 }
 
+//This function lists the tree below it, don't know what to return yet here
+void listTree(struct node * node){
+	if(node->left != NULL){
+		//do something for the left tree
+		listTree(node->left);
+	}
+	//do something for the center node
+	if(node->right != NULL){
+		//do something for the right node
+		listTree(node->right);
+	}
+
+	//return something here that will allow us to print out the whole thing
+}
