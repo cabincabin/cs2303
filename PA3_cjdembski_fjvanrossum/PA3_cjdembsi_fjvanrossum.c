@@ -10,15 +10,21 @@
 #include <errno.h>
 #include <string.h>
 #include "readWords.h"
+#include "tree.h"
 
 int main(){
+
+
   char word[100];
   int a = 0;
   int i = 0;
-  initFile("Kennedy.txt");
-//  for(;a<2400;a++){
-getNextWord(word);
-  while(word[0]!=-1){
+  initFile("Obama.txt");
+  getNextWord(word);
+  struct node * rootNode = newNode(word);
+  for(;a<5;a++){
+	  insertWord(word,rootNode);
+
+  //while(word[0]!=-1){
 
     printf("%s",word);
 
