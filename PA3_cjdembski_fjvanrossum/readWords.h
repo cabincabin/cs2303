@@ -8,7 +8,7 @@
 
 void initFile(char fileName[]);
 
-char getNextWord();
+void getNextWord(char word[]);
 
 void closeFile();
 #endif

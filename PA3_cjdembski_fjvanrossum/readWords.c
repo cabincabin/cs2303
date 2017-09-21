@@ -5,7 +5,7 @@
 #include "readWords.h"
 
 static FILE *input;
-static char scroll;
+static int scroll;
 
 ///////////////////////////////////////////////////////////////
 void initFile(char fileName[]){
@@ -22,35 +22,44 @@ void initFile(char fileName[]){
 }
 
 ///////////////////////////////////////////////////////////////
-char getNextWord(){
+void getNextWord(char word[]){
   int sizeOfFile = 0;
   int wordGet = 0;
   char prevchar = ' ';
-  char word[100];
-  if(scroll==EOF){
+  /*if(scroll==EOF){
     closeFile();
     return EOF;
     printf("%d\n", sizeOfFile);
     //exit(-0);
-  }
-  for(;!(scroll>=(char)48 && scroll <= (char)57)&&!(scroll>=(char)65 && scroll <= (char)90)&&
-  !(scroll >= (char)97 && scroll <=(char)122) && scroll!=(char)39; scroll = fgetc(input)){
-  //printf("%c",scroll);
-  }
-  sizeOfFile++;
-  printf("%c",178);
+  }*/
 
-  for(;(scroll>=(char)48 && scroll <= (char)57)||(scroll>=(char)65 && scroll <=(char)90)||
-  (scroll >= (char)97 && scroll <=(char)122) || scroll==(char)39 || (prevchar == '-'
-   && scroll!='-'); scroll = fgetc(input)){
-    printf("%c",scroll);
-    word[wordGet]=scroll;
-    fflush(stdout);
-    prevchar = scroll;
-    wordGet++;
-    //printf("%c",scroll);
+  if(scroll!=EOF){
+    for(;!(scroll>=(char)48 && scroll <= (char)57)&&!(scroll>=(char)65 && scroll <= (char)90)&&
+    !(scroll >= (char)97 && scroll <=(char)122) && scroll!=(char)39 && scroll!=EOF; scroll = fgetc(input)){
+        //printf("dasdsadasd %d",scroll);
+    }
+    sizeOfFile++;
+    //printf("%c",178);
+
+    for(;(scroll>=(char)48 && scroll <= (char)57)||(scroll>=(char)65 && scroll <=(char)90)||
+    (scroll >= (char)97 && scroll <=(char)122) || scroll==(char)39 || (prevchar == '-'
+     && scroll!='-'); scroll = fgetc(input)){
+      //printf("%c",scroll);
+      word[wordGet]=scroll;
+
+      prevchar = scroll;
+      wordGet++;
+      //printf("hhhhhhhhhhhhh %d",scroll);
+    }
   }
-  return 'n';
+
+  else{
+    word[0]=-1;
+    wordGet = 1;
+  }
+  word[wordGet]='\0';
+  //printf("%d",scroll);
+  fflush(stdout);
 }
 
 ///////////////////////////////////////////////////////////////
