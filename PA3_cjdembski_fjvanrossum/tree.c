@@ -5,16 +5,16 @@
  *      Author:Floris van Rossum & Clayton Dembski
  */
 
+//Include Statements
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-//RIGHT IS HIGHER IN ALPHABET (B IS HIGHER THAN A SO RIGHT)
-//LEFT IS LOWER IN ALPHABET (A IS LOWER THAN B SO LEFT)
+//Function Prototypes
 struct node * getWord(char * word, struct node* node);
 void derefTree(struct node * node);
 
-//This is a node that contains the string as well as a left and right node
+//Tree node
 struct node {
 	char * word; //pointer to the char string
 	int cnt; //An integer value that counts the number of words
@@ -113,20 +113,20 @@ void listTree(struct node * node){
 		listTree(node->left);
 	}
 	else if(node->left == NULL){
-		printf("%s -- %d\n", node->word , node->cnt);
+		printf("%17s | %7d\n", node->word , node->cnt);
 		fflush(stdout);
 	}
 	//do something for the center node
 	if(node->right != NULL){
 		if( node->left != NULL){
-			printf("%s -- %d\n", node->word , node->cnt);
+			printf("%17s | %7d\n", node->word , node->cnt);
 			fflush(stdout);
 		}
 		//do something for the right node
 		listTree(node->right);
 	}
 	else if(node->right == NULL && node->left != NULL){
-		printf("%s -- %d\n", node->word , node->cnt);
+		printf("%17s | %7d\n", node->word , node->cnt);
 		fflush(stdout);
 	}
 }
