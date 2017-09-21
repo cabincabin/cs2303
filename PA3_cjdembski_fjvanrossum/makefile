@@ -16,4 +16,4 @@ PA3_cjdembsi_fjvanrossum.c.o: PA3_cjdembsi_fjvanrossum.c
 	gcc $(CFLAGS) -Wall -c PA3_cjdembsi_fjvanrossum.c
 
 clean:
-	 rm -f life.o PA3_cjdembsi_fjvanrossum.c.o PA3
+	 rm -f readWords.o tree.o PA3_cjdembsi_fjvanrossum.o PA3

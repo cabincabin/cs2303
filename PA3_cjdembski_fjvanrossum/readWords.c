@@ -67,8 +67,9 @@ void getNextWord(char word[]){
     word[0]=-1;
     wordGet = 1;
   }
+
   word[wordGet]='\0';
-  //printf("%d",scroll);
+  printf("%s",word);
   fflush(stdout);
 }
 

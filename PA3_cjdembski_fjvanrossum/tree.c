@@ -45,7 +45,7 @@ struct node * newNode(char * word1){
 	struct node* node = (struct node*)malloc(sizeof(struct node));
 
 	//Malloc the space for a string of word size and copy the word to it
-	node -> word = strncpy(((char *)malloc(strlen(word1)*sizeof(char))),  word1,20);
+	node -> word = strncpy(((char *)malloc((strlen(word1)+1)*sizeof(char))),  word1,20);
 	node -> cnt = 1; //set count of word1 to 1
 	node -> left = NULL;
 	node -> right = NULL;
