@@ -9,9 +9,15 @@ static int scroll;
 static int sizeOfFile = 0;
 
 ///////////////////////////////////////////////////////////////
+
+/**void initFile(char fileName[])
+ * Purpose: initializes the file to be read
+ * and initializes scroll to be the first letter in the file.
+ * prints if the file is opened successfully or not
+ * @param char fileName[] The name of the file to be opened, as a string literal
+ */
 void initFile(char fileName[]){
 
-  //fName[] = fileName;
   input = fopen(fileName, "r");
   if (!input){
     printf("Unable to open file\n");
@@ -23,16 +29,14 @@ void initFile(char fileName[]){
 }
 
 ///////////////////////////////////////////////////////////////
+/**void getNextWord(char word[])
+ * Purpose:
+ * returns the
+ */
 void getNextWord(char word[]){
 
   int wordGet = 0;
   char prevchar = ' ';
-  /*if(scroll==EOF){
-    closeFile();
-    return EOF;
-
-    //exit(-0);
-  }*/
 
   if(scroll!=EOF){
     for(;!(scroll>=(char)48 && scroll <= (char)57)&&!(scroll>=(char)65 && scroll <= (char)90)&&
