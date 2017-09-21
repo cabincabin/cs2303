@@ -5,69 +5,105 @@
  *      Author:Floris van Rossum & Clayton Dembski
  */
 
+/*****************************************************************/
+
 //Include Statements
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+/*****************************************************************/
+
 //Function Prototypes
 struct node * getWord(char * word, struct node* node);
 void derefTree(struct node * node);
 
-//Tree node
+/*****************************************************************/
+
+//Definition of a node in the binary tree
 struct node {
-	char * word; //pointer to the char string
+	char * word; //pointer to the string which contains a word
 	int cnt; //An integer value that counts the number of words
 	struct node *left; //left node
 	struct node *right; //right node
 };
 
-//This function creates a new node
+/*****************************************************************/
+
+/*
+ * struct node * newNode(char * word1)
+ * Purpose: Initialize a new node in the program containing word
+ * dynamically allocates memory for the struct and the word inside it
+ * @param char * word1 Pointer to the string word which is to be entered in
+ * the new node
+ * @return struct node * Returns the pointer to the node that was just created
+ */
 struct node * newNode(char * word1){
-	struct node* node = (struct node*)malloc(sizeof(struct node)); //malloc the space for a new node
+	//Malloc the space required for a new node
+	struct node* node = (struct node*)malloc(sizeof(struct node));
+
+	//Malloc the space for a string of word size and copy the word to it
 	node -> word = strncpy(((char *)malloc(strlen(word1)*sizeof(char))),  word1,20);
-	node -> cnt = 1; //set count to 1
+	node -> cnt = 1; //set count of word1 to 1
 	node -> left = NULL;
 	node -> right = NULL;
 	return node;
 }
 
-//This function takes a word and inserts it into the tree, incrementing count
-//or creating a new node
+/*****************************************************************/
 
-//TO-DO:
-//Make this so that we can break up nodes and insert a node in between
+/*
+ * void insertWord(char * word1, struct node * node)
+ * Purpose: Insert a word into the binary tree, alphabetically
+ * @param char * word1 Pointer to the string word which is to be entered in
+ * the binary tree
+ * @param struct node * node Root node of the binary tree into which the word
+ * is to be entered
+ * @return void
+ */
 void insertWord(char* word1, struct node * node){
 
+	/*This if-else statement decides whether the word is alphabetically higher or
+	 lower than node->word*/
 	if(0 > strcmp(word1,node->word)){
-		//Means that node.word is higher in alphabet
+		//Means that node->word is higher in alphabet
 
-		//check that the left node is not empty
+		//Checks if the left node is empty
 		if(node->left == NULL){
+			//Left node is empty so create a new node
 			node->left = newNode(word1);
 		}
 		else{
-
-			insertWord(word1, node->left); //insert word in the left node
+			//Recursively call function in order to insert word into left node
+			insertWord(word1, node->left);
 		}
 	}
-
 	else if(strcmp(word1,node->word) > 0){
 		//Means that word is higher in alphabet, so RIGHT
 
-		//check to see that right node is not empty
+		//Checks if right node is empty
 		if(node->right == NULL){
-			node->right = newNode(word1); //create a new node
+			//Right node is empty so create a new node in right node
+			node->right = newNode(word1);
 		} else {
-			insertWord(word1, node->right); //insert word in right node
+			//Recursively call function in order to insert word into right node
+			insertWord(word1, node->right);
 		}
 	} else if(strcmp(word1,node->word) == 0){
-		//Same word
-		node->cnt++;//increment the count of word
+		//Word entered in function is same word as in node
+		node->cnt++; //Increment the count of that word
 	}
 }
 
-//This function allows you to enter a word and returns the number of those words
+/*****************************************************************/
+
+/*
+ * int getNumber(char * word, struct node* node)
+ * Purpose: Get the count of a word located in the tree
+ * @param char * word Pointer to the string word whose count is to be obtained
+ * @param struct node * node
+ * @return struct node * Returns the pointer to the node that was just created
+ */
 int getNumber(char* word,struct node* node){
 	struct node * noded = getWord(word, node);
 	if(noded == NULL){
@@ -75,6 +111,8 @@ int getNumber(char* word,struct node* node){
 	}
 	return noded->cnt;
 }
+
+/*****************************************************************/
 
 // Returns the pointer to a node when you enter a word
 struct node * getWord(char * word, struct node* node){
@@ -106,6 +144,8 @@ struct node * getWord(char * word, struct node* node){
 	return NULL;
 }
 
+/*****************************************************************/
+
 //This function lists the tree below it
 void listTree(struct node * node){
 	if( node->left != NULL){
@@ -130,6 +170,8 @@ void listTree(struct node * node){
 		fflush(stdout);
 	}
 }
+
+/*****************************************************************/
 
 void derefTree(struct node * node){
 	if( node->left != NULL){

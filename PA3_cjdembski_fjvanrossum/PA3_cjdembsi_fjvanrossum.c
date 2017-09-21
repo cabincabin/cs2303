@@ -78,6 +78,8 @@ int main(int argc, char ** argv){
 	return 0;
 }
 
+/*****************************************************************/
+
 /*
  * void readFile(char * fileName, char * word, struct node * rootNode)
  * Purpose: Read a file as determined by user and store words in tree
