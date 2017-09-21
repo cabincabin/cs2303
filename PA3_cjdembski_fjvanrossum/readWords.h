@@ -10,5 +10,7 @@ void initFile(char fileName[]);
 
 void getNextWord(char word[]);
 
+void totalWords();
+
 void closeFile();
 #endif

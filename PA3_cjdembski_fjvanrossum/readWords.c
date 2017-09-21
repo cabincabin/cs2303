@@ -6,7 +6,7 @@
 
 static FILE *input;
 static int scroll;
-static int sizeOfFile = 0;
+static int sizeOfFiles = 0;
 
 ///////////////////////////////////////////////////////////////
 
@@ -43,7 +43,7 @@ void getNextWord(char word[]){
     !(scroll >= (char)97 && scroll <=(char)122) && scroll!=(char)39 && scroll!=EOF; scroll = fgetc(input)){
         //printf("dasdsadasd %d",scroll);
     }
-    sizeOfFile++;
+    sizeOfFiles++;
     //printf("%c",178);
 
     for(;(scroll>=(char)48 && scroll <= (char)57)||(scroll>=(char)65 && scroll <=(char)90)||
@@ -77,5 +77,8 @@ void closeFile(){
   if (input){
     fclose(input);
   }
-  	printf("\n%d", sizeOfFile);
+}
+
+void totalWords(){
+	printf("Total number of words: %d \n", sizeOfFiles);
 }

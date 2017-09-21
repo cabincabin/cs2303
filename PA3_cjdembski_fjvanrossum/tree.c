@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+static int nodeNumber = 0;
+
 /*****************************************************************/
 
 //Function Prototypes
@@ -47,6 +49,7 @@ struct node * newNode(char * word1){
 	node -> cnt = 1; //set count of word1 to 1
 	node -> left = NULL;
 	node -> right = NULL;
+	nodeNumber++;
 	return node;
 }
 
@@ -97,55 +100,6 @@ void insertWord(char* word1, struct node * node){
 
 /*****************************************************************/
 
-/*
- * int getNumber(char * word, struct node* node)
- * Purpose: Get the count of a word located in the tree
- * @param char * word Pointer to the string word whose count is to be obtained
- * @param struct node * node
- * @return struct node * Returns the pointer to the node that was just created
- */
-int getNumber(char* word,struct node* node){
-	struct node * noded = getWord(word, node);
-	if(noded == NULL){
-		return 0;
-	}
-	return noded->cnt;
-}
-
-/*****************************************************************/
-
-// Returns the pointer to a node when you enter a word
-struct node * getWord(char * word, struct node* node){
-	if((0 > strcmp(word, node->word))){
-		//Means that node.word is higher in alphabet
-
-		//check if left node is empty
-		if(node->left == NULL){
-			//if the left node is empty return null
-			return NULL;
-		} else {
-			//else continue searching for the word
-			getWord(word,node->left);
-		}
-	} else if(strcmp(word,node->word) > 0){
-		//Means that word is higher in alphabet, so RIGHT
-		//check to see that right node is not empty
-		if(node->right == NULL){
-			//if the right node is empty return 0
-			return NULL;
-		} else {
-			//else continue searching for word
-			getWord(word, node->right);
-		}
-	} else if(strcmp(word, node->word) == 0){
-		//Same word so return the current node
-		return node;
-	}
-	return NULL;
-}
-
-/*****************************************************************/
-
 //This function lists the tree below it
 void listTree(struct node * node){
 	if( node->left != NULL){
@@ -187,4 +141,8 @@ void derefTree(struct node * node){
 
 	free(node->word);
 	free(node);
+}
+
+void numUniqueWords(){
+	printf("Unique words: %d \n", nodeNumber);
 }

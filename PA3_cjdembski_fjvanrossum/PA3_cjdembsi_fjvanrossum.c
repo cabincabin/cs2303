@@ -38,10 +38,15 @@ int main(int argc, char ** argv){
 	struct node * rootNode = newNode(word); /* creating the root node of
 	our binary tree */
 
+	getNextWord(word);
+
 	//Purpose: Fill the rest of the binary tree with words from the first file
 	//Pre-condition: File is opened correctly, word is not -1
 	while (word[0] != -1){
+
 		//Loop-Invariant: word is not -1 in the while loop
+
+			insertWord(word, rootNode); //Insert the word from the file into tree
 
 		/*Purpose: Fill the word with a so that there is no risk of running
 		off the end of the string.
@@ -52,7 +57,7 @@ int main(int argc, char ** argv){
 			//Loop-Invariant: word[i] is now 'a'
 		}
 		getNextWord(word); //Get the next word from the file
-		insertWord(word, rootNode); //Insert the word from the file into tree
+
 		//Loop-Invariant: Word has been inserted into the binary tree
 	}
 	closeFile(); //close the file that was just read
@@ -75,6 +80,8 @@ int main(int argc, char ** argv){
 	starting at root node */
 	derefTree(rootNode); //Deleting the tree and freeing up memory
 	printf("\n");
+	numUniqueWords();
+	totalWords();
 	return 0;
 }
 
@@ -97,14 +104,14 @@ void readFile(char * fileName, char * word, struct node * rootNode){
 	//Purpose: Iterate through all the words in the file
 	//Pre-condition: word[0] should not be -1, and the file is correctly setup
 	while (word[0] != -1){
-		//printf("%s ", word); //Used for debugging
+			insertWord(word,rootNode);
 		//Purpose: Fill word with 'a' to prevent running off the end of string
 		for(int i = 0; i<100; i++){
 			word[i]= 'a';
 		}
 
 		getNextWord(word);
-		insertWord(word,rootNode);
+
 		//Loop-invariant: word is inserted into the tree
 	}
 	closeFile();
