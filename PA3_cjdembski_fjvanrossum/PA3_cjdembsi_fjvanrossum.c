@@ -21,18 +21,19 @@ int main(){
   initFile("Obama.txt");
   getNextWord(word);
   struct node * rootNode = newNode(word);
-  for(;a<5;a++){
-	  insertWord(word,rootNode);
+  //for(;a<5;a++){
 
-  //while(word[0]!=-1){
 
-    printf("%s",word);
+  while(word[0]!=-1){
+
+    printf("%s ",word);
 
     fflush(stdout);
     for(int i; i<100; i++){
       word[i]='a';
     }
     getNextWord(word);
+    insertWord(word,rootNode);
   }
   closeFile();
   return 0;

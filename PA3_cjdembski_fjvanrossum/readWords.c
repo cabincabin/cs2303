@@ -42,10 +42,15 @@ void getNextWord(char word[]){
     //printf("%c",178);
 
     for(;(scroll>=(char)48 && scroll <= (char)57)||(scroll>=(char)65 && scroll <=(char)90)||
-    (scroll >= (char)97 && scroll <=(char)122) || scroll==(char)39 || (prevchar == '-'
+    (scroll >= (char)97 && scroll <=(char)122) || scroll==(char)39 || scroll=='-' || (prevchar == '-'
      && scroll!='-'); scroll = fgetc(input)){
       //printf("%c",scroll);
-      word[wordGet]=scroll;
+      if((scroll>=(char)65 && scroll <=(char)90)){
+        word[wordGet]=scroll+32;
+      }
+      else{
+        word[wordGet]=scroll;
+      }
 
       prevchar = scroll;
       wordGet++;

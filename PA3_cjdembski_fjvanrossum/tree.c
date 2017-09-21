@@ -21,9 +21,9 @@ struct node {
 };
 
 //This function creates a new node
-struct node * newNode(char * word){
+struct node * newNode(char * word1){
 	struct node* node = (struct node*)malloc(sizeof(struct node)); //malloc the space for a new node
-	node -> word = word;
+	node -> word = strncpy(((char *)malloc(strlen(word1)*sizeof(char))),  word1,20);
 	node -> cnt = 1; //set count to 1
 	node -> left = NULL;
 	node -> right = NULL;
@@ -35,30 +35,31 @@ struct node * newNode(char * word){
 
 //TO-DO:
 //Make this so that we can break up nodes and insert a node in between
-void insertWord(char* word, struct node * node){
-	static char array[20];
-	strcpy(array, *word);
-	if((0 > strcmp(word,node->word))){
+void insertWord(char* word1, struct node * node){
+
+	if(0 > strcmp(word1,node->word)){
 		//Means that node.word is higher in alphabet
 
 		//check that the left node is not empty
 		if(node->left == NULL){
-			newNode(word);
-		} else{
-
-			insertWord(array, node->left); //insert word in the left node
+			node->left = newNode(word1);
 		}
-	} else if(strcmp(word,node->word) > 0){
+		else{
+
+			insertWord(word1, node->left); //insert word in the left node
+		}
+	}
+
+	else if(strcmp(word1,node->word) > 0){
 		//Means that word is higher in alphabet, so RIGHT
 
 		//check to see that right node is not empty
 		if(node->right == NULL){
-			newNode(word); //create a new node
+			node->right = newNode(word1); //create a new node
 		} else {
-			strcpy(array, *word);
-			insertWord(array, node->right); //insert word in right node
+			insertWord(word1, node->right); //insert word in right node
 		}
-	} else if(strcmp(word,node->word) == 0){
+	} else if(strcmp(word1,node->word) == 0){
 		//Same word
 		node->cnt++;//increment the count of word
 	}
