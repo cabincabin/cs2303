@@ -1,4 +1,0 @@
-1. Create binary tree
-2. Handle punctuation
-3. Plural vs non-plural?
-4. 

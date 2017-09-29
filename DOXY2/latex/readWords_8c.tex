@@ -1,0 +1,110 @@
+\hypertarget{readWords_8c}{}\section{read\+Words.\+c File Reference}
+\label{readWords_8c}\index{read\+Words.\+c@{read\+Words.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}read\+Words.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{readWords_8c_a65293667f0e89ebf6ada9651b1c12f63}{init\+File} (char file\+Name\mbox{[}$\,$\mbox{]})
+\item 
+void \hyperlink{readWords_8c_a5f9439fb79e8768e9fa603c213596866}{init\+Output} (char fileoutput\mbox{[}$\,$\mbox{]})
+\item 
+void \hyperlink{readWords_8c_aed1be650037eebda47561aa7f753a4cd}{get\+Next\+Word} (char word\mbox{[}$\,$\mbox{]})
+\item 
+void \hyperlink{readWords_8c_ab2ff17b940ae7aca4827d832ceeaeda4}{close\+File} ()
+\item 
+void \hyperlink{readWords_8c_a18bfefccf3c62d62f12efb9f6439a3bb}{total\+Words} (int files)
+\item 
+void \hyperlink{readWords_8c_a975633b7edb4066d58b2fb47dff550d3}{output\+File} (char outputchar\mbox{[}$\,$\mbox{]})
+\item 
+void \hyperlink{readWords_8c_aaf3f961255674e776fe125f4ca7e0cba}{output\+File2} (char usedword\mbox{[}$\,$\mbox{]}, int numcalls)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{readWords_8c_a4039a20eb39975bcb60a18dfc41f3b00}{fileout}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{readWords_8c_ab2ff17b940ae7aca4827d832ceeaeda4}\label{readWords_8c_ab2ff17b940ae7aca4827d832ceeaeda4}} 
+\index{read\+Words.\+c@{read\+Words.\+c}!close\+File@{close\+File}}
+\index{close\+File@{close\+File}!read\+Words.\+c@{read\+Words.\+c}}
+\subsubsection{\texorpdfstring{close\+File()}{closeFile()}}
+{\footnotesize\ttfamily void close\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+void \hyperlink{readWords_8c_ab2ff17b940ae7aca4827d832ceeaeda4}{close\+File()} Purpose\+: Closes the input file after all data has been read from it \mbox{\Hypertarget{readWords_8c_aed1be650037eebda47561aa7f753a4cd}\label{readWords_8c_aed1be650037eebda47561aa7f753a4cd}} 
+\index{read\+Words.\+c@{read\+Words.\+c}!get\+Next\+Word@{get\+Next\+Word}}
+\index{get\+Next\+Word@{get\+Next\+Word}!read\+Words.\+c@{read\+Words.\+c}}
+\subsubsection{\texorpdfstring{get\+Next\+Word()}{getNextWord()}}
+{\footnotesize\ttfamily void get\+Next\+Word (\begin{DoxyParamCaption}\item[{char}]{word\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+void \hyperlink{readWords_8c_aed1be650037eebda47561aa7f753a4cd}{get\+Next\+Word(char word\mbox{[}$\,$\mbox{]})} Purpose\+: fills a given char array with the next full word in the file a word is defined as a-\/z A-\/Z 1-\/9 , or -\/ 
+\begin{DoxyParams}{Parameters}
+{\em char} & word\mbox{[}\mbox{]} the array to be filled with the next word. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{readWords_8c_a65293667f0e89ebf6ada9651b1c12f63}\label{readWords_8c_a65293667f0e89ebf6ada9651b1c12f63}} 
+\index{read\+Words.\+c@{read\+Words.\+c}!init\+File@{init\+File}}
+\index{init\+File@{init\+File}!read\+Words.\+c@{read\+Words.\+c}}
+\subsubsection{\texorpdfstring{init\+File()}{initFile()}}
+{\footnotesize\ttfamily void init\+File (\begin{DoxyParamCaption}\item[{char}]{file\+Name\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+void \hyperlink{readWords_8c_a65293667f0e89ebf6ada9651b1c12f63}{init\+File(char file\+Name\mbox{[}$\,$\mbox{]})} Purpose\+: initializes the file to be read and initializes scroll to be the first letter in the file. prints if the file is opened successfully or not 
+\begin{DoxyParams}{Parameters}
+{\em char} & file\+Name\mbox{[}\mbox{]} The name of the file to be opened, as a string literal \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{readWords_8c_a5f9439fb79e8768e9fa603c213596866}\label{readWords_8c_a5f9439fb79e8768e9fa603c213596866}} 
+\index{read\+Words.\+c@{read\+Words.\+c}!init\+Output@{init\+Output}}
+\index{init\+Output@{init\+Output}!read\+Words.\+c@{read\+Words.\+c}}
+\subsubsection{\texorpdfstring{init\+Output()}{initOutput()}}
+{\footnotesize\ttfamily void init\+Output (\begin{DoxyParamCaption}\item[{char}]{fileoutput\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+void \hyperlink{readWords_8c_a65293667f0e89ebf6ada9651b1c12f63}{init\+File(char file\+Name\mbox{[}$\,$\mbox{]})} Purpose\+: initializes the file to be written to and clears all data in the file. prints if the file is opened successfully or not 
+\begin{DoxyParams}{Parameters}
+{\em char} & file\+Name\mbox{[}\mbox{]} The name of the file to be opened, as a string literal \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{readWords_8c_a975633b7edb4066d58b2fb47dff550d3}\label{readWords_8c_a975633b7edb4066d58b2fb47dff550d3}} 
+\index{read\+Words.\+c@{read\+Words.\+c}!output\+File@{output\+File}}
+\index{output\+File@{output\+File}!read\+Words.\+c@{read\+Words.\+c}}
+\subsubsection{\texorpdfstring{output\+File()}{outputFile()}}
+{\footnotesize\ttfamily void output\+File (\begin{DoxyParamCaption}\item[{char}]{outputchar\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\hyperlink{readWords_8c_a975633b7edb4066d58b2fb47dff550d3}{output\+File(char outputchar\mbox{[}$\,$\mbox{]})} prints the given string to the file already given 
+\begin{DoxyParams}{Parameters}
+{\em char} & outputchar\mbox{[}\mbox{]} the string to be printed to the user \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{readWords_8c_aaf3f961255674e776fe125f4ca7e0cba}\label{readWords_8c_aaf3f961255674e776fe125f4ca7e0cba}} 
+\index{read\+Words.\+c@{read\+Words.\+c}!output\+File2@{output\+File2}}
+\index{output\+File2@{output\+File2}!read\+Words.\+c@{read\+Words.\+c}}
+\subsubsection{\texorpdfstring{output\+File2()}{outputFile2()}}
+{\footnotesize\ttfamily void output\+File2 (\begin{DoxyParamCaption}\item[{char}]{usedword\mbox{[}$\,$\mbox{]},  }\item[{int}]{numcalls }\end{DoxyParamCaption})}
+
+\hyperlink{readWords_8c_aaf3f961255674e776fe125f4ca7e0cba}{output\+File2(char usedword\mbox{[}$\,$\mbox{]}, int numcalls)} prints the given string to the file already given and the number of times the string is used 
+\begin{DoxyParams}{Parameters}
+{\em char} & usedword\mbox{[}\mbox{]} the string to be printed to the user \\
+\hline
+{\em int} & numcalls the number of calls of the word, to be printed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{readWords_8c_a18bfefccf3c62d62f12efb9f6439a3bb}\label{readWords_8c_a18bfefccf3c62d62f12efb9f6439a3bb}} 
+\index{read\+Words.\+c@{read\+Words.\+c}!total\+Words@{total\+Words}}
+\index{total\+Words@{total\+Words}!read\+Words.\+c@{read\+Words.\+c}}
+\subsubsection{\texorpdfstring{total\+Words()}{totalWords()}}
+{\footnotesize\ttfamily void total\+Words (\begin{DoxyParamCaption}\item[{int}]{files }\end{DoxyParamCaption})}
+
+void \hyperlink{readWords_8c_a18bfefccf3c62d62f12efb9f6439a3bb}{total\+Words()} Purpose\+: prints the total number of words read in by the program at the time of call 
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{readWords_8c_a4039a20eb39975bcb60a18dfc41f3b00}\label{readWords_8c_a4039a20eb39975bcb60a18dfc41f3b00}} 
+\index{read\+Words.\+c@{read\+Words.\+c}!fileout@{fileout}}
+\index{fileout@{fileout}!read\+Words.\+c@{read\+Words.\+c}}
+\subsubsection{\texorpdfstring{fileout}{fileout}}
+{\footnotesize\ttfamily char$\ast$ fileout}
+
