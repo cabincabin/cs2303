@@ -1,20 +1,16 @@
+#include "Event.h"
 #ifndef CustEvent_H_
 #define CustEvent_H_
 
-class Event {
+class CustEvent: public Event {
 
 public:
-  Event();
-  Event(EventQueue evQue);
+  CustEvent();
+  CustEvent(EventQueue &evQue, float time);
 
-  void AddEvent();
-  void getTime();
-  void getActionType();
+  int timeAtBank();
 
- ~Event();
-private:
-  const inittime;
-  int actionTime;
+ ~CustEvent();
 
 };
 
