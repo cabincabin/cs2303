@@ -12,51 +12,50 @@
 //Event event = new Event();
 //Event blankEvent = new Event();
 
-struct node{
-		Event *event; // Stores a generic event object
-		struct node *next; // the next node
-		struct node *prev; // the previous node
-	};
 
-node rootNode;
 
 EventQueue::EventQueue(){
 }
 
 // Insert an event into the event queue
-void EventQueue::insertQueue(Event &eventIn, node comparedNode){
-	if(comparedNode.event.getTime() >= eventIn.getTime()){
+void EventQueue::insertQueue(Event *eventIn, node *comparedNode){
+	if(comparedNode -> event -> getTime() >= eventIn -> getTime()){
 		// eventIn needs to be inserted before comparedNode
 		// because eventIn has a time that is smaller or equal
 		node insertNode = new node; // Create a new node
 
-		insertNode.prev = comparedNode.prev; // Set new node previous
+		insertNode.prev = comparedNode -> prev; // Set new node previous
 
-		comparedNode.prev -> next = insertNode; // Set old previous node
+		comparedNode -> prev -> next = insertNode; // Set old previous node
 		// next field to new node
 
-		comparedNode.prev = insertNode; // Set the comparedNode previous to
+		comparedNode -> prev = insertNode; // Set the comparedNode previous to
 		// new node
 	}
-	if(comparedNode.event.getTime() < eventIn.getTime()){
+	if(comparedNode -> event -> getTime() < eventIn -> getTime()){
 		// comparedNode is earlier in even queue so continue searching
-		insertQueue(eventIn,comparedNode.next); // recursively call
+		insertQueue(eventIn,comparedNode -> next); // recursively call
 	}
+}
+
+void EventQueue::insertQueue(Event &eventIn){
+	Event *Ev = &eventIn;
+
 }
 // Determine if the event queue is empty, returns true if true
 bool EventQueue::emptyEventQueue(){
 	return true;
 }
 //Create the event queue with event
-node* EventQueue::initEventQueue(Event &eventIn){
-	node = new node;
-	node.event = event;
-	node.next = NULL;
-	node.prev = NULL;
-	return node;
+node* EventQueue::initEventQueue(Event *eventIn){
+	node *Node = new node;
+	Node -> event = eventIn;
+	Node -> next = NULL;
+	Node -> prev = NULL;
+	return Node;
 }
 
 // gets the rootNode of the event queue
 node* EventQueue::getRootNode(){
-	return rootNode;
+	return &rootNode;
 }

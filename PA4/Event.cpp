@@ -7,21 +7,22 @@
 #include <string.h>
 
 
-Event::Event(){
-}
 
-Event::Event(EventQueue &evQue){
-  eventQue = evQue;
+Event::Event(EventQueue &evQue, int time):
+initTime(time),
+eventQue(evQue){
+	action = 0;
+	netTime = 0;
 }
 
 void Event::AddEvent(){
-  eventQue.InsertQueue(*this);
+  eventQue.insertQueue(*this);
 }
 
 int Event::getTime(){
   return netTime;
 }
 
-Event Event::getActionType(){
+int Event::getActionType(){
   return action;
 }
