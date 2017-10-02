@@ -4,28 +4,22 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
-
-#include "EventQueue.h"
 #include "Event.h"
+#include "EventQueue.h"
 #include "TypesOfActions.h"
 
 
 //Event event = new Event();
 //Event blankEvent = new Event();
 
-struct node {
-	Event event; // Stores a generic event object
-	struct node *next; // the next node
-	struct node *prev; // the previous node
-};
 node rootNode;
 
 EventQueue::EventQueue(){
 	rootNode = initEventQueue();
-};
+}
 
 // Insert an event into the event queue
-void EventQueue::insertQueue(Event eventIn, node comparedNode){
+void EventQueue::insertQueue(Event &eventIn, node comparedNode){
 	if(comparedNode.event.getTime() >= eventIn.getTime()){
 		// eventIn needs to be inserted before comparedNode
 		// because eventIn has a time that is smaller or equal
@@ -61,7 +55,3 @@ node* EventQueue::initEventQueue(){
 node* EventQueue::getRootNode(){
 	return rootNode;
 }
-
-
-
-

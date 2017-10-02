@@ -1,3 +1,4 @@
+
 #ifndef EVENT_H_
 #define EVENT_H_
 #include "EventQueue.h"
@@ -10,7 +11,7 @@ public:
 
 
   int getTime();
-  Event getActionType();
+  int getActionType();
   void AddEvent();
  ~Event();
 
