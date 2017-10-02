@@ -14,31 +14,46 @@
 //struct node;
 
 EventQueue::EventQueue(){
+	Event * eventStart = new Event(*this, -10);
+	rootNode = new node();
+	rootNode -> event = eventStart;
+	rootNode -> next = NULL; //Furthest up, smallest time
+	rootNode -> prev = NULL;
 }
+
 
 // Insert an event into the event queue
 void EventQueue::insertQueue(Event *eventIn, node *comparedNode){
-	if(comparedNode -> event -> getTime() >= eventIn -> getTime()){
-		// eventIn needs to be inserted before comparedNode
-		// because eventIn has a time that is smaller or equal
-		node insertNode; // Create a new node
+	node *insertNode = initEventInQueue(eventIn);
 
-		insertNode.prev = comparedNode -> prev; // Set new node previous
+	if(comparedNode -> event -> getTime() < insertNode -> event -> getTime() &&
+			(comparedNode -> prev == NULL ||
+			 comparedNode -> prev -> event -> getTime() > insertNode -> event -> getTime()) ){
+		// eventIn needs to be inserted after comparedNode
+		int a = 1;
+		// because eventIn has a time that is larger or equal
+		// and less than previous node
 
-		*comparedNode -> prev -> next = insertNode; // Set old previous node
+		insertNode -> next = comparedNode; // Set new node previous to the old node
+		if(comparedNode->prev!=NULL){
+			insertNode -> prev = comparedNode->prev;
+			comparedNode -> prev -> next = insertNode;
+		}
+
+		comparedNode -> prev = insertNode; // Set old previous node
 		// next field to new node
 
-		*comparedNode -> prev = insertNode; // Set the comparedNode previous to
-		// new node
 	}
-	if(comparedNode -> event -> getTime() < eventIn -> getTime()){
+
+	else if(comparedNode -> event -> getTime() < eventIn -> getTime() &&
+			 comparedNode -> prev -> event -> getTime() < insertNode -> event -> getTime()){
 		// comparedNode is earlier in even queue so continue searching
-		insertQueue(eventIn,comparedNode -> next); // recursively call
+		insertQueue(eventIn,comparedNode -> prev); // recursively call
 	}
 }
 
 void EventQueue::insertQueue(Event &eventIn){
-	Event *Ev = &eventIn;
+	insertQueue(&eventIn, rootNode);
 
 }
 // Determine if the event queue is empty, returns true if true
@@ -46,7 +61,7 @@ bool EventQueue::emptyEventQueue(){
 	return true;
 }
 //Create the event queue with event
-EventQueue::node* EventQueue::initEventQueue(Event *eventIn){
+EventQueue::node* EventQueue::initEventInQueue(Event *eventIn){
 	node *Node = new node;
 	Node -> event = eventIn;
 	Node -> next = NULL;
@@ -56,5 +71,5 @@ EventQueue::node* EventQueue::initEventQueue(Event *eventIn){
 
 // gets the rootNode of the event queue
 EventQueue::node* EventQueue::getRootNode(){
-	return &rootNode;
+	return rootNode;
 }

@@ -7,15 +7,15 @@ class Event {
 
 protected:
   int action;
-  const int initTime;
-  int netTime;
+  const float initTime;
+  float netTime;
   EventQueue &eventQue;
 
 
 public:
 
-  Event(EventQueue &evQue, int time);
-  int getTime();
+  Event(EventQueue &evQue, float time);
+  float getTime();
   int getActionType();
   void AddEvent();
  ~Event();

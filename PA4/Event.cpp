@@ -8,18 +8,18 @@
 
 
 
-Event::Event(EventQueue &evQue, int time):
+Event::Event(EventQueue &evQue, float time):
 initTime(time),
 eventQue(evQue){
 	action = 0;
-	netTime = 0;
+	netTime = time;
 }
 
 void Event::AddEvent(){
   eventQue.insertQueue(*this);
 }
 
-int Event::getTime(){
+float Event::getTime(){
   return netTime;
 }
 

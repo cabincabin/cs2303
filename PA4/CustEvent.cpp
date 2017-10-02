@@ -6,17 +6,12 @@
 #include <errno.h>
 #include <string.h>
 
-CustEvent::CustEvent(){
-  printf("ERROR: No Event Queue");
-  exit(0);
-}
 
 CustEvent::CustEvent(EventQueue &evQue, float time):
-Event(evQue, float time),
-initTime(time)
+Event(evQue, time)
 {
-  Action = CustArrive;
   netTime = time;
+  action = CustArrive;
   AddEvent();
 }
 

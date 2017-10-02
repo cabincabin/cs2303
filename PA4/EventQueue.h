@@ -12,9 +12,9 @@ class EventQueue{
 		};
 private:
 
-	node rootNode;
+	node* rootNode;
 	void insertQueue(Event *eventIn, node *comparedNode);
-	node* initEventQueue(Event *eventIn); // initialize the eventqueue
+	node* initEventInQueue(Event *eventIn); // initialize the eventqueue
 	node* getRootNode();
 
 public:
