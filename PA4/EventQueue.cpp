@@ -11,8 +11,7 @@
 
 //Event event = new Event();
 //Event blankEvent = new Event();
-
-
+//struct node;
 
 EventQueue::EventQueue(){
 }
@@ -22,14 +21,14 @@ void EventQueue::insertQueue(Event *eventIn, node *comparedNode){
 	if(comparedNode -> event -> getTime() >= eventIn -> getTime()){
 		// eventIn needs to be inserted before comparedNode
 		// because eventIn has a time that is smaller or equal
-		node insertNode = new node; // Create a new node
+		node insertNode; // Create a new node
 
 		insertNode.prev = comparedNode -> prev; // Set new node previous
 
-		comparedNode -> prev -> next = insertNode; // Set old previous node
+		*comparedNode -> prev -> next = insertNode; // Set old previous node
 		// next field to new node
 
-		comparedNode -> prev = insertNode; // Set the comparedNode previous to
+		*comparedNode -> prev = insertNode; // Set the comparedNode previous to
 		// new node
 	}
 	if(comparedNode -> event -> getTime() < eventIn -> getTime()){
@@ -47,7 +46,7 @@ bool EventQueue::emptyEventQueue(){
 	return true;
 }
 //Create the event queue with event
-node* EventQueue::initEventQueue(Event *eventIn){
+EventQueue::node* EventQueue::initEventQueue(Event *eventIn){
 	node *Node = new node;
 	Node -> event = eventIn;
 	Node -> next = NULL;
@@ -56,6 +55,6 @@ node* EventQueue::initEventQueue(Event *eventIn){
 }
 
 // gets the rootNode of the event queue
-node* EventQueue::getRootNode(){
+EventQueue::node* EventQueue::getRootNode(){
 	return &rootNode;
 }
