@@ -9,11 +9,11 @@ qSim: qSim.o Event.o EventQueue.o
 qSim.o: qSim.cpp
 	g++ $(CFLAGS) -Wall -c qSim.cpp
 
-Event.o: Event.cpp EventQueue.h
+Event.o: Event.cpp Event.h
 	g++ $(CFLAGS) -Wall -c Event.cpp
 
-EventQueue.o: EventQueue.cpp Event.h
+EventQueue.o: EventQueue.cpp EventQueue.h
 	g++ $(CFLAGS) -Wall -c EventQueue.cpp
 
 clean:
-	 rm -f qSim.o qSim
+	 rm -f qSim.o Event.o EventQueue.o  qSim
