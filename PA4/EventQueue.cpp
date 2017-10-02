@@ -12,10 +12,15 @@
 //Event event = new Event();
 //Event blankEvent = new Event();
 
+struct node{
+		Event *event; // Stores a generic event object
+		struct node *next; // the next node
+		struct node *prev; // the previous node
+	};
+
 node rootNode;
 
 EventQueue::EventQueue(){
-	rootNode = initEventQueue();
 }
 
 // Insert an event into the event queue
@@ -43,11 +48,11 @@ bool EventQueue::emptyEventQueue(){
 	return true;
 }
 //Create the event queue with event
-node* EventQueue::initEventQueue(){
+node* EventQueue::initEventQueue(Event &eventIn){
 	node = new node;
-	Event blankEvent = new Event(); // UPDATE THIS LATER
-	node.event = blankEvent;
+	node.event = event;
 	node.next = NULL;
+	node.prev = NULL;
 	return node;
 }
 
