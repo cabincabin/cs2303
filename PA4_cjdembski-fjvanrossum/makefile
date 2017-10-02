@@ -10,4 +10,4 @@ qSim.o: qSim.cpp
 	g++ $(CFLAGS) -Wall -c qSim.cpp
 
 clean:
-	 rm -f readWords.o tree.o PA3_cjdembsi_fjvanrossum.o PA3
+	 rm -f qSim.o qSim

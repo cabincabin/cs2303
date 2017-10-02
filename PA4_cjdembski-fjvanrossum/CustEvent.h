@@ -1,5 +1,5 @@
-#ifndef Event_H_
-#define Event_H_
+#ifndef CustEvent_H_
+#define CustEvent_H_
 
 class Event {
 
