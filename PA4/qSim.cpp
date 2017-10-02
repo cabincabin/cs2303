@@ -7,7 +7,8 @@
 #include "EventQueue.h"
 
 int main(){
-	Event event = new Event();
-	event.addEvent();
+	Event * event = new Event();
+	EventQueue * queue = new EventQueue();
+	event -> AddEvent();
 
 }
