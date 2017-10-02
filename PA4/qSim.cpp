@@ -8,6 +8,9 @@
 
 int main(){
 	//Event * event = new Event();
-	//EventQueue * queue = new EventQueue();
-	//event -> AddEvent();
+
+	EventQueue *queue = new EventQueue();
+
+
+
 }

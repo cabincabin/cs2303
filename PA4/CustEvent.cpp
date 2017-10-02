@@ -1,6 +1,6 @@
 #include "CustEvent.h"
 #include "TypesOfActions.h"
-
+#include "Event.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -22,5 +22,5 @@ initTime(time)
 
 
 int CustEvent::timeAtBank(){
-  return netTime - innitTime;
+  return netTime - initTime;
 }
