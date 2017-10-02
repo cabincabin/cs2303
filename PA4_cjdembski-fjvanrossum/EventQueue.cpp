@@ -2,37 +2,53 @@
 #include <conio.h>
 #include <iostream>
 
-#include EventQueue.h
+#include "EventQueue.h"
+#include "Event.h"
+
+node rootNode;
 
 struct node {
 	int time;
 	Event event; // Stores a generic event object
 	struct node *next; // the next node
+	struct node *prev; // the previous node
 };
 
 // event.getTime()
-public:
-	// Insert an event into the event queue
-	void insertQueue(Event event, Event firstEvent){
-		if(firstEvent.getTime)
+// Insert an event into the event queue
+EventQueue::void insertQueue(Event *eventIn, node comparedNode){
+	if(comparedNode -> event.getTime() > eventIn.getTime()){
+		// eventIn needs to be inserted before comparedNode
+		node insertNode = new node; // Create a new node
+		insertNode.time = eventIn.getTime(); // Set time of new node
+		insertNode.prev = comparedNode -> prev; // Set new node previous
+		comparedNode.prev -> next = insertNode; // Set old previous node
+		// next field to new node
+		comparedNode.prev = insertNode; // Set the comparedNode previous to
+		// new node
 	}
-	// Determine if the event queue is empty, returns true if true
-	bool emptyEventQueue(){
+	if(rootNode -> event.getTime() < event.getTime()){
+	}
+}
+// Determine if the event queue is empty, returns true if true
+EventQueue::bool emptyEventQueue(){
+}
+//Create the event queue with event
+node * EventQueue::initEventQueue(){
+	node = new node;
+	Event blankEvent = new Event(); // UPDATE THIS LATER
+	node -> event = blankEvent;
+	node -> next = NULL;
+	return *node;
+}
 
-	}
-	//Create the event queue with event
-	void initEventQueue(Event eventIn){
-		node = new node;
-		node -> event = eventIn;
-		node -> next = NULL;
-	}
+// gets the rootNode of the event queue
+node * EventQueue::getRootNode(){
+	return *rootNode;
+}
 
-class eventQueue{
-	public:
-	node rootNode;
-	void insertQueue(Event event);
-	bool emptyEventQueue();
+
+EventQueue::EventQueue(){
+	rootNode = initEventQueue();
 };
 
-//Can there be multiple events of the same event class in the queue:
-// Not of the same object but yes for the same class.

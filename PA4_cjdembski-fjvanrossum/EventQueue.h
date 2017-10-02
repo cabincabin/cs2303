@@ -6,8 +6,9 @@
 class EventQueue{
 
 public:
-  class eventQueue();
-  // store a generic type of event in the linked list
+  EventQueue();
+  EventQueue();
+
   // Sorted linked list based on time
   // Add something to the linked list
   // remove something from the head
@@ -15,8 +16,8 @@ public:
   //Insert a something into the event queue
   void insertQueue(Event event);
 
-  //Initialize the event queue
-  void initEventQueue(Event event);
+private:
+  node * initEventQueue(); // initialize the eventqueue
 
 };
 
