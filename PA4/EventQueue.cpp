@@ -10,11 +10,10 @@
 #include "TypesOfActions.h"
 
 
-Event event = new Event();
-Event blankEvent = new Event();
+//Event event = new Event();
+//Event blankEvent = new Event();
 
 struct node {
-	int time;
 	Event event; // Stores a generic event object
 	struct node *next; // the next node
 	struct node *prev; // the previous node
@@ -31,8 +30,6 @@ void EventQueue::insertQueue(Event eventIn, node comparedNode){
 		// eventIn needs to be inserted before comparedNode
 		// because eventIn has a time that is smaller or equal
 		node insertNode = new node; // Create a new node
-
-		insertNode.time = eventIn.getTime(); // Set time of new node
 
 		insertNode.prev = comparedNode.prev; // Set new node previous
 
