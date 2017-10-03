@@ -38,7 +38,7 @@ void TellerEvent::GetNextCustomer(int CurrentTime, float averageServiceTime){
 	else{
 		int i;
 		TellerList *TellCust = new TellerList(eventQue);
-		for(i = 1; i <= tList.getListLen(); i++){
+		for(i = 0; i <= tList.getListLen(); i++){
 
 			if((tList.GetEvent(i))->linelength() !=0 ){
 				TellCust->insertQueue(*tList.GetEvent(i));

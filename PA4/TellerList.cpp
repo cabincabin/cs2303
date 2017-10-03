@@ -69,8 +69,8 @@ TellerList::node* TellerList::getRootNode(){
 
 TellerEvent *TellerList::GetEvent(int tellNum){ //grab this as refrence
 
-		node* tellNode = rootNode -> prev;
-		for(int i = 1; i < tellNum; i++){
+		node* tellNode = rootNode;
+		for(int i = 0; i < tellNum; i++){
 			tellNode = tellNode -> prev;
 		}
 		TellerEvent *Tev = tellNode -> tellerEvent;

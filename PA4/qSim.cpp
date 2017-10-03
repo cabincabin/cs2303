@@ -24,6 +24,9 @@ using namespace std;
 #include "Event.h"
 #include "EventQueue.h"
 #include "CustEvent.h"
+#include "TellerList.h"
+#include "TypesOfActions.h"
+#include "TellerEvent.h"
 
 /*****************************************************************/
 
@@ -48,19 +51,23 @@ int main(int argc, char ** argv){
 
 	//Initializing necessary objects
 	EventQueue *queue = new EventQueue();
-	float arrivalTime;
+	TellerList *Tell = new TellerList(*queue);
+
 	for(int i = 0; i < customers; i++){
-		arrivalTime = simulationTime * (rand() / float(RAND_MAX));
+		float arrivalTime = simulationTime * (rand() / float(RAND_MAX));
 		cout << "The random arrival time of customer:" << i << " is " <<
 				arrivalTime << "\n";
-		CustEvent *customer = new CustEvent(*queue, arrivalTime);
+		new CustEvent(*queue, arrivalTime);
 	}
 	float serviceTime;
 	for(int i = 0; i < tellers; i++){
 		//Put teller initialization here
-		serviceTime = 2 * averageServiceTime * (rand()/float(RAND_MAX));
+		float idleTime = 10 * (rand()/float(RAND_MAX));
+		new TellerEvent(*queue, idleTime, *Tell);
 		//put teller object initialization here later
 	}
+
+	float time = 0;
 
 	Event * c1 = new Event(*queue, 1);
 	c1->AddEvent();
