@@ -1,26 +1,22 @@
 #include "TellerEvent.h"
 #include "TypesOfActions.h"
-
+#include "Event.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
 
-TelerEvent::TellerEvent(){
-  printf("ERROR: No Event Queue");
-  exit(0);
-}
 
 TellerEvent::TellerEvent(EventQueue &evQue, float time):
-Event(evQue, float time),
-initTime(time)
+Event(evQue, time)
 {
-  Action = TellIdle;
+  action = TellIdle;
   netTime = time;
+  AddEvent();
 }
 
-void idle(int currentTime){
-  Action = TellIdle;
+void TellerEvent::idle(int currentTime){
+  action = TellIdle;
   netTime = currentTime + initTime;
   AddEvent();
 }

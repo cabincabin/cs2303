@@ -3,8 +3,8 @@ CFLAGS = -g
 
 all: qSim
 
-qSim: qSim.o Event.o EventQueue.o CustEvent.o
-	g++ $(CFLAGS) -Wall qSim.o Event.o EventQueue.o CustEvent.o -o qSim
+qSim: qSim.o Event.o EventQueue.o CustEvent.o TellerEvent.o
+	g++ $(CFLAGS) -Wall qSim.o Event.o EventQueue.o CustEvent.o TellerEvent.o -o qSim
 
 qSim.o: qSim.cpp
 	g++ $(CFLAGS) -Wall -c qSim.cpp
@@ -17,6 +17,9 @@ EventQueue.o: EventQueue.cpp EventQueue.h Event.h
 
 CustEvent.o: CustEvent.cpp CustEvent.h Event.h
 	g++ $(CFLAGS) -Wall -c CustEvent.cpp
+	
+TellerEvent.o:  TellerEvent.h Event.h TellerEvent.cpp
+	g++ $(CFLAGS) -Wall -c TellerEvent.cpp	
 
 clean:
-	 rm -f qSim.o Event.o EventQueue.o  qSim
+	 rm -f qSim.o Event.o EventQueue.o TellEvent.o CustEvent.o qSim

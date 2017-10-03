@@ -1,16 +1,13 @@
-#include "Event.h"
+
 #ifndef TellerEvent_H_
 #define TellerEvent_H_
-
-class CustEvent: public Event {
+#include "Event.h"
+class TellerEvent: public Event{
 
 public:
-
-  TellerEvent();
   TellerEvent(EventQueue &evQue, float time);
 
+  ~TellerEvent();
   void idle(int currentTime);
-
- ~TellerEvent();
 };
 #endif

@@ -15,7 +15,13 @@ Event(evQue, time)
   AddEvent();
 }
 
-
-int CustEvent::timeAtBank(){
+float CustEvent::CustLeaveBank(){
+  action = CustLeave;
   return netTime - initTime;
+}
+
+void CustEvent::timeWithTeller(float currentTime, float TellTime){
+ netTime = currentTime + TellTime;
+ action = CustService;
+ AddEvent();
 }

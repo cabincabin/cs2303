@@ -7,10 +7,11 @@ class CustEvent: public Event{
 public:
   CustEvent(EventQueue &evQue, float time);
 
-  int timeAtBank();
+  float CustLeaveBank();
 
  ~CustEvent();
 
+ void timeWithTeller(float currentTime, float TellTime);
 };
 
 #endif
