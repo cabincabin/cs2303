@@ -5,7 +5,7 @@
 class EventQueue;
 class Event {
 
-public:
+protected:
   int action;
   const float initTime;
   float netTime;
@@ -13,13 +13,11 @@ public:
 
 
 
-
+public:
   Event(EventQueue &evQue, float time);
   float getTime();
   int getActionType();
   void AddEvent();
- ~Event();
-
 
 };
 

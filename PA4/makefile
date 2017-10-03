@@ -4,7 +4,7 @@ CFLAGS = -g
 all: qSim
 
 qSim: qSim.o Event.o EventQueue.o CustEvent.o
-	g++ $(CFLAGS) -Wall qSim.o Event.o EventQueue.o -o qSim
+	g++ $(CFLAGS) -Wall qSim.o Event.o EventQueue.o CustEvent.o -o qSim
 
 qSim.o: qSim.cpp
 	g++ $(CFLAGS) -Wall -c qSim.cpp
