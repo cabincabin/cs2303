@@ -53,7 +53,9 @@ void EventQueue::insertQueue(Event *eventIn, node *comparedNode){
 	else if(comparedNode -> event -> getTime() < eventIn -> getTime() &&
 			 comparedNode -> prev -> event -> getTime() < insertNode -> event -> getTime()){
 		// comparedNode is earlier in even queue so continue searching
+		free(insertNode);
 		insertQueue(eventIn,comparedNode -> prev); // recursively call
+
 	}
 }
 

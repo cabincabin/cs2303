@@ -7,20 +7,19 @@
 
 #ifndef TELLERLIST_H_
 #define TELLERLIST_H_
+#include "TellerEvent.h"
 class TellerEvent;
 class TellerList{
-
 	struct node{
 	TellerEvent *tellerEvent;
+	int tellerNum;
 	struct node *prev;
-	struct node *next;
 	};
-
 private:
-	node * rootNode;
-	void insertQueue(TellerEvent *eventIn, node *comparedNode);
-	node * initTellerInQueue(TellerEvent *eventIn);
-	node * getRootNode();
+	node* rootNode;
+	void insertQueue(TellerEvent *eventIn, node *comparedNode, int tellNum);
+	node* initTellerInQueue(TellerEvent *eventIn);
+	node* getRootNode();
 
 public:
 	TellerList(EventQueue &eventQue);

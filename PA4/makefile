@@ -3,8 +3,8 @@ CFLAGS = -g
 
 all: qSim
 
-qSim: qSim.o Event.o EventQueue.o CustEvent.o TellerEvent.o TellerQueue.o TellerList.o
-	g++ $(CFLAGS) -Wall qSim.o Event.o EventQueue.o CustEvent.o TellerEvent.o TellerQueue.o TellerList.o -o qSim
+qSim: qSim.o Event.o EventQueue.o CustEvent.o TellerEvent.o TellerList.o
+	g++ $(CFLAGS) -Wall qSim.o Event.o EventQueue.o CustEvent.o TellerEvent.o TellerList.o -o qSim
 
 qSim.o: qSim.cpp
 	g++ $(CFLAGS) -Wall -c qSim.cpp
@@ -20,12 +20,9 @@ CustEvent.o: CustEvent.cpp CustEvent.h Event.h
 	
 TellerEvent.o: TellerEvent.cpp TellerEvent.h Event.h
 	g++ $(CFLAGS) -Wall -c TellerEvent.cpp	
-
-TellerQueue.o: TellerQueue.h Event.h CustEvent.h TellerQueue.cpp
-	g++ $(CFLAGS) -Wall -c TellerQueue.cpp
 	
-TellerList.o: TellerList.h Event.h EventQueue.h TellerList.cpp TellerEvent.h
+TellerList.o: TellerList.cpp TellerList.h Event.h EventQueue.h  TellerEvent.h
 	g++ $(CFLAGS) -Wall -c TellerList.cpp
 	
 clean:
-	 rm -f qSim.o Event.o EventQueue.o TellerEvent.o CustEvent.o TellerQueue.o TellerList.o qSim
+	 rm -f qSim.o Event.o EventQueue.o TellerEvent.o CustEvent.o TellerList.o qSim

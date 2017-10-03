@@ -22,48 +22,43 @@ TellerList::TellerList(EventQueue &eventQue){
 	TellerEvent * tellerEventStart = new TellerEvent(eventQue,-10);
 	rootNode = new node();
 	rootNode -> tellerEvent = tellerEventStart;
-	rootNode -> next = NULL;
+	rootNode -> tellerNum = 0;
 	rootNode -> prev = NULL;
 }
 
-void TellerList::insertQueue(TellerEvent *eventIn, node * comparedNode){
-	node * insertNode = initTellerInQueue(eventIn);
+void TellerList::insertQueue(TellerEvent *eventIn, node *comparedNode, int tellNum){
+	node* insertNode = initTellerInQueue(eventIn);
 
-	if(comparedNode -> tellerEvent-> getTime() < insertNode -> tellerEvent-> getTime() &&
-				(comparedNode -> prev == NULL || comparedNode -> prev -> tellerEvent
-				-> getTime() > insertNode -> tellerEvent-> getTime())){
-			int a = 1;
-			insertNode -> next = comparedNode;
-			if(comparedNode -> prev != NULL){
-				insertNode -> prev = comparedNode -> prev;
-				comparedNode -> prev -> next = insertNode;
-			}
+	if(comparedNode-> prev == NULL){
+			insertNode -> tellerNum = tellNum;
 
 			comparedNode -> prev = insertNode;
 		}
 
-		else if (comparedNode -> tellerEvent-> getTime() < eventIn -> getTime() &&
-				 comparedNode -> prev -> tellerEvent-> getTime() < insertNode -> tellerEvent-> getTime()){
-			insertQueue(eventIn, comparedNode -> prev);
+		else{
+			insertQueue(eventIn, comparedNode -> prev, ++tellNum);
+			free(insertNode);
 		}
 }
 
 void TellerList::insertQueue(TellerEvent &eventIn){
-	insertQueue(&eventIn , rootNode);
+	insertQueue(&eventIn, rootNode, 1);
 }
 
 bool TellerList::emptyEventQueue(){
 	return true;
 }
 
-TellerList::node * TellerList::initTellerInQueue(TellerEvent * eventIn){
-	node * Node = new node;
+TellerList::node* TellerList::initTellerInQueue(TellerEvent *eventIn){
+	node *Node = new node;
 	Node -> tellerEvent = eventIn;
-	Node -> next = NULL;
 	Node -> prev = NULL;
+	Node -> tellerNum = -20;
 	return Node;
 }
 
-TellerList::node * TellerList::getRootNode(){
+
+
+TellerList::node* TellerList::getRootNode(){
 	return rootNode;
 }
