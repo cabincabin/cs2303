@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <iostream>
 #include <stdio.h>
@@ -8,21 +9,25 @@
 #include "EventQueue.h"
 #include "TypesOfActions.h"
 
-
-//Event event = new Event();
-//Event blankEvent = new Event();
-//struct node;
-
+/*
+ * EventQueue()
+ * Purpose: Constructor of the EventQueue class
+ */
 EventQueue::EventQueue(){
 	Event * eventStart = new Event(*this, -10);
 	rootNode = new node();
 	rootNode -> event = eventStart;
-	rootNode -> next = NULL; //Furthest up, smallest time
-	rootNode -> prev = NULL;
+	rootNode -> next = NULL; //Furthest up, smallest time (EARLIEST)
+	rootNode -> prev = NULL; //Furthest down, Higher time (LATER)
 }
 
-
-// Insert an event into the event queue
+/*
+ * void insertQueue(Event *eventIn, node * comparedNode)
+ * Purpose: Insert an element Event into the event queue based on time, recursive
+ * @param Event *eventIn Event to be inserted into the Queue
+ * @param node * comparedNode Node which is to be compared to event time
+ * @return void
+ */
 void EventQueue::insertQueue(Event *eventIn, node *comparedNode){
 	node *insertNode = initEventInQueue(eventIn);
 
@@ -52,15 +57,32 @@ void EventQueue::insertQueue(Event *eventIn, node *comparedNode){
 	}
 }
 
+/* Overloaded Function:
+ * void insertQueue(Event &eventIn)
+ * Purpose: public function in order to insert an event into the event queue
+ * @param Event &eventIn Pointer to an event which is to be inserted in the queue
+ * @return void
+ */
 void EventQueue::insertQueue(Event &eventIn){
-	insertQueue(&eventIn, rootNode);
-
+	insertQueue(&eventIn, rootNode); //Call other insertQueue Method
 }
-// Determine if the event queue is empty, returns true if true
+
+/*
+ * bool emptyEventQueue()
+ * Purpose: Return a boolean value if the EventQueue is empty
+ * @return bool (TRUE == Empty) (FALSE == Event in Queue)
+ */
 bool EventQueue::emptyEventQueue(){
 	return true;
 }
-//Create the event queue with event
+
+/*
+ * node * initEventQueue(Event *eventIn)
+ * Purpose:
+ * @param Event *eventIn Event to be inserted into the Queue
+ * @param node * comparedNode Node which is to be compared to event time
+ * @return void
+ */
 EventQueue::node* EventQueue::initEventInQueue(Event *eventIn){
 	node *Node = new node;
 	Node -> event = eventIn;

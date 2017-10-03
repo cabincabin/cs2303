@@ -11,7 +11,6 @@ class EventQueue{
 			struct node *prev; // the previous node
 		};
 private:
-
 	node* rootNode;
 	void insertQueue(Event *eventIn, node *comparedNode);
 	node* initEventInQueue(Event *eventIn); // initialize the eventqueue
