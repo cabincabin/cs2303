@@ -21,7 +21,7 @@ private:
 	node* initTellerInQueue(CustEvent *eventIn);
 	node* getRootNode();
 public:
-	TellerQueue();
+	TellerQueue(EventQueue &eventQue);
 	int getQueueLength();
 	void insertQueue(CustEvent &eventIn);
 	bool emptyEventQueue();

@@ -2,7 +2,7 @@
  * TellerQueue.cpp
  *
  *  Created on: Oct 2, 2017
- *      Author: student
+ *      Author: Floris van Rossum & Clayton Dembski
  */
 
 #include <stdio.h>
@@ -29,8 +29,8 @@ void TellerQueue::insertQueue(CustEvent *eventIn, node *comparedNode){
 	node * insertNode = initTellerInQueue(eventIn);
 
 	if(comparedNode -> customerEvent -> getTime() < insertNode -> customerEvent -> getTime() &&
-			(comparedNode -> prev == NULL || comparedNode -> prev -> event
-			-> getTime() > insertNode -> getTime())){
+			(comparedNode -> prev == NULL || comparedNode -> prev -> customerEvent
+			-> getTime() > insertNode -> customerEvent -> getTime())){
 		int a = 1;
 		insertNode -> next = comparedNode;
 		if(comparedNode -> prev != NULL){
@@ -60,9 +60,9 @@ TellerQueue::node * TellerQueue::initTellerInQueue(CustEvent *eventIn){
 	Node -> customerEvent = eventIn;
 	Node -> next = NULL;
 	Node -> prev = NULL;
-	return node;
+	return Node;
 }
 
-TellerQueue::node * TellerQueue::getRoodNode(){
+TellerQueue::node * TellerQueue::getRootNode(){
 	return rootNode;
 }
