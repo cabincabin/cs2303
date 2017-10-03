@@ -19,11 +19,12 @@
 #include "TellerEvent.h"
 
 TellerList::TellerList(EventQueue &eventQue){
-	TellerEvent * tellerEventStart = new TellerEvent(eventQue,-10);
+	TellerEvent * tellerEventStart = new TellerEvent(eventQue,-10, *this);
 	rootNode = new node();
 	rootNode -> tellerEvent = tellerEventStart;
 	rootNode -> tellerNum = 0;
 	rootNode -> prev = NULL;
+	nodeleng = 0;
 }
 
 void TellerList::insertQueue(TellerEvent *eventIn, node *comparedNode, int tellNum){
@@ -33,6 +34,7 @@ void TellerList::insertQueue(TellerEvent *eventIn, node *comparedNode, int tellN
 			insertNode -> tellerNum = tellNum;
 
 			comparedNode -> prev = insertNode;
+			nodeleng++;
 		}
 
 		else{
@@ -57,8 +59,22 @@ TellerList::node* TellerList::initTellerInQueue(TellerEvent *eventIn){
 	return Node;
 }
 
-
+int TellerList::getListLen(){
+	return nodeleng;
+}
 
 TellerList::node* TellerList::getRootNode(){
 	return rootNode;
 }
+
+TellerEvent TellerList::GetTopEvent(int tellNum){ //grab this as refrence
+
+		node* tellNode = rootNode -> prev;
+		for(int i = 1; i < tellNum; i++){
+			tellNode = tellNode -> prev;
+		}
+		TellerEvent *Tev = tellNode -> tellerEvent;
+		return *Tev;
+
+}
+

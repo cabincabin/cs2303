@@ -28,6 +28,7 @@ public:
 
 	void insertQueue(Event &eventIn);
 	int getQueueLen();
+	Event GetTopEvent();
 
 	~EventQueue();
 

@@ -16,6 +16,7 @@ class TellerList{
 	struct node *prev;
 	};
 private:
+	int nodeleng;
 	node* rootNode;
 	void insertQueue(TellerEvent *eventIn, node *comparedNode, int tellNum);
 	node* initTellerInQueue(TellerEvent *eventIn);
@@ -26,6 +27,8 @@ public:
 	int getQueueLength();
 	void insertQueue(TellerEvent &eventIn);
 	bool emptyEventQueue();
+	int getListLen();
+	TellerEvent GetTopEvent(int tellNum);
 	~TellerList();
 };
 

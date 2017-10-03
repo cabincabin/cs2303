@@ -3,14 +3,17 @@
 #include "TypesOfActions.h"
 #include "Event.h"
 #include "EventQueue.h"
+#include "TellerList.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
 
 
-TellerEvent::TellerEvent(EventQueue &evQue, float time):
-Event(evQue, time)
+TellerEvent::TellerEvent(EventQueue &evQue, float time, TellerList &Tlist):
+Event(evQue, time),
+tList(Tlist)
 {
   action = TellIdle;
   netTime = time;

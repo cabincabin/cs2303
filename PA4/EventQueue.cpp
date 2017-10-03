@@ -38,7 +38,7 @@ void EventQueue::insertQueue(Event *eventIn, node *comparedNode){
 		// eventIn needs to be inserted after comparedNode
 		// because eventIn has a time that is larger or equal
 		// and less than previous node
-
+		nodeleng++;
 		insertNode -> next = comparedNode; // Set new node previous to the old node
 		if(comparedNode->prev!=NULL){
 			insertNode -> prev = comparedNode->prev;
@@ -86,7 +86,7 @@ bool EventQueue::emptyEventQueue(){
  * @return void
  */
 EventQueue::node* EventQueue::initEventInQueue(Event *eventIn){
-	nodeleng++;
+
 	node *Node = new node;
 	Node -> event = eventIn;
 	Node -> next = NULL;
@@ -102,5 +102,14 @@ int EventQueue::getQueueLen(){
 	return nodeleng;
 }
 
+//MAKE SURE NODE LENGTH IS NOT 0
+Event EventQueue::GetTopEvent(){ //grab this as refrence
+		Event *eventIn = rootNode -> prev -> event;
+		node* prevNode = rootNode -> prev;
+		rootNode -> prev = rootNode -> prev -> prev;
+		free(prevNode);
+		return *eventIn;
+
+}
 
 
