@@ -7,25 +7,25 @@
 
 #ifndef TELLERQUEUE_H_
 #define TELLERQUEUE_H_
-
+class CustEvent;
 class TellerQueue{
 	struct node{
-		TellerEvent *tellerEvent;
+		CustEvent *customerEvent;
 		struct node *prev;
 		struct node *next;
 	};
 
 private:
 	node* rootNode;
-	void insertQueue(TellerEvent *eventIn, node *comparedNode);
-	node* initTellerInQueue(TellerEvent *eventIn);
+	void insertQueue(CustEvent *eventIn, node *comparedNode);
+	node* initTellerInQueue(CustEvent *eventIn);
 	node* getRootNode();
 public:
-	TellerEventQueue();
+	TellerQueue();
 	int getQueueLength();
-	void insertQueue(TellerEvent &eventIn);
-
-	~EventQueue;
+	void insertQueue(CustEvent &eventIn);
+	bool emptyEventQueue();
+	~TellerQueue();
 };
 
 
