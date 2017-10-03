@@ -1,3 +1,10 @@
+/*
+ *  CustEvent.h
+ *
+ *  Created on: Oct. 1st, 2017
+ *  Author: Clayton Dembski & Floris van Rossum
+ *  Purpose: Header file of Customer Event Class
+ */
 
 #ifndef CustEvent_H_
 #define CustEvent_H_
