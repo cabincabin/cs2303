@@ -1,6 +1,8 @@
 #include "TellerEvent.h"
+#include "CustEvent.h"
 #include "TypesOfActions.h"
 #include "Event.h"
+#include "EventQueue.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -13,10 +15,26 @@ Event(evQue, time)
   action = TellIdle;
   netTime = time;
   AddEvent();
+  tellerQue = new EventQueue();
 }
 
 void TellerEvent::idle(int currentTime){
   action = TellIdle;
   netTime = currentTime + initTime;
   AddEvent();
+}
+
+void TellerEvent::GetNextCustomer(){
+	action = TellGetCust;
+	if(tellerQue->getQueueLen()!=0){
+	}
+}
+
+void TellerEvent::AddCustToQue(CustEvent *cust){
+	if(cust->getActionType() == CustArrive)
+	tellerQue->insertQueue(*cust);
+}
+
+int TellerEvent::linelength(){
+	return tellerQue->getQueueLen();
 }

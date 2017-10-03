@@ -19,6 +19,7 @@ EventQueue::EventQueue(){
 	rootNode -> event = eventStart;
 	rootNode -> next = NULL; //Furthest up, smallest time (EARLIEST)
 	rootNode -> prev = NULL; //Furthest down, Higher time (LATER)
+	nodeleng = 0;
 }
 
 /*
@@ -35,7 +36,6 @@ void EventQueue::insertQueue(Event *eventIn, node *comparedNode){
 			(comparedNode -> prev == NULL ||
 			 comparedNode -> prev -> event -> getTime() > insertNode -> event -> getTime()) ){
 		// eventIn needs to be inserted after comparedNode
-		int a = 1;
 		// because eventIn has a time that is larger or equal
 		// and less than previous node
 
@@ -84,6 +84,7 @@ bool EventQueue::emptyEventQueue(){
  * @return void
  */
 EventQueue::node* EventQueue::initEventInQueue(Event *eventIn){
+	nodeleng++;
 	node *Node = new node;
 	Node -> event = eventIn;
 	Node -> next = NULL;
@@ -95,3 +96,9 @@ EventQueue::node* EventQueue::initEventInQueue(Event *eventIn){
 EventQueue::node* EventQueue::getRootNode(){
 	return rootNode;
 }
+int EventQueue::getQueueLen(){
+	return nodeleng;
+}
+
+
+

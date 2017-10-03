@@ -15,6 +15,7 @@ private:
 	void insertQueue(Event *eventIn, node *comparedNode);
 	node* initEventInQueue(Event *eventIn); // initialize the eventqueue
 	node* getRootNode();
+	int nodeleng;
 
 public:
 	EventQueue();
@@ -26,6 +27,7 @@ public:
 	bool emptyEventQueue();
 
 	void insertQueue(Event &eventIn);
+	int getQueueLen();
 
 	~EventQueue();
 
