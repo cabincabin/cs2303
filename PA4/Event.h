@@ -5,14 +5,14 @@
 class EventQueue;
 class Event {
 
-protected:
+public:
   int action;
   const float initTime;
   float netTime;
   EventQueue &eventQue;
 
 
-public:
+
 
   Event(EventQueue &evQue, float time);
   float getTime();

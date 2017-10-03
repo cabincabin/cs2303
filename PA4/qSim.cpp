@@ -23,7 +23,8 @@ using namespace std;
 
 #include "Event.h"
 #include "EventQueue.h"
-//#include "CustEvent.h"
+#include "CustEvent.h"
+
 /*****************************************************************/
 
 int main(int argc, char ** argv){
@@ -41,9 +42,9 @@ int main(int argc, char ** argv){
 	//Initializing necessary objects
 	EventQueue *queue = new EventQueue();
 	float arrivalTime;
-	for(int i = 0; i < 1; i++){
+	for(int i = 0; i < customers; i++){
 		arrivalTime = simulationTime * rand() / float(RAND_MAX);
-		//CustEvent * custEvent1 = new CustEvent(*queue,arrivalTime);
+		CustEvent *customer = new CustEvent(*queue, arrivalTime);
 
 	}
 

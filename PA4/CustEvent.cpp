@@ -9,13 +9,12 @@
 
 
 CustEvent::CustEvent(EventQueue &evQue, float time):
-netTime(time),
+initTime(time),
 eventQue(evQue){
   netTime = time;
   action = CustArrive;
   AddEvent();
 }
-
 
 int CustEvent::timeAtBank(){
   return netTime - initTime;
