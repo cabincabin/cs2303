@@ -18,7 +18,7 @@ EventQueue.o: EventQueue.cpp EventQueue.h Event.h
 CustEvent.o: CustEvent.cpp CustEvent.h Event.h
 	g++ $(CFLAGS) -Wall -c CustEvent.cpp
 	
-TellerEvent.o:  TellerEvent.h Event.h TellerEvent.cpp
+TellerEvent.o: TellerEvent.cpp TellerEvent.h Event.h
 	g++ $(CFLAGS) -Wall -c TellerEvent.cpp	
 
 TellerQueue.o: TellerQueue.h Event.h CustEvent.h TellerQueue.cpp
