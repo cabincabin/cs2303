@@ -21,5 +21,8 @@ CustEvent.o: CustEvent.cpp CustEvent.h Event.h
 TellerEvent.o:  TellerEvent.h Event.h TellerEvent.cpp
 	g++ $(CFLAGS) -Wall -c TellerEvent.cpp	
 
+TellerQueue.o: TellerQueue.h Event.h CustomerEvent.h TellerQueue.cpp
+	g++ $(CFLAGS) -Wall -c TellerQueue.cpp
+	
 clean:
 	 rm -f qSim.o Event.o EventQueue.o TellEvent.o CustEvent.o qSim

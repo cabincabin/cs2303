@@ -35,17 +35,18 @@ int main(int argc, char ** argv){
 	cout << "The number of tellers entered: " << argv[2] << "\n";
 	int tellers = atoi(argv[2]);
 	cout << "The simulation time entered: " << argv[3] << "\n";
-	int simulationTime = atoi(argv[3]);
+	int simulationTime = atoi(argv[3]); // Simulation time in minutes
 	cout << "The random seed entered entered: " << argv[4] << "\n";
-	float randomSeed = atoi(argv[4]);
+	float randomSeed = atoi(argv[4]); // Random
 
 	//Initializing necessary objects
 	EventQueue *queue = new EventQueue();
 	float arrivalTime;
 	for(int i = 0; i < customers; i++){
-		arrivalTime = simulationTime * rand() / float(RAND_MAX);
+		arrivalTime = simulationTime * (rand() / float(RAND_MAX));
+		cout << "The random arrival time of customer:" << i << " is " <<
+				arrivalTime << "\n";
 		CustEvent *customer = new CustEvent(*queue, arrivalTime);
-
 	}
 
 	Event * c1 = new Event(*queue, 1);
