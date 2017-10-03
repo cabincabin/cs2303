@@ -16,7 +16,7 @@ public:
 
   ~TellerEvent();
   void idle(int currentTime);
-  void GetNextCustomer();
+  void GetNextCustomer(int CurrentTime, float averageServiceTime);
   void AddCustToQue(CustEvent *cust);
   void AddCustomerToLine();
   int linelength();

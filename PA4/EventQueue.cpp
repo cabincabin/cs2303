@@ -103,12 +103,12 @@ int EventQueue::getQueueLen(){
 }
 
 //MAKE SURE NODE LENGTH IS NOT 0
-Event EventQueue::GetTopEvent(){ //grab this as refrence
+Event *EventQueue::GetTopEvent(){ //grab this as refrence
 		Event *eventIn = rootNode -> prev -> event;
 		node* prevNode = rootNode -> prev;
 		rootNode -> prev = rootNode -> prev -> prev;
 		free(prevNode);
-		return *eventIn;
+		return eventIn;
 
 }
 

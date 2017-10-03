@@ -28,7 +28,7 @@ public:
 	void insertQueue(TellerEvent &eventIn);
 	bool emptyEventQueue();
 	int getListLen();
-	TellerEvent GetTopEvent(int tellNum);
+	TellerEvent *GetEvent(int tellNum);
 	~TellerList();
 };
 

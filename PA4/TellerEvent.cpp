@@ -17,25 +17,54 @@ tList(Tlist)
 {
   action = TellIdle;
   netTime = time;
+  tList.insertQueue(*this);
   AddEvent();
   tellerQue = new EventQueue();
 }
 
-void TellerEvent::idle(int currentTime){
+void TellerEvent::idle(int currentTime){//WHEN PULLED OUT CHANGE action TO TELLGETCUST
   action = TellIdle;
   netTime = currentTime + initTime;
   AddEvent();
 }
 
-void TellerEvent::GetNextCustomer(){
+void TellerEvent::GetNextCustomer(int CurrentTime, float averageServiceTime){
 	action = TellGetCust;
-	if(tellerQue->getQueueLen()!=0){
+	CustEvent * cust;
+	if(linelength()!=0){
+		 cust = static_cast<CustEvent*>(tellerQue->GetTopEvent());
+	}
+
+	else{
+		int i;
+		TellerList *TellCust = new TellerList(eventQue);
+		for(i = 1; i <= tList.getListLen(); i++){
+
+			if((tList.GetEvent(i))->linelength() !=0 ){
+				TellCust->insertQueue(*tList.GetEvent(i));
+			}
+		}
+		if(TellCust->getListLen()==0){
+				idle(CurrentTime);//can change action
+		}
+		else{
+			cust = static_cast<CustEvent*>(TellCust->GetEvent(
+					 rand() % (TellCust->getListLen()+1) )->
+					tellerQue->GetTopEvent());
+		}
+
+	}
+	if(action == TellGetCust){
+		float serviceTime = 2*averageServiceTime*rand()/float(RAND_MAX);
+		cust->timeWithTeller(CurrentTime,serviceTime);
+		netTime = CurrentTime + serviceTime;
+		AddEvent();
 	}
 }
 
 void TellerEvent::AddCustToQue(CustEvent *cust){
 	if(cust->getActionType() == CustArrive)
-	tellerQue->insertQueue(*cust);
+		tellerQue->insertQueue(*cust);
 }
 
 int TellerEvent::linelength(){
