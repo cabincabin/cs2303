@@ -1,21 +1,41 @@
-//Header file for the event queue class
+/*
+ *  EventQueue.h
+ *
+ *  Created on: Oct. 1st, 2017
+ *  Author: Clayton Dembski & Floris van Rossum
+ *  Purpose: Header file of EventQueue Class
+ */
 
 #ifndef EVENTQUEUE_H_
 #define EVENTQUEUE_H_
-//Event queue object
+
+//Class declaration
 class Event;
+
+/*****************************************************************/
+//CLASS EVENT QUEUE
+
 class EventQueue{
+	//Event Queue Node
 	struct node{
 			Event *event; // Stores a generic event object
 			struct node *next; // the next node
 			struct node *prev; // the previous node
 		};
+
+/*****************************************************************/
+
+
 private:
-	node* rootNode;
-	void insertQueue(Event *eventIn, node *comparedNode);
+	node* rootNode; // The rootNode of the EventQueue
+
+
+	void insertQueue(Event *eventIn, node *comparedNode); //
 	node* initEventInQueue(Event *eventIn); // initialize the eventqueue
 	node* getRootNode();
 	int nodeleng;
+
+/*****************************************************************/
 
 public:
 	EventQueue();

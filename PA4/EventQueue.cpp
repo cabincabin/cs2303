@@ -1,4 +1,11 @@
-
+/*
+ *  EventQueue.cpp
+ *
+ *  Created on: Oct. 1st, 2017
+ *  Author: Clayton Dembski & Floris van Rossum
+ *  Purpose: Source file of EventQueue class
+ *
+ */
 #include <stdio.h>
 #include <iostream>
 #include <stdio.h>
@@ -8,6 +15,8 @@
 #include "Event.h"
 #include "EventQueue.h"
 #include "TypesOfActions.h"
+
+/*****************************************************************/
 
 /*
  * EventQueue()
@@ -21,6 +30,8 @@ EventQueue::EventQueue(){
 	rootNode -> prev = NULL; //Furthest down, Higher time (LATER)
 	nodeleng = 0;
 }
+
+/*****************************************************************/
 
 /*
  * void insertQueue(Event *eventIn, node * comparedNode)
@@ -59,6 +70,8 @@ void EventQueue::insertQueue(Event *eventIn, node *comparedNode){
 	}
 }
 
+/*****************************************************************/
+
 /* Overloaded Function:
  * void insertQueue(Event &eventIn)
  * Purpose: public function in order to insert an event into the event queue
@@ -74,9 +87,14 @@ void EventQueue::insertQueue(Event &eventIn){
  * Purpose: Return a boolean value if the EventQueue is empty
  * @return bool (TRUE == Empty) (FALSE == Event in Queue)
  */
+
+/*****************************************************************/
+
 bool EventQueue::emptyEventQueue(){
 	return true;
 }
+
+/*****************************************************************/
 
 /*
  * node * initEventQueue(Event *eventIn)
@@ -94,22 +112,32 @@ EventQueue::node* EventQueue::initEventInQueue(Event *eventIn){
 	return Node;
 }
 
+/*****************************************************************/
+
 // gets the rootNode of the event queue
 EventQueue::node* EventQueue::getRootNode(){
 	return rootNode;
 }
+
+/*****************************************************************/
+
 int EventQueue::getQueueLen(){
 	return nodeleng;
 }
 
-//MAKE SURE NODE LENGTH IS NOT 0
+/*****************************************************************/
+
+/*
+ * Event *GetTopEvent()
+ * Purpose: Return Pointer to event at the top of the event queue
+ * @param void
+ * @return Event * Return the pointer to the top event in event queue
+ */
+//ENSURE THAT IT IS NOT 0
 Event *EventQueue::GetTopEvent(){ //grab this as refrence
 		Event *eventIn = rootNode -> prev -> event;
 		node* prevNode = rootNode -> prev;
 		rootNode -> prev = rootNode -> prev -> prev;
 		free(prevNode);
 		return eventIn;
-
 }
-
-
