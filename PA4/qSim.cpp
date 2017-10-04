@@ -45,29 +45,30 @@ int main(int argc, char ** argv){
 	cout << "The average service time entered: " << argv[4] << "\n";
 	float averageServiceTime = atoi(argv[4]);
 	cout << "The random seed entered entered: " << argv[5] << "\n";
-	float randomSeed = atoi(argv[5]); // Random
-	if(randomSeed != NULL && randomSeed != 0)
-		srand(randomSeed);
+
+
+	if(argc >= 6 && atoi(argv[5]) != 0)
+		srand(atoi(argv[5]));
 
 	//Initializing necessary objects
 	EventQueue *queue = new EventQueue();
 	TellerList *Tell = new TellerList(*queue);
-
-	for(int i = 0; i < customers; i++){
+	int i;
+	for(i = 0; i < customers; i++){
 		float arrivalTime = simulationTime * (rand() / float(RAND_MAX));
 		cout << "The random arrival time of customer:" << i << " is " <<
 				arrivalTime << "\n";
 		new CustEvent(*queue, arrivalTime);
 	}
-	float serviceTime;
-	for(int i = 0; i < tellers; i++){
+	//float serviceTime;
+	for(i = 0; i < tellers; i++){
 		//Put teller initialization here
 		float idleTime = 10 * (rand()/float(RAND_MAX));
 		new TellerEvent(*queue, idleTime, *Tell);
 		//put teller object initialization here later
 	}
 
-	float time = 0;
+	//float time = 0;
 
 	Event * c1 = new Event(*queue, 1);
 	c1->AddEvent();

@@ -17,7 +17,6 @@ tList(Tlist)
 {
   action = TellIdle;
   netTime = time;
-  tList.insertQueue(*this);
   AddEvent();
   tellerQue = new EventQueue();
 }
@@ -26,6 +25,10 @@ void TellerEvent::idle(int currentTime){//WHEN PULLED OUT CHANGE action TO TELLG
   action = TellIdle;
   netTime = currentTime + initTime;
   AddEvent();
+}
+
+void TellerEvent::InsertTellerToList(){
+	tList.insertQueue(*this);
 }
 
 void TellerEvent::GetNextCustomer(int CurrentTime, float averageServiceTime){
