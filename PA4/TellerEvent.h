@@ -9,11 +9,11 @@ class TellerList;
 
 class TellerEvent: public Event{
 protected:
-EventQueue *tellerQue;
+
 TellerList &tList;
 public:
   TellerEvent(EventQueue &evQue, float time, TellerList &Tlist);
-
+  EventQueue *tellerQue;
   ~TellerEvent();
   void idle(int currentTime);
   void InsertTellerToList();
