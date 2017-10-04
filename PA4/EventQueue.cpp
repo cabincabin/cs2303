@@ -141,3 +141,16 @@ Event *EventQueue::GetTopEvent(){ //grab this as refrence
 		free(prevNode);
 		return eventIn;
 }
+
+/*****************************************************************/
+
+/*
+ * float GetTopEventTime()
+ * Purpose: Return time of the top event
+ * @param void
+ * @return float Return the time of the top event
+ */
+
+float EventQueue::GetTopEventTime(){
+	return rootNode -> prev ->event -> getTime();
+}

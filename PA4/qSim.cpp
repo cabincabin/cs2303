@@ -47,7 +47,7 @@ int main(int argc, char ** argv){
 	cout << "The random seed entered entered: " << argv[5] << "\n";
 
 
-	if(argc >= 6 && atoi(argv[5]) != 0)
+	if(argc >= 6 && (atoi(argv[5]) != 0))
 		srand(atoi(argv[5]));
 
 	//Initializing necessary objects
@@ -63,9 +63,19 @@ int main(int argc, char ** argv){
 	//float serviceTime;
 	for(i = 0; i < tellers; i++){
 		//Put teller initialization here
-		float idleTime = 10 * (rand()/float(RAND_MAX));
+		float idleTime = 10 * (rand()/float(RAND_MAX)); // Why is this idle time and not service time?
+		// We need to identify the service time of the tellers
+		cout << "The average service time of teller is: " << i << " is " <<
+						idleTime << "\n";
 		new TellerEvent(*queue, idleTime, *Tell);
 		//put teller object initialization here later
+	}
+
+	// Working on pulling events from the event queue
+	for(int i = 0; i < simulationTime; i++){
+		if(queue->GetTopEventTime() < i){
+			queue -> GetTopEvent();
+		}
 	}
 
 	//float time = 0;
