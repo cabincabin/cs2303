@@ -130,16 +130,44 @@ process the command line arguments and respond accordingly by calling all
 necessary constructors and functions throughout the program. It uses all of the 
 above described files to ensure that the simulation runs effectively. 
 
-Explain how you represented tellers events and customers:
+Initially it uses for loops to create all the Customer events and initialize
+the teller lists. The customer arrival times and teller idle times are
+randomized as described in the homework assignment. Then a while loop
+handles the events in the event queue one by one until all customer events
+have been processed. Once all customer events and there are no customers left
+in the bank simulation 1 is done, so necessary calculations for statistics are
+performed and the statistics are printed. Simulation 2 runs exactly the same except
+that there are multiple teller queues defined. The while loop will run again until all
+customers have left the bank and then the statistics for simulation 2 will be 
+printed. At the end of the program all used objects are destructed properly.
+
+Representation of Tellers, Customers and Events:
+Teller and customer objects do not directly exist. There are only Teller and Customer
+Events and TellerLists which is a list of Teller queues. Therefore you can imagine a 
+TellerQueue to be a teller, as it stores customers and creates TellerEvents which are
+stored in the event queue. The teller can create two kinds of TellerEvents teller idle
+(TellIdle) and teller getting a customer (TellGetCust). These events can be added either
+to the eventqueue or a teller queue. A customer can be seen as an event that occurs
+since there is no customer class. Initially the customer arrives and is placed at a
+random point in the event queue. There are two other customer events, namely customer
+service (CustService) and customer leave (CustLeave) which represent a customer being serviced
+by a teller and a customer leaving the bank. All of the customer events are added to the event
+queue or to the teller queue. Events are represented as Customer Events (CustEvent) and
+teller events (TellerEvent). Each of them are a child/derived class of Event.cpp so that
+they can be stored in a common event queue and for code reuse and clarity reasons.
 
 Algorithm explanation:
+???
 
 DISCUSSION:
 Common queuing vs. per-teller queuing:
-
+???
 
 PROGRAM FLOW:
-
+1. main() is run, it stores all user input and verifies that it is correct
+2. Prints all user input for troubleshooting and clarity reasons
+3. Customers and Tellers are initialized with a random arrival time and idle time
+4. 
 
 LOOP INVARIANTS:
 

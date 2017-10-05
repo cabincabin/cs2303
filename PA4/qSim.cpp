@@ -215,6 +215,8 @@ int main(int argc, char ** argv){
 
 			// properly delete nextEv Event object
 			delete nextEv;
+			// LOOP-INVARIANT: An event from the event queue has been processed and
+			// the nextEv object has been deleted
 		}
 	}
 
