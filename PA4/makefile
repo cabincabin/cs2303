@@ -23,6 +23,10 @@ TellerEvent.o: TellerEvent.cpp TellerEvent.h Event.h
 	
 TellerList.o: TellerList.cpp TellerList.h Event.h EventQueue.h  TellerEvent.h
 	g++ $(CFLAGS) -Wall -c TellerList.cpp
-	
+
+docs:
+	@doxygen
+	@open doxygen/html/index.html
+
 clean:
 	 rm -f qSim.o Event.o EventQueue.o TellerEvent.o CustEvent.o TellerList.o qSim

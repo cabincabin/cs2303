@@ -21,8 +21,7 @@
 
 /*****************************************************************/
 
-/*
- * TellerEvent(EventQueue &evQue, float time)
+/**TellerEvent(EventQueue &evQue, float time)
  * Purpose: Constructor of the Event class
  * @param EventQueue &evQue A pointer to the main Eventqueue
  * @param float time The current time of the event
@@ -36,9 +35,7 @@ eventQue(evQue){
 }
 
 /*****************************************************************/
-
-/*
- * void AddEvent()
+/**void AddEvent()
  * Purpose: Add an event to the event queue
  * @return void
  */
@@ -48,8 +45,7 @@ void Event::AddEvent(){
 
 /*****************************************************************/
 
-/*
- * float getTime()
+/**float getTime()
  * Purpose: Return the time of the event
  * @return float Returns the time of the event
  */
@@ -59,8 +55,7 @@ float Event::getTime(){
 
 /*****************************************************************/
 
-/*
- * int getActionType()
+/**int getActionType()
  * Purpose: Get the action type required for the event
  * @return int Returns the number of action, look in TypesOfActions.h for
  * meaning of integers

@@ -19,8 +19,7 @@
 
 /*****************************************************************/
 
-/*
- * CustEvent(EventQueue &evQue, float time)
+/**CustEvent(EventQueue &evQue, float time)
  * Purpose: Constructor of the CustEvent class
  * @param EventQueue &evQue A pointer to the main Eventqueue which the cust event
  * is to be stored in upon declaration
@@ -39,8 +38,7 @@ float CustEvent::getServTime(){
 	return servTime;
 }
 
-/*
- * CustLeaveBank()
+/**CustLeaveBank()
  * Purpose: Sets action of event to leave
  */
 float CustEvent::CustLeaveBank(){
@@ -48,8 +46,7 @@ float CustEvent::CustLeaveBank(){
   return netTime - initTime;
 }
 
-/*
- * timeWithTeller()
+/**timeWithTeller()
  * @param currentTime The current program time
  * @param TellTime The time that the teller took
  * Purpose: Change the event action and calculate net time

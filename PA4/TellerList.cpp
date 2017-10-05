@@ -24,8 +24,7 @@
 #include "TellerEvent.h"
 
 /*****************************************************************/
-/*
- * TellerList(EventQueue &evQue)
+/**TellerList(EventQueue &evQue)
  * Purpose: Constructor of the teller list class
  * @param EventQueue &evQue A pointer to the main Event Queue
  */
@@ -40,8 +39,7 @@ TellerList::TellerList(EventQueue &eventQue){
 	nodeleng = 0;
 }
 
-/*
- * void insertQueue(TellerEvent *eventIn, node *comparedNode, int tellNum)
+/**void insertQueue(TellerEvent *eventIn, node *comparedNode, int tellNum)
  * Purpose: Insert a teller queue into the queue with respect to time
  * @param TellerEvent *eventIn A teller event to be inserted
  * @param node *comparedNode The node which inserted teller event will be
@@ -71,8 +69,7 @@ void TellerList::insertQueue(TellerEvent *eventIn, node *comparedNode, int tellN
 	}
 }
 
-/*
- * void insertQueue(TellerEvent &eventIn)
+/**void insertQueue(TellerEvent &eventIn)
  * Purpose: overloaded public function of the insertQueue, calls the actual
  * function and uses rootnode
  * @param TellerEvent &eventIn The teller event to be inserted
@@ -82,8 +79,7 @@ void TellerList::insertQueue(TellerEvent &eventIn){
 	insertQueue(&eventIn, rootNode, 1);
 }
 
-/*
- * node * initTellerInQueue(TellerEvent * eventIn)
+/**node * initTellerInQueue(TellerEvent * eventIn)
  * Purpose: Initialize the teller queue
  * @param TellerEvent &eventIn The teller event to be inserted in the teller
  * queue
@@ -99,8 +95,7 @@ TellerList::node* TellerList::initTellerInQueue(TellerEvent *eventIn){
 	return Node;
 }
 
-/*
- * int getListLen()
+/**int getListLen()
  * Purpose: Get the length of the teller queue
  * @return int Returns the length of the teller queue
  */
@@ -108,8 +103,7 @@ int TellerList::getListLen(){
 	return nodeleng;
 }
 
-/*
- * node * getRootNode()
+/**node * getRootNode()
  * Purpose: Return the root node of the teller queue
  * @return node * The root node of the teller queue
  */
@@ -117,8 +111,7 @@ TellerList::node* TellerList::getRootNode(){
 	return rootNode;
 }
 
-/*
- * int GetPeopleInBank()
+/**int GetPeopleInBank()
  * Purpose: Return all the customers currently inside teller queues
  * @return int Return the number of people in teller queues
  */
@@ -135,8 +128,7 @@ int TellerList::GetPeopleInBank(){
 	return leng;
 }
 
-/*
- * TellerEvent * GetEvent(int tellNum)
+/**TellerEvent * GetEvent(int tellNum)
  * Purpose: Get the next event from the teller queue
  * @param int tellNum The queue number referring to which teller queue to grab the
  * Teller Event from
@@ -153,8 +145,7 @@ TellerEvent *TellerList::GetEvent(int tellNum){
 		return Tev;
 }
 
-/*
- * ~TellerList()
+/**~TellerList()
  * Purpose: Destructor of the teller list class
  */
 TellerList::~TellerList(){

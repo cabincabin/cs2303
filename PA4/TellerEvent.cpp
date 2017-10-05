@@ -24,8 +24,7 @@
 
 /*****************************************************************/
 
-/*
- * TellerEvent(EventQueue &evQue, float time, TellerList &TList)
+/**TellerEvent(EventQueue &evQue, float time, TellerList &TList)
  * Purpose: Constructor of the TellerEvent class
  * @param EventQueue &evQue A pointer to the main Eventqueue which the cust event
  * is to be stored in upon declaration
@@ -43,8 +42,7 @@ tList(Tlist)
 
 /*****************************************************************/
 
-/*
- * float idle(float currentTime)
+/** float idle(float currentTime)
  * Purpose: Add event to idle
  * @param float currentTime The current time of the simulation which is used
  * to calculate the time of the event
@@ -59,8 +57,7 @@ float TellerEvent::idle(float currentTime){//WHEN PULLED OUT CHANGE action TO TE
 
 /*****************************************************************/
 
-/*
- * void InsertTellerToList()
+/**void InsertTellerToList()
  * Purpose: Add teller event to list of all tellers
  * @param void
  * @return void
@@ -71,8 +68,7 @@ void TellerEvent::InsertTellerToList(){
 
 /*****************************************************************/
 
-/*
- * float GetNextCustomer(float currentTime, float averageServiceTime)
+/**float GetNextCustomer(float currentTime, float averageServiceTime)
  * Purpose: Get the next customer event from the teller queue with a specific
  * time
  * @param float averageServiceTime The service time of the program
@@ -131,9 +127,7 @@ float TellerEvent::GetNextCustomer(float CurrentTime, float averageServiceTime){
 }
 
 /*****************************************************************/
-
-/*
- * void AddCustToQue(CustEvent *cust)
+/**void AddCustToQue(CustEvent *cust)
  * Purpose: Add a customer event to the teller queue
  * @param CustEvent *cust The customer event to be added to the queue
  * @return void
@@ -146,8 +140,7 @@ void TellerEvent::AddCustToQue(CustEvent *cust){
 
 /*****************************************************************/
 
-/*
- * int linelength()
+/**int linelength()
  * Purpose: Return the length of the teller queue
  * @return int Return the length of the teller queue
  */
@@ -157,10 +150,9 @@ int TellerEvent::linelength(){
 
 /*****************************************************************/
 
-/*
- * ~TellerEvent()
+/**~TellerEvent()
  * Purpose: TellerEvent destructor
  */
 TellerEvent::~TellerEvent(){
-	free(this);
+	delete(this);
 }
