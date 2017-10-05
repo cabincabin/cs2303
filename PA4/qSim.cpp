@@ -1,5 +1,5 @@
 /*
- * qSim.c
+ * qSim.cpp
  *
  *  Created on: Oct. 1st, 2017
  *  Author: Clayton Dembski & Floris van Rossum
