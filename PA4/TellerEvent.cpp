@@ -60,7 +60,7 @@ float TellerEvent::idle(float currentTime){//WHEN PULLED OUT CHANGE action TO TE
 
 /*
  * void InsertTellerToList()
- * Purpose: ??? Add teller event to this teller queue
+ * Purpose: Add teller event to list of all tellers
  * @param void
  * @return void
  */
@@ -94,19 +94,20 @@ float TellerEvent::GetNextCustomer(float CurrentTime, float averageServiceTime){
 		// Initialize teller queue
 		TellerList *TellCust = new TellerList(eventQue);
 
-		// Insert the customer in the queue ???
+		// Looks at all tellers with lines greater than 0
 		for(i = 0; i <= tList.getListLen(); i++){
-			if((tList.GetEvent(i))->linelength() !=0 ){
+			if(( tList.GetEvent(i)) -> linelength() !=0 ){
+				// Adds teller to list of tellers with non-zero queues
 				TellCust->insertQueue(*tList.GetEvent(i));
 			}
 		}
-		// Checks if the teller queue has a length of 0
+		// Checks if the list of tellers is not 0
 		if(TellCust -> getListLen() == 0){
 			// Teller queue is 0 so return the idle time
 			return idle(CurrentTime);//can change action
 		}
 		else{
-			// Get a random customer ???
+			// Get a customer from a random teller queue which is not 0
 			int randNum = rand() % (TellCust->getListLen())+1;
 			cust = static_cast<CustEvent*>(TellCust->GetEvent(randNum)->
 					tellerQue->GetTopEvent());

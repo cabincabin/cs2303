@@ -77,10 +77,6 @@ int main(int argc, char ** argv){
 		srand(atoi(argv[5]));
 		cout << "The random seed entered entered: " << argv[5] << "\n";
 	}
-	else{
-		// User has not specified a random seed so use a random one
-		// srand(5); ???
-	}
 
 	// Initializing necessary objects
 	EventQueue *queue = new EventQueue(); // Event Queue Constructor
@@ -181,20 +177,20 @@ int main(int argc, char ** argv){
 			Tell->GetEvent(0)->tellerQue->insertQueue(*nextEv);
 		}
 		else if(action <= TellIdle) {
-			// Event is a teller idling
+			// Event is a Teller Event
 
-			// Get the next customer from the teller queue ???
+			// Get the time of the Teller Event
 			tempTimeOfAction = static_cast<TellerEvent*>(nextEv) ->
 					GetNextCustomer(currentTime,averageServiceTime);
 
-			// Checks action of next event
+			// If teller event is Idle Event
 			if(nextEv->getActionType()==TellIdle){
 				// Next event from event queue is an idling teller
 				IdleTime = IdleTime + tempTimeOfAction; /* increment idleTime
-				 with next action idle time ??? */
+				 with next action idle time*/
 			}
 			else{
-				// The action is a customer event
+				// The Teller event is a customer service event
 				ServTime = ServTime + tempTimeOfAction; /* Increment
 				service time with the service time of the next event */
 			}
@@ -223,7 +219,7 @@ int main(int argc, char ** argv){
 		}
 	}
 
-	// Update the idle time of the tellers if simulation has not ended ???
+	// Update the idle time of the tellers if end of day is not yet reached
 	if(currentTime<simulationTime)
 		IdleTime=IdleTime+tellers*(simulationTime-currentTime);
 
@@ -237,13 +233,14 @@ int main(int argc, char ** argv){
 	// Print out the statistics of the first simulation
 	cout << "--------Simulation 1--------"<<"\n";
 	cout << "Customers Served: "<<customers<<"\n";
-	cout << "Customer Service Time: "<<ServTime<<"min \n";
+	cout << "Time Required to Serve All Customers: "<<currentTime<<" min \n";
 	cout << "Tellers: "<<tellers<<"\n";
 	cout << "Queuing System: Single Queue"<<"\n";
-	cout << "Average Time Spent in Bank: "<<(AverageTimeInBank/customers)<<"min \n";
-	cout << "Standard Deviation: "<<stdDev<<"min \n";
-	cout << "Max Wait Time: "<<MaxTimeInLine<<"min \n";
-	cout << "Teller Idle Time: "<<IdleTime<<"min \n";
+	cout << "Average Time Spent in Bank: "<<(AverageTimeInBank/customers)<<" min \n";
+	cout << "Standard Deviation: "<<stdDev<<" min \n";
+	cout << "Max Wait Time: "<<MaxTimeInLine<<" min \n";
+	cout << "Teller Service Time: " << ServTime << " min \n";
+	cout << "Teller Idle Time: "<<IdleTime<<" min \n";
 
 	// Free the objects used
 	delete queue;
@@ -256,10 +253,6 @@ int main(int argc, char ** argv){
 	if(argc >= 5 && atoi(argv[5]) != 0){
 		// User has specified a random seed
 		srand(atoi(argv[5])); // Use user-specified seed
-	}
-	else{
-		// Use custom random seed ??? don't need
-		srand(5);
 	}
 
 	// Initializing necessary objects
@@ -280,7 +273,8 @@ int main(int argc, char ** argv){
 	// Pre-condition: Queue has been initialized and tellers is a
 	// user specified non-zero number
 	for(int i = 0; i < tellers; i++){
-		float idleTime = 599/60 * (rand()/float(RAND_MAX))+1/60; // ???
+		float idleTime = ((599/60) * (rand()/float(RAND_MAX))) + 1/60;
+		// Prevent 0 idle time
 		(new TellerEvent(*queue, idleTime, *Tell))->InsertTellerToList();
 		// LOOP-INVARIANT: A teller event has been created with a random idle
 		// time
@@ -354,10 +348,10 @@ int main(int argc, char ** argv){
 			int i; // Count variable
 			TellerList *TellCust = new TellerList(*queue);
 
-			// This for loop gets smallest size of line ???
+			// This for loop gets smallest teller queue length
 			// Pre-condition: All teller queues have been initialized
 			for(i = 1; i <= Tell -> getListLen(); i++) {
-				// do not add to ULTIqueue ???
+				// Do not look at teller queue 0
 				if( (Tell -> GetEvent(i)) -> linelength() < lineS){
 					lineS=(Tell->GetEvent(i))->linelength();
 				}
@@ -373,10 +367,11 @@ int main(int argc, char ** argv){
 				if((Tell->GetEvent(i))->linelength() == lineS ){
 					TellCust->insertQueue(*(Tell->GetEvent(i)));
 				}
-				// LOOP-INVARIANT: The teller Tell's queue length has been checked ???
+				// LOOP-INVARIANT: The teller Tell's queue length has been checked, minimum size
+				// has been found
 			}
 
-			// ??? this throws everything off, as the randoms do not match up anymore,
+			// This throws everything off, as the randoms do not match up anymore,
 			// however it is a requirement via the assignment.
 
 			// Get a random teller queue
@@ -388,7 +383,7 @@ int main(int argc, char ** argv){
 		}
 		else if(action <= TellIdle) {
 			// Action is an idling teller
-			// ??? Get the time of the action of the next event in the queue
+			// Get the time of the next Teller Event action
 			tempTimeOfAction = static_cast<TellerEvent*>(nextEv) ->
 					GetNextCustomer(currentTime,averageServiceTime);
 
@@ -438,12 +433,13 @@ int main(int argc, char ** argv){
 	// Print out all statistics
 	cout << "--------Simulation 2--------"<<"\n";
 	cout << "Customers Served: "<<customers<<"\n";
-	cout << "Customer Service Time: "<<ServTime<<"min \n";
+	cout << "Time Required to Serve All Customers: "<<currentTime<<" min \n";
 	cout << "Tellers: "<<tellers<<"\n";
 	cout << "Queuing System: Multiple Queues"<<"\n";
 	cout << "Average Time Spent in Bank: "<<(AverageTimeInBank/customers)<<"min \n";
 	cout << "Standard Deviation: "<<stdDev<<"min \n";
 	cout << "Max Wait Time: "<<MaxTimeInLine<<"min \n";
+	cout << "Teller Service Time: " << ServTime << " min \n";
 	cout << "Teller Idle Time: "<<IdleTime<<"min \n";
 
 	// Delete all used objects
