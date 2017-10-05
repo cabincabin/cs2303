@@ -32,22 +32,22 @@ private:
 
 	void insertQueue(Event *eventIn, node *comparedNode); //
 	node* initEventInQueue(Event *eventIn); // initialize the eventqueue
-	node* getRootNode();
 	int nodeleng;
 
 /*****************************************************************/
 
 public:
+	//Constructs new EventQueue with a rootnode of an empty EVENT
 	EventQueue();
 
-	// Sorted linked list based on time
-	// Add something to the linked list
-	// remove something from the head
-	//Insert a something into the event queue
+	//returns the number of customers in the EventQueue
 	int EventQueueCusts();
 
+	//Inserts and sorts the envent as a node into the queue
 	void insertQueue(Event &eventIn);
+	//gets the total length of the queue, ignoring the default node
 	int getQueueLen();
+	//pops the first event to the user
 	Event* GetTopEvent();
 
 	~EventQueue();

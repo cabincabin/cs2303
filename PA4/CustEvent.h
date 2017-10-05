@@ -12,12 +12,14 @@
 class CustEvent: public Event{
 float servTime;
 public:
+	//creates new customer which has the single Event queue and the initial time of arrival
   CustEvent(EventQueue &evQue, float time);
-
+  //returns the total time in the bank
   float CustLeaveBank();
+  //returns the service time of the customer
   float getServTime();
  ~CustEvent();
-
+//puts the customer back in the event queue with the advanced time
  void timeWithTeller(float currentTime, float TellTime);
 };
 

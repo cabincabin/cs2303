@@ -3,7 +3,7 @@
 
 #define CustArrive -1
 #define CustService -2
-#define CustLeave -3//unused
+#define CustLeave -3
 #define TellIdle -4
 #define TellGetCust -5
 

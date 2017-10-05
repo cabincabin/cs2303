@@ -33,8 +33,7 @@ using namespace std;
 
 /*****************************************************************/
 
-/*
- * int main(int argc, char ** argv)
+/**int main(int argc, char ** argv)
  * Purpose: Main function of the program
  * @param argc Number of user input arguments
  * @param char ** argv String array of all user input command arguments
@@ -72,7 +71,7 @@ int main(int argc, char ** argv){
 	//////////////////SIM 1//////////////////////////////
 
 	// Sets random seed if user specifies otherwise use a random seed
-	if(argc >= 5 && atoi(argv[5]) != 0){
+	if(argc >= 6 && atoi(argv[5]) != 0){
 		// User has specified a random seed so use it
 		srand(atoi(argv[5]));
 		cout << "The random seed entered entered: " << argv[5] << "\n";
@@ -250,7 +249,7 @@ int main(int argc, char ** argv){
 	//////////////////SIM 2//////////////////////////////
 
 	// Controls setting of random seed
-	if(argc >= 5 && atoi(argv[5]) != 0){
+	if(argc >= 6 && atoi(argv[5]) != 0){
 		// User has specified a random seed
 		srand(atoi(argv[5])); // Use user-specified seed
 	}
