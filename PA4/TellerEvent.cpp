@@ -3,6 +3,7 @@
  *
  *  Created on: Oct 2, 2017
  *      Author: Floris van Rossum & Clayton Dembski
+ *  Purpose: Source file of the teller event class
  */
 
 /*****************************************************************/

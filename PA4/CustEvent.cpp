@@ -3,7 +3,7 @@
  *
  *  Created on: Oct. 1st, 2017
  *  Author: Clayton Dembski & Floris van Rossum
- *  Purpose: Header file of customer event class
+ *  Purpose: Source file of the customer event class
  */
 
 /*****************************************************************/
