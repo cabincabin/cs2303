@@ -31,7 +31,12 @@ Event(evQue, time)
 {
   netTime = time;
   action = CustArrive;
+  servTime = 0;
   AddEvent(); // Add customer arrival to event queue
+}
+
+float CustEvent::getServTime(){
+	return servTime;
 }
 
 /*
@@ -51,6 +56,7 @@ float CustEvent::CustLeaveBank(){
  */
 void CustEvent::timeWithTeller(float currentTime, float TellTime){
  netTime = currentTime + TellTime;
+ servTime = TellTime;
  action = CustService;
  AddEvent(); // Add customer to teller to event queue
 }

@@ -10,12 +10,12 @@
 #define CustEvent_H_
 #include "Event.h"
 class CustEvent: public Event{
-
+float servTime;
 public:
   CustEvent(EventQueue &evQue, float time);
 
   float CustLeaveBank();
-
+  float getServTime();
  ~CustEvent();
 
  void timeWithTeller(float currentTime, float TellTime);

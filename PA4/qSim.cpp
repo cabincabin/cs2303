@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
+#include <math.h>
 
 //Used for printing messages
 #include <iostream>
@@ -88,11 +89,14 @@ int main(int argc, char ** argv){
 						NoCustAtStartOfDay = true;
 		}
 	}
-
+	float custBankTimes[customers];
+	int custBankCount = 0;
+	float stdDev = 0;
 	int action;
 	float ServTime = 0;
-	float TimeInBank = 0;
+	float AverageTimeInBank = 0;
 	float tempTimeOfAction;
+	float MaxTimeInLine = 0;
 	while(Tell -> GetPeopleInBank()!=0 || queue->EventQueueCusts()!=0){
 		if(firstRun == false){
 			nextEv = queue->GetTopEvent();
@@ -120,7 +124,13 @@ int main(int argc, char ** argv){
 			}
 		}
 		else if(action == CustService){
-			TimeInBank = TimeInBank + (static_cast<CustEvent*>(nextEv))->CustLeaveBank();
+			float TimeInBank = (static_cast<CustEvent*>(nextEv))->CustLeaveBank();
+			float TimeInLine = TimeInBank -(static_cast<CustEvent*>(nextEv)) -> getServTime();
+			if(TimeInLine>MaxTimeInLine)
+				MaxTimeInLine=TimeInLine;
+			AverageTimeInBank = AverageTimeInBank + TimeInBank;
+			custBankTimes[custBankCount] = TimeInBank;
+			custBankCount++;
 			delete nextEv;
 		}
 
@@ -128,15 +138,17 @@ int main(int argc, char ** argv){
 
 	if(currentTime<simulationTime)
 		IdleTime=IdleTime+tellers*(simulationTime-currentTime);
-	cout << "end1"<<"\n";
-
-
-	Event * c1 = new Event(*queue, 1);
-	c1->AddEvent();
-	Event * c2 = new Event(*queue, 1.5);
-	c2->AddEvent();
-	Event * c3 = new Event(*queue, 2);
-	c3->AddEvent();
-	Event * c4 = new Event(*queue, 5);
-	c4->AddEvent();
+	for(int i = 0; i < customers; i++){
+		stdDev = stdDev + (custBankTimes[i]-AverageTimeInBank/customers)*(custBankTimes[i]-AverageTimeInBank/customers);
+	}
+	stdDev = sqrt(stdDev/customers);
+	cout << "--------Simulation 1--------"<<"\n";
+	cout << "Customers Served: "<<customers<<"\n";
+	cout << "Customer Service Time: "<<ServTime<<"min \n";
+	cout << "Tellers: "<<tellers<<"\n";
+	cout << "Queuing System: Single Queue"<<"\n";
+	cout << "Average Time Spent in Bank: "<<(AverageTimeInBank/customers)<<"min \n";
+	cout << "Standard Deviation: "<<stdDev<<"min \n";
+	cout << "Max Wait Time: "<<MaxTimeInLine<<"min \n";
+	cout << "Teller Idle Time: "<<IdleTime<<"min \n";
 }
