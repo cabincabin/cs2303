@@ -44,7 +44,7 @@ public:
 	// Add something to the linked list
 	// remove something from the head
 	//Insert a something into the event queue
-	bool emptyEventQueue();
+	int EventQueueCusts();
 
 	void insertQueue(Event &eventIn);
 	int getQueueLen();

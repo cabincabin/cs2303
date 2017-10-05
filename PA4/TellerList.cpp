@@ -47,10 +47,6 @@ void TellerList::insertQueue(TellerEvent &eventIn){
 	insertQueue(&eventIn, rootNode, 1);
 }
 
-bool TellerList::emptyEventQueue(){
-	return true;
-}
-
 TellerList::node* TellerList::initTellerInQueue(TellerEvent *eventIn){
 	node *Node = new node;
 	Node -> tellerEvent = eventIn;
@@ -65,6 +61,18 @@ int TellerList::getListLen(){
 
 TellerList::node* TellerList::getRootNode(){
 	return rootNode;
+}
+
+int TellerList::GetPeopleInBank(){
+	int leng = 0;
+	node* tellNode = rootNode;
+	leng = leng + tellNode->tellerEvent->tellerQue->getQueueLen();
+	for(int i = 0; i < nodeleng; i++){
+		tellNode = tellNode -> prev;
+		leng = leng + tellNode->tellerEvent->tellerQue->getQueueLen();
+	}
+
+	return leng;
 }
 
 TellerEvent *TellerList::GetEvent(int tellNum){ //grab this as refrence

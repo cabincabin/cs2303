@@ -64,7 +64,7 @@ void EventQueue::insertQueue(Event *eventIn, node *comparedNode){
 	else if(comparedNode -> event -> getTime() < eventIn -> getTime() &&
 			 comparedNode -> prev -> event -> getTime() < insertNode -> event -> getTime()){
 		// comparedNode is earlier in even queue so continue searching
-		free(insertNode);
+		delete(insertNode);
 		insertQueue(eventIn,comparedNode -> prev); // recursively call
 
 	}
@@ -90,8 +90,17 @@ void EventQueue::insertQueue(Event &eventIn){
 
 /*****************************************************************/
 
-bool EventQueue::emptyEventQueue(){
-	return true;
+int EventQueue::EventQueueCusts(){
+	int leng = 0;
+	node* Node = rootNode;
+	for(int i = 0; i < nodeleng; i++){
+		Node = Node -> prev;
+		if(Node->event->getActionType()>=-3)
+				leng++;
+	}
+
+	return leng;
+
 }
 
 /*****************************************************************/
@@ -139,5 +148,7 @@ Event *EventQueue::GetTopEvent(){ //grab this as refrence
 		node* prevNode = rootNode -> prev;
 		rootNode -> prev = rootNode -> prev -> prev;
 		free(prevNode);
+		nodeleng--;
 		return eventIn;
+
 }

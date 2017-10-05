@@ -51,9 +51,12 @@ int main(int argc, char ** argv){
 	cout << "The random seed entered entered: " << argv[5] << "\n";
 
 
-	if(argc >= 6 && atoi(argv[5]) != 0)
+	if(argc >= 6 && atoi(argv[5]) != 0){
 		srand(atoi(argv[5]));
-
+	}
+	else{
+		srand(0);
+	}
 	//Initializing necessary objects
 	EventQueue *queue = new EventQueue();
 	TellerList *Tell = new TellerList(*queue);
@@ -67,39 +70,65 @@ int main(int argc, char ** argv){
 	//float serviceTime;
 	for(i = 0; i < tellers; i++){
 		//Put teller initialization here
-		float idleTime = 10 * (rand()/float(RAND_MAX));
+		float idleTime = 2;//599/60 * (rand()/float(RAND_MAX))+1/60;
 		(new TellerEvent(*queue, idleTime, *Tell))->InsertTellerToList();
 		//put teller object initialization here later
 	}
 	float currentTime = 0;
 	bool NoCustAtStartOfDay = false;
+	bool firstRun = true;
 	Event * nextEv = queue->GetTopEvent();
+	float IdleTime = 0;
 	if(nextEv->getTime() != 0){
+		TellerEvent * teller;
 				for(i = 0; i < tellers; i++){
-			TellerEvent * teller = Tell->GetEvent(i+1);
-			teller->idle(currentTime);
-			nextEv->AddEvent();
-			NoCustAtStartOfDay = true;
+						teller = Tell->GetEvent(i+1);
+						IdleTime = IdleTime + teller->idle(currentTime);
+						nextEv->AddEvent();
+						NoCustAtStartOfDay = true;
 		}
 	}
+
 	int action;
-	while (true){
-		if (NoCustAtStartOfDay){
+	float ServTime = 0;
+	float TimeInBank = 0;
+	float tempTimeOfAction;
+	while(Tell -> GetPeopleInBank()!=0 || queue->EventQueueCusts()!=0){
+		if(firstRun == false){
+			nextEv = queue->GetTopEvent();
+		}
+	    else if (NoCustAtStartOfDay){
 			nextEv = queue->GetTopEvent();
 			NoCustAtStartOfDay =  false;
+			firstRun = false;
+		}
+	    else if(firstRun){
+			firstRun = false;
 		}
 		action = nextEv->getActionType();
 		currentTime = nextEv->getTime();
 		if(action == CustArrive){
 			Tell->GetEvent(0)->tellerQue->insertQueue(*nextEv);
 		}
-
-		if(action <= TellIdle){//if teller
-			static_cast<TellerEvent*>(nextEv)->GetNextCustomer(currentTime,averageServiceTime);
+		else if(action <= TellIdle){//if teller
+			tempTimeOfAction = static_cast<TellerEvent*>(nextEv)->GetNextCustomer(currentTime,averageServiceTime);
+			if(nextEv->getActionType()==TellIdle){
+				IdleTime = IdleTime + tempTimeOfAction;
+			}
+			else{
+				ServTime = ServTime + tempTimeOfAction;
+			}
 		}
-			nextEv = queue->GetTopEvent();
+		else if(action == CustService){
+			TimeInBank = TimeInBank + (static_cast<CustEvent*>(nextEv))->CustLeaveBank();
+			delete nextEv;
+		}
+
 	}
 
+	if(currentTime<simulationTime)
+		IdleTime=IdleTime+tellers*(simulationTime-currentTime);
+	cout << "end1"<<"\n";
 
 
 	Event * c1 = new Event(*queue, 1);

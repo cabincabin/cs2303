@@ -26,8 +26,8 @@ public:
 	TellerList(EventQueue &eventQue);
 	int getQueueLength();
 	void insertQueue(TellerEvent &eventIn);
-	bool emptyEventQueue();
 	int getListLen();
+	int GetPeopleInBank();
 	TellerEvent *GetEvent(int tellNum);
 	~TellerList();
 };

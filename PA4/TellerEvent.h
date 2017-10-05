@@ -15,9 +15,9 @@ public:
   TellerEvent(EventQueue &evQue, float time, TellerList &Tlist);
   EventQueue *tellerQue;
   ~TellerEvent();
-  void idle(int currentTime);
+  int idle(int currentTime);
   void InsertTellerToList();
-  void GetNextCustomer(int CurrentTime, float averageServiceTime);
+  float GetNextCustomer(int CurrentTime, float averageServiceTime);
   void AddCustToQue(CustEvent *cust);
   void AddCustomerToLine();
   int linelength();
