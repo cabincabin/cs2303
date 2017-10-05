@@ -20,7 +20,7 @@ tList(Tlist)
   tellerQue = new EventQueue();
 }
 
-int TellerEvent::idle(int currentTime){//WHEN PULLED OUT CHANGE action TO TELLGETCUST
+float TellerEvent::idle(float currentTime){//WHEN PULLED OUT CHANGE action TO TELLGETCUST
   action = TellIdle;
   netTime = currentTime + initTime;
   AddEvent();
@@ -31,7 +31,7 @@ void TellerEvent::InsertTellerToList(){
 	tList.insertQueue(*this);
 }
 
-float TellerEvent::GetNextCustomer(int CurrentTime, float averageServiceTime){
+float TellerEvent::GetNextCustomer(float CurrentTime, float averageServiceTime){
 	action = TellGetCust;
 	CustEvent * cust;
 	if(linelength()!=0){
@@ -55,7 +55,7 @@ float TellerEvent::GetNextCustomer(int CurrentTime, float averageServiceTime){
 			cust = static_cast<CustEvent*>(TellCust->GetEvent(randNum)->
 					tellerQue->GetTopEvent());
 		}
-
+		delete TellCust;
 	}
 	if(action == TellGetCust){
 		float serviceTime = 2*averageServiceTime*rand()/float(RAND_MAX);
@@ -74,4 +74,7 @@ void TellerEvent::AddCustToQue(CustEvent *cust){
 
 int TellerEvent::linelength(){
 	return tellerQue->getQueueLen();
+}
+TellerEvent::~TellerEvent(){
+	free(this);
 }

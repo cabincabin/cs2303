@@ -87,3 +87,16 @@ TellerEvent *TellerList::GetEvent(int tellNum){ //grab this as refrence
 
 }
 
+TellerList::~TellerList(){
+	node* tellNode;
+	for(int i=nodeleng; i >=0; i--){
+	 tellNode = rootNode;
+		for(int j = 0; j < nodeleng; j++){
+			tellNode = tellNode -> prev;
+		}
+		delete tellNode->prev;
+
+
+	}
+}
+

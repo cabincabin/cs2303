@@ -15,6 +15,7 @@
 #include <errno.h>
 #include <string.h>
 #include <math.h>
+#include <climits>
 
 //Used for printing messages
 #include <iostream>
@@ -52,7 +53,7 @@ int main(int argc, char ** argv){
 	float averageServiceTime = atoi(argv[4]);
 
 
-
+	//////////////////SIM 1//////////////////////////////
 	if(argc >= 5 && atoi(argv[5]) != 0){
 		srand(atoi(argv[5]));
 		cout << "The random seed entered entered: " << argv[5] << "\n";
@@ -73,12 +74,14 @@ int main(int argc, char ** argv){
 	//float serviceTime;
 	for(int i = 0; i < tellers; i++){
 		//Put teller initialization here
-		float idleTime = 2;//599/60 * (rand()/float(RAND_MAX))+1/60;
+		float idleTime = 599/60 * (rand()/float(RAND_MAX))+1/60;
 		cout << "The random idle time of Teller:" << i << " is " <<
 						idleTime << "\n";
 		(new TellerEvent(*queue, idleTime, *Tell))->InsertTellerToList();
 		//put teller object initialization here later
 	}
+
+
 	float currentTime = 0;
 	bool NoCustAtStartOfDay = false;
 	bool firstRun = true;
@@ -138,8 +141,6 @@ int main(int argc, char ** argv){
 			custBankCount++;
 			delete nextEv;
 		}
-		cout <<currentTime<<endl;
-		cout.flush();
 	}
 
 	if(currentTime<simulationTime)
@@ -157,4 +158,132 @@ int main(int argc, char ** argv){
 	cout << "Standard Deviation: "<<stdDev<<"min \n";
 	cout << "Max Wait Time: "<<MaxTimeInLine<<"min \n";
 	cout << "Teller Idle Time: "<<IdleTime<<"min \n";
+	delete queue;
+	delete Tell;
+
+	//////////////////SIM 2//////////////////////////////
+
+	if(argc >= 5 && atoi(argv[5]) != 0){
+		srand(atoi(argv[5]));
+	}
+	else{
+		srand(12345);
+	}
+	//Initializing necessary objects
+	queue = new EventQueue();
+	Tell = new TellerList(*queue);
+
+	for(int i = 0; i < customers; i++){
+		float arrivalTime = simulationTime * (rand() / float(RAND_MAX));
+		new CustEvent(*queue, arrivalTime);
+	}
+	//float serviceTime;
+	for(int i = 0; i < tellers; i++){
+		//Put teller initialization here
+		float idleTime = 599/60 * (rand()/float(RAND_MAX))+1/60;
+		(new TellerEvent(*queue, idleTime, *Tell))->InsertTellerToList();
+		//put teller object initialization here later
+	}
+
+
+	currentTime = 0;
+	NoCustAtStartOfDay = false;
+	firstRun = true;
+	nextEv = queue->GetTopEvent();
+	IdleTime = 0;
+	if(nextEv->getTime() != 0){
+		TellerEvent * teller;
+				for(int i = 0; i < tellers; i++){
+						teller = Tell->GetEvent(i+1);
+						IdleTime = IdleTime + teller->idle(currentTime);
+
+		}
+				nextEv->AddEvent();
+				NoCustAtStartOfDay = true;
+	}
+	custBankCount = 0;
+	stdDev = 0;
+	action = -10;
+	ServTime = 0;
+	AverageTimeInBank = 0;
+	tempTimeOfAction=0;
+	MaxTimeInLine = 0;
+	while(Tell -> GetPeopleInBank()!=0 || queue->EventQueueCusts()!=0){
+		if(firstRun == false){
+			nextEv = queue->GetTopEvent();
+		}
+	    else if (NoCustAtStartOfDay){
+			nextEv = queue->GetTopEvent();
+			NoCustAtStartOfDay =  false;
+			firstRun = false;
+		}
+	    else if(firstRun){
+			firstRun = false;
+		}
+		action = nextEv->getActionType();
+		currentTime = nextEv->getTime();
+		if(action == CustArrive){
+
+			int lineS = INT_MAX;//to find the line with the smallest size
+			int i;
+			TellerList *TellCust = new TellerList(*queue);
+			//get smallest size of line
+			for(i = 1; i <= Tell->getListLen(); i++){//do not add to ULTIqueue
+				if((Tell->GetEvent(i))->linelength() < lineS){
+					lineS=(Tell->GetEvent(i))->linelength();
+				}
+			}
+			//get all the tellers which have this size of line
+			for(i = 1; i <= Tell->getListLen(); i++){
+
+				if((Tell->GetEvent(i))->linelength() == lineS ){
+					TellCust->insertQueue(*(Tell->GetEvent(i)));
+				}
+			}
+
+			int randNum = rand() % (TellCust->getListLen())+1;
+			TellCust->GetEvent(randNum)->tellerQue->insertQueue(*nextEv);
+			delete TellCust;
+
+		}
+
+
+		else if(action <= TellIdle){//if teller
+			tempTimeOfAction = static_cast<TellerEvent*>(nextEv)->GetNextCustomer(currentTime,averageServiceTime);
+			if(nextEv->getActionType()==TellIdle){
+				IdleTime = IdleTime + tempTimeOfAction;
+			}
+			else{
+				ServTime = ServTime + tempTimeOfAction;
+			}
+		}
+		else if(action == CustService){
+			float TimeInBank = (static_cast<CustEvent*>(nextEv))->CustLeaveBank();
+			float TimeInLine = TimeInBank -(static_cast<CustEvent*>(nextEv)) -> getServTime();
+			if(TimeInLine>MaxTimeInLine)
+				MaxTimeInLine=TimeInLine;
+			AverageTimeInBank = AverageTimeInBank + TimeInBank;
+			custBankTimes[custBankCount] = TimeInBank;
+			custBankCount++;
+			delete nextEv;
+		}
+	}
+
+	if(currentTime<simulationTime)
+		IdleTime=IdleTime+tellers*(simulationTime-currentTime);
+	for(int i = 0; i < customers; i++){
+		stdDev = stdDev + (custBankTimes[i]-AverageTimeInBank/customers)*(custBankTimes[i]-AverageTimeInBank/customers);
+	}
+	stdDev = sqrt(stdDev/customers);
+	cout << "--------Simulation 2--------"<<"\n";
+	cout << "Customers Served: "<<customers<<"\n";
+	cout << "Customer Service Time: "<<ServTime<<"min \n";
+	cout << "Tellers: "<<tellers<<"\n";
+	cout << "Queuing System: Multiple Queues"<<"\n";
+	cout << "Average Time Spent in Bank: "<<(AverageTimeInBank/customers)<<"min \n";
+	cout << "Standard Deviation: "<<stdDev<<"min \n";
+	cout << "Max Wait Time: "<<MaxTimeInLine<<"min \n";
+	cout << "Teller Idle Time: "<<IdleTime<<"min \n";
+	delete queue;
+	delete Tell;
 }
