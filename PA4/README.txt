@@ -4,11 +4,40 @@ USERNAMES: cjdembski & fjvanrossum
 LAST UPDATED: October 5th 2017, 1:33 PM
 
 FILES INCLUDED:
-
+qSim.cpp
+CustEvent.cpp
+CustEvent.h
+Event.cpp
+Event.h
+EventQueue.cpp
+EventQueue.h
+TellerEvent.cpp
+TellerEvent.h
+TellerList.cpp
+TellerList.h
+TypesOfAction.h
+makefile
+README.txt
 
 HOW TO USE:
+Running make all will compile the code without warnings and generate a executable
+called qSim. Running qSim with compatible arguments will run the program. 
+	
+	./qSim #customers #tellers simulationTime averageServiceTime <seed>
+	
+This line will run the program. customers, tellers, simulationTime averageServiceTime
+must be entered to run the program. The seed variable is optional. customers,
+tellers and simulationTime should be a whole integer value while averageServiceTime
+can be a value with decimals.
 
-
+Running the program with the correct arguments will execute the program as defined 
+by assignment 4. Improperly entering the command line arguments as specified above 
+will print an error and exit the program. Assuming the program runs correctly the
+program will run two simulations and print out the statistics of both simulations 
+once the program is complete. When the program is complete all nodes and objects used
+during runtime are properly freed and deleted. More information about how the program
+runs can be found later on in the README file under PURPOSE and PROGRAM STRUCTURE &
+ORGANIZATION.
 
 DOXYGEN:
 
@@ -32,6 +61,8 @@ PROGRAM FLOW:
 LOOP INVARIANTS:
 
 PROBLEMS:
+
+TEST CASES:
 
 SOURCES:
 1. http://en.cppreference.com/w/cpp/language/abstract_class
