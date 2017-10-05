@@ -9,6 +9,7 @@
 
 /*****************************************************************/
 //Include Statements:
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -49,29 +50,32 @@ int main(int argc, char ** argv){
 	int simulationTime = atoi(argv[3]); // Simulation time in minutes
 	cout << "The average service time entered: " << argv[4] << "\n";
 	float averageServiceTime = atoi(argv[4]);
-	cout << "The random seed entered entered: " << argv[5] << "\n";
 
 
-	if(argc >= 6 && atoi(argv[5]) != 0){
+
+	if(argc >= 5 && atoi(argv[5]) != 0){
 		srand(atoi(argv[5]));
+		cout << "The random seed entered entered: " << argv[5] << "\n";
 	}
 	else{
-		srand(0);
+		srand(12345);
 	}
 	//Initializing necessary objects
 	EventQueue *queue = new EventQueue();
 	TellerList *Tell = new TellerList(*queue);
-	int i;
-	for(i = 0; i < customers; i++){
+
+	for(int i = 0; i < customers; i++){
 		float arrivalTime = simulationTime * (rand() / float(RAND_MAX));
 		cout << "The random arrival time of customer:" << i << " is " <<
 				arrivalTime << "\n";
 		new CustEvent(*queue, arrivalTime);
 	}
 	//float serviceTime;
-	for(i = 0; i < tellers; i++){
+	for(int i = 0; i < tellers; i++){
 		//Put teller initialization here
 		float idleTime = 2;//599/60 * (rand()/float(RAND_MAX))+1/60;
+		cout << "The random idle time of Teller:" << i << " is " <<
+						idleTime << "\n";
 		(new TellerEvent(*queue, idleTime, *Tell))->InsertTellerToList();
 		//put teller object initialization here later
 	}
@@ -82,12 +86,13 @@ int main(int argc, char ** argv){
 	float IdleTime = 0;
 	if(nextEv->getTime() != 0){
 		TellerEvent * teller;
-				for(i = 0; i < tellers; i++){
+				for(int i = 0; i < tellers; i++){
 						teller = Tell->GetEvent(i+1);
 						IdleTime = IdleTime + teller->idle(currentTime);
-						nextEv->AddEvent();
-						NoCustAtStartOfDay = true;
+
 		}
+				nextEv->AddEvent();
+				NoCustAtStartOfDay = true;
 	}
 	float custBankTimes[customers];
 	int custBankCount = 0;
@@ -133,7 +138,8 @@ int main(int argc, char ** argv){
 			custBankCount++;
 			delete nextEv;
 		}
-
+		cout <<currentTime<<endl;
+		cout.flush();
 	}
 
 	if(currentTime<simulationTime)

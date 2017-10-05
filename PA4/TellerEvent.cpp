@@ -51,8 +51,8 @@ float TellerEvent::GetNextCustomer(int CurrentTime, float averageServiceTime){
 			return idle(CurrentTime);//can change action
 		}
 		else{
-			cust = static_cast<CustEvent*>(TellCust->GetEvent(
-					 rand() % (TellCust->getListLen()+1) )->
+			int randNum = rand() % (TellCust->getListLen())+1;
+			cust = static_cast<CustEvent*>(TellCust->GetEvent(randNum)->
 					tellerQue->GetTopEvent());
 		}
 

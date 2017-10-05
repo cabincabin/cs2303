@@ -84,5 +84,6 @@ TellerEvent *TellerList::GetEvent(int tellNum){ //grab this as refrence
 		TellerEvent *Tev = tellNode -> tellerEvent;
 		return Tev;
 
+
 }
 

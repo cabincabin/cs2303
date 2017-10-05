@@ -43,7 +43,7 @@ EventQueue::EventQueue(){
 void EventQueue::insertQueue(Event *eventIn, node *comparedNode){
 	node *insertNode = initEventInQueue(eventIn);
 
-	if(comparedNode -> event -> getTime() < insertNode -> event -> getTime() &&
+	if(comparedNode -> event -> getTime() <= insertNode -> event -> getTime() &&
 			(comparedNode -> prev == NULL ||
 			 comparedNode -> prev -> event -> getTime() > insertNode -> event -> getTime()) ){
 		// eventIn needs to be inserted after comparedNode
@@ -61,8 +61,8 @@ void EventQueue::insertQueue(Event *eventIn, node *comparedNode){
 
 	}
 
-	else if(comparedNode -> event -> getTime() < eventIn -> getTime() &&
-			 comparedNode -> prev -> event -> getTime() < insertNode -> event -> getTime()){
+	else if(comparedNode -> event -> getTime() <= eventIn -> getTime() &&
+			 comparedNode -> prev -> event -> getTime() <= insertNode -> event -> getTime()){
 		// comparedNode is earlier in even queue so continue searching
 		delete(insertNode);
 		insertQueue(eventIn,comparedNode -> prev); // recursively call
