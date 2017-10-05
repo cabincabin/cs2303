@@ -240,7 +240,9 @@ int main(int argc, char ** argv){
 					TellCust->insertQueue(*(Tell->GetEvent(i)));
 				}
 			}
-
+			//this throws everything off, as the randoms do not match up anymore,
+			//however it is a requirement via the assignment.
+			//oh well
 			int randNum = rand() % (TellCust->getListLen())+1;
 			TellCust->GetEvent(randNum)->tellerQue->insertQueue(*nextEv);
 			delete TellCust;
