@@ -59,7 +59,7 @@ int main(int argc, char ** argv){
 		cout << "The random seed entered entered: " << argv[5] << "\n";
 	}
 	else{
-		srand(12345);
+		srand(5);
 	}
 	//Initializing necessary objects
 	EventQueue *queue = new EventQueue();
@@ -97,6 +97,7 @@ int main(int argc, char ** argv){
 				nextEv->AddEvent();
 				NoCustAtStartOfDay = true;
 	}
+
 	float custBankTimes[customers];
 	int custBankCount = 0;
 	float stdDev = 0;
@@ -167,7 +168,7 @@ int main(int argc, char ** argv){
 		srand(atoi(argv[5]));
 	}
 	else{
-		srand(12345);
+		srand(5);
 	}
 	//Initializing necessary objects
 	queue = new EventQueue();
