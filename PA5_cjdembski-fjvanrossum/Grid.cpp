@@ -1,19 +1,20 @@
 /*
- * Orginism.cpp
+ * Grid.cpp
  *
  *  Created on: Oct 8, 2017
  *      Author: student
  */
 
-#include "Orginism.h"
-#include "grid.h"
+#include "Grid.h"
+#include "Organism.h"
 
-Orginism::Orginism() {
+Grid(int row, int col) {
 	// TODO Auto-generated constructor stub
 
 }
 
-Orginism::~Orginism() {
+
+Grid::~Grid() {
 	// TODO Auto-generated destructor stub
 }
 

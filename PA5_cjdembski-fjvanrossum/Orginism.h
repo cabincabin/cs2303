@@ -8,6 +8,7 @@
 #ifndef ORGINISM_H_
 #define ORGINISM_H_
 
+class Grid;
 class Orginism {
 protected:
 
