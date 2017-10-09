@@ -15,16 +15,17 @@ protected:
 bool prey;
 int breedcount;
 Grid* grid;
-int x;
-int y;
+int r;
+int c;
 public:
-Organism(bool pre, Grid* gri, int xpos, int ypos);
+Organism(bool pre, Grid* gri, int rpos, int cpos);
 	bool isPrey();
 	virtual void move() = 0;
 	virtual void breed() = 0;
-	virtual void doAction() = 0;
-	int xPos();
-	int yPos();
+	void die();
+	int rPos();
+	int cPos();
+	void AddSelfToGrid();
 	virtual ~Organism();
 
 };

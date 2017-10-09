@@ -19,12 +19,12 @@ protected:
 public:
 	Organism*** BugGrid;
 	Grid(int row, int col);
-	bool isValid();
+	bool isValid(int r, int c);
 	int getrow();
 	int getcol();
 	std::vector<Organism*> GetAllPrey(int r, int c);
-	std::vector<Organism*> GetAllEmptyLoc(int r, int c);
-	Organism* getOrginismsAtLoc(int x, int y);
+	std::vector<Organism*> GetAllPred(int r, int c);
+	std::vector<int*> GetAllEmptyLoc(int r, int c);
 	virtual ~Grid();
 };
 

@@ -9,19 +9,28 @@
 #include "Grid.h"
 #include <vector>
 
-Organism::Organism(bool pre, Grid* gri, int xpos, int ypos):
+Organism::Organism(bool pre, Grid* gri, int rpos, int cpos):
 		prey(pre),
 		breedcount(0),
 		grid(gri),
-		x(xpos),
-		y(ypos){
+		r(rpos),
+		c(cpos){
 
 }
-int Organism::xPos(){
-	return x;
+int Organism::rPos(){
+	return r;
 }
-int Organism::yPos(){
-	return y;
+
+void Organism::die(){
+	grid->BugGrid[r][c]=NULL;
+	delete this;
+}
+void Organism::AddSelfToGrid(){
+	if(grid->isValid(r,c))
+	grid->BugGrid[r][c]=this;
+}
+int Organism::cPos(){
+	return c;
 }
 bool Organism::isPrey(){
 	return prey;
