@@ -7,9 +7,12 @@
 
 #ifndef GRID_H_
 #define GRID_H_
-class Orginism;
+class Organism;
 class Grid {
+protected:
+
 public:
+	Organism*** grid;
 	Grid(int row, int col);
 	bool isValid();
 	Organism* getOrginismsAtLoc(int x, int y);

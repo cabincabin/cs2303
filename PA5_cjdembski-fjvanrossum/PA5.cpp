@@ -17,7 +17,10 @@
 
 //Random libraries
 #include <cstdlib>
+#include "Grid.h"
 
 int main(){
+	Grid* PlayGrid = new Grid(5,5);
+	int i = 0;
 
 }
