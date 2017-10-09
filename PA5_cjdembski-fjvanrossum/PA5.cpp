@@ -11,6 +11,7 @@
 #include <string.h>
 #include <math.h>
 #include <climits>
+#include <vector>
 
 //Used for printing messages
 #include <iostream>
@@ -19,23 +20,38 @@
 #include <cstdlib>
 #include "Grid.h"
 #include "Organism.h"
+#include "Doodlebug.h"
+#include "Ant.h"
 
 int main(){
-	Grid PlayGrid(5,5);
-	Organism *Bug1 = PlayGrid.BugGrid[1][1];
-	delete PlayGrid.BugGrid[1][1];
+	Grid* PlayGrid = new Grid(5,5);
+	PlayGrid->BugGrid[1][1] = new Ant(PlayGrid, 1, 1);
+	delete PlayGrid->BugGrid[1][1];
+	PlayGrid->BugGrid[1][1]=NULL;
 	bool bool1 = true;
-	if(PlayGrid.BugGrid[1][1]==NULL){
+	if(PlayGrid->BugGrid[1][1]==NULL){
 		bool1 = false;
 	}
 	else{
 		bool1 = true;
 	}
-	/*for(int i = 0; i<5; i++){
-			for(int j = 0; j<5; j++){
-				std::cout<<PlayGrid->grid[i][j]->isPrey();
-			}
-		}*/
-	int i = 0;
+
+	std::vector<Organism*> pred = PlayGrid->GetAllPred();
+	std::vector<Organism*> prey = PlayGrid->GetAllPrey();
+	int predsize = pred.size();
+	int preysize = prey.size();
+	while(predsize!=0){
+		for(int i = 0; i<predsize; i++){
+			pred.at(i)->move();
+		}
+		for(int i = 0; i<preysize; i++){
+			prey.at(i)->move();
+		}
+		prey.clear();
+		prey = PlayGrid->GetAllPrey();
+		pred.clear();//should not delete objects themselves if so, this could cause error
+		pred = PlayGrid->GetAllPred();
+
+	}
 
 }

@@ -33,6 +33,7 @@ void Doodlebug::move(){// if need to dynamically allocate, free openSpace here
 		c = co;
 		eatcnt=0;
 		breed();
+		prey.clear();
 	}
 	else{
 		std::vector<int*> OpenSpaces = grid->GetAllEmptyLoc(rPos(),cPos());
@@ -48,8 +49,8 @@ void Doodlebug::move(){// if need to dynamically allocate, free openSpace here
 				die();
 			}
 			else
-			breed();
-
+				breed();
+			OpenSpaces.clear();
 
 		}
 	}

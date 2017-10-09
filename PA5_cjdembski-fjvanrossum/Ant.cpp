@@ -28,6 +28,7 @@ void Ant::move(){// if need to dynamically allocate, free openSpace here
 		c = loc[1];
 		breed();
 	}
+	OpenSpaces.clear();
 }
 void Ant::breed(){
 	breedcount++;

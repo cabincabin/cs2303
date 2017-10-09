@@ -20,6 +20,18 @@ col(co), BugGrid(new Organism**[ro])
 	}
 }
 
+std::vector<Organism*> Grid::GetAllPred(){
+	std::vector<Organism*> AllPred;
+	for(int i = 0; i<row; i++){
+		for(int j = 0; j<col; j++){
+			if(BugGrid[i][j]!=NULL && !BugGrid[i][j]->isPrey()){
+				AllPred.push_back(BugGrid[i][j]);
+			}
+		}
+	}
+	return AllPred;
+}
+
 std::vector<Organism*> Grid::GetAllPred(int r, int c){
 	std::vector<Organism*> AllPred;
 	if(r-1>=0){
@@ -43,6 +55,18 @@ std::vector<Organism*> Grid::GetAllPred(int r, int c){
 		}
 	}
 		return AllPred;
+}
+
+std::vector<Organism*> Grid::GetAllPrey(){
+	std::vector<Organism*> AllPrey;
+	for(int i = 0; i<row; i++){
+		for(int j = 0; j<col; j++){
+			if(BugGrid[i][j]!=NULL && BugGrid[i][j]->isPrey()){
+				AllPrey.push_back(BugGrid[i][j]);
+			}
+		}
+	}
+	return AllPrey;
 }
 
 std::vector<Organism*> Grid::GetAllPrey(int r, int c){
