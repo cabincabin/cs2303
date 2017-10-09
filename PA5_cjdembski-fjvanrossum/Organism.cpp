@@ -7,15 +7,25 @@
 
 #include "Organism.h"
 #include "Grid.h"
+#include <vector>
 
-Organism::Organism():prey(false){
+Organism::Organism(bool pre, Grid* gri, int xpos, int ypos):
+		prey(pre),
+		breedcount(0),
+		grid(gri),
+		x(xpos),
+		y(ypos){
+
 }
-Organism::Organism(bool pre):prey(pre){
+int Organism::xPos(){
+	return x;
+}
+int Organism::yPos(){
+	return y;
 }
 bool Organism::isPrey(){
 	return prey;
 }
+Organism::~Organism(){
 
-Organism::~Organism() {
 }
-
