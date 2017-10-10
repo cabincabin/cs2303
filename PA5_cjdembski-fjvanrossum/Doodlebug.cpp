@@ -13,6 +13,8 @@
 #include <iostream>
 
 #include <cstdlib>
+
+// Represented with x
 Doodlebug::Doodlebug(Grid* gri, int rpos, int cpos):
 Organism(false,gri,rpos,cpos), eatcnt(0){
 

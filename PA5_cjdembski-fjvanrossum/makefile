@@ -22,4 +22,4 @@ Ant.o: Ant.cpp Ant.h Organism.h Grid.h
 	g++ $(CFLAGS) -Wall -c Ant.cpp
 	
 clean:
-	 rm -f PA5.o Grid.o Organism.o Ant.o PA5
+	 rm -f PA5.o Grid.o Organism.o Ant.o Doodlebug.o PA5
