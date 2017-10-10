@@ -101,26 +101,34 @@ std::vector<int*> Grid::GetAllEmptyLoc(int r, int c){//THIS MAY HAVE SCOPE PROBL
 	std::vector<int*> AllEmpty;
 	if(r-1>=0){
 		if(BugGrid[r-1][c]==NULL){
-			int loc[2]={r-1,c};
-			AllEmpty.push_back(loc);
+			int* loc1 = new int[2];
+			 loc1[0]=r-1;
+			 loc1[1]=c;
+			AllEmpty.push_back(loc1);
 		}
 	}
 	if(r+1<row){
 		if(BugGrid[r+1][c]==NULL){
-			int loc[2]={r+1,c};
-			AllEmpty.push_back(loc);
+			int* loc2 = new int[2];
+			loc2[0]=r+1;
+			loc2[1]=c;
+			AllEmpty.push_back(loc2);
 		}
 	}
 	if(c-1>=0){
 		if(BugGrid[r][c-1]==NULL){
-			int loc[2]={r,c-1};
-			AllEmpty.push_back(loc);
+			int* loc3 = new int[2];
+			loc3[0]=r;
+			loc3[1]=c-1;
+			AllEmpty.push_back(loc3);
 		}
 	}
 	if(c+1<col){
 		if(BugGrid[r][c+1]==NULL){
-			int loc[2]={r,c+1};
-			AllEmpty.push_back(loc);
+			int* loc4 = new int[2];
+			loc4[0]=r;
+			loc4[1]=c+1;
+			AllEmpty.push_back(loc4);
 		}
 	}
 		return AllEmpty;

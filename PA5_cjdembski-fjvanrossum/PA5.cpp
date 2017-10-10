@@ -32,7 +32,7 @@ int main(){
 	PlayGrid -> BugGrid[1][1] = new Ant(PlayGrid, 1, 1);
 	PlayGrid -> BugGrid[1][2] = new Ant(PlayGrid, 1, 2); // This causes 1 prey to appear with GetAllPrey()
 	PlayGrid -> BugGrid[1][3] = new Doodlebug(PlayGrid, 1, 3);
-	PlayGrid -> BugGrid[2][4] = new Doodlebug(PlayGrid, 2, 4);
+	//PlayGrid -> BugGrid[1][0] = new Doodlebug(PlayGrid, 1, 0);
 	std::vector<Organism*> pred = PlayGrid -> GetAllPred();
 	std::vector<Organism*> prey = PlayGrid -> GetAllPrey();
 	printGrid(PlayGrid);
@@ -42,17 +42,20 @@ int main(){
 	int preysize = prey.size();
 	cout << "Number of prey: " << preysize << "\n";
 
-	while(predsize!=0){
-		/*for(int i = 0; i<predsize; i++){
+	for(int i = 0; i<10; i++){
+		for(int i = 0; i<predsize; i++){
 			pred.at(i)->move();
-		}*/
+		}
+		prey = PlayGrid->GetAllPrey();
+		preysize = prey.size();
 		for(int i = 0; i<preysize; i++){
 			prey.at(i)->move();
 		}
 		//prey.clear();
-		prey = PlayGrid->GetAllPrey();
+
 		//pred.clear(); //should not delete objects themselves if so, this could cause error
 		pred = PlayGrid->GetAllPred();
+		predsize = pred.size();
 		printGrid(PlayGrid);
 	}
 
