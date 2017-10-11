@@ -78,7 +78,7 @@ int main(int argc, char *argv[]){
 	int numAnt = 100;
 	int timeSteps = 1000;
 	int seed = 1;
-	int pauses = 0;
+	int pauses = 1;
 
 	// Parsing and storing the command line arguments based
 	// on number of arguments entered by the user
@@ -132,6 +132,7 @@ int main(int argc, char *argv[]){
 	std::vector<Organism*> prey = PlayGrid -> GetAllPrey();
 
 	// Print the grid
+	cout << "Initial Grid:";
 	printGrid(PlayGrid);
 
 	int predsize = pred.size();
@@ -143,40 +144,45 @@ int main(int argc, char *argv[]){
 	// Main loop:
 	// Pre-condition:
 	while(predsize > 0 && preysize > 0 && tstep < timeSteps){
-		if(pauses!=0){
-			if(pauseLoop%pauses==0 && pauseLoop!=0){//don't print on first time through
+
+		if(pauses != 0){
+			if(pauseLoop % pauses == 0 && pauseLoop != 0){//don't print on first time through
 				getchar();
+				cout << "Grid: " << tstep << endl;
 				printGrid(PlayGrid);
 			}
 			pauseLoop++;
 		}
-		for(int i = 0; i<predsize; i++){
-			pred.at(i)->move();
-		}
-		prey = PlayGrid->GetAllPrey();
-		preysize = prey.size();
-		for(int i = 0; i<preysize; i++){
-			prey.at(i)->move();
-		}
-		prey.clear();
 
+		for(int i = 0; i < predsize; i++){
+			pred.at(i) -> move();
+		}
+
+		prey = PlayGrid -> GetAllPrey();
+		preysize = prey.size();
+
+		for(int i = 0; i < preysize; i++){
+			prey.at(i) -> move();
+		}
+
+		prey.clear();
 		pred.clear(); //should not delete objects themselves if so, this could cause error
-		pred = PlayGrid->GetAllPred();
+		pred = PlayGrid -> GetAllPred();
 		predsize = pred.size();
 		tstep++;
 	}
-	cout << "Final Grid:" << endl;
-	if(tstep!=0)
+	cout << endl << "Final Grid:";
+	if(tstep != 0)
 		printGrid(PlayGrid);
 
-	cout << endl << endl << "Gridsize: "<<gridsize<<" #doodlebugs: "<<numDood<<
-			" #ants: "<<numAnt<<" #time_steps: "<< timeSteps<<
-			" seed: "<<seed<<" pause: "<<pauses<<endl;
-	cout<<"Total Number of Steps Performed: "<<tstep<<endl;
-	cout<<"Net Number of Ants On Board: "<<PlayGrid->getTotAnts()<<endl;
-	cout<<"Net Number of DoodleBugs On Board: "<<PlayGrid->getTotDoods()<<endl;
-	cout<<"Current Number Of Ants On Board: "<<(PlayGrid -> GetAllPrey()).size()<<endl;
-	cout<<"Current Number Of DoodleBugs On Board: "<<predsize<<endl;
+	cout << endl << endl << "Gridsize: " << gridsize << " #doodlebugs: " << numDood <<
+			" #ants: " << numAnt << " #time_steps: " << timeSteps <<
+			" seed: " << seed << " pause: " << pauses << endl;
+	cout << "Total Number of Steps Performed: " << tstep << endl;
+	cout << "Net Number of Ants On Board: " << PlayGrid -> getTotAnts() << endl;
+	cout << "Net Number of DoodleBugs On Board: " << PlayGrid -> getTotDoods() << endl;
+	cout << "Current Number Of Ants On Board: " << (PlayGrid -> GetAllPrey()).size() << endl;
+	cout << "Current Number Of DoodleBugs On Board: " << predsize << endl;
 }
 
 
