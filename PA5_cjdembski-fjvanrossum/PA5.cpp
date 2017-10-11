@@ -2,7 +2,7 @@
  * PA5.cpp
  *
  *  Created on: Oct 8, 2017
- *      Author: Clayton Dembski and Floris vanRossum
+ *      Author: Clayton Dembski and Floris van Rossum
  */
 
 #include <stdio.h>

@@ -2,7 +2,8 @@
  * Grid.h
  *
  *  Created on: Oct 8, 2017
- *      Author: student
+ *      Author: Clayton Dembski and Floris van Rossum
+ *      Purpose:
  */
 
 #ifndef GRID_H_

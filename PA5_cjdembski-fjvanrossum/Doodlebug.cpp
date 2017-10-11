@@ -2,7 +2,8 @@
  * Doodlebug.cpp
  *
  *  Created on: Oct 9, 2017
- *      Author: student
+ *      Author: Clayton Dembski and Floris van Rossum
+ *      Purpose:
  */
 
 #include "Doodlebug.h"

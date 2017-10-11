@@ -2,15 +2,24 @@
  * Grid.cpp
  *
  *  Created on: Oct 8, 2017
- *      Author: student
+ *      Author: Clayton Dembski and Floris van Rossum
+ *      Purpose:
  */
-
+/*****************************************************************************/
+// Include statements
 #include "Grid.h"
 #include "Organism.h"
 
 #include <vector>
 #include <iostream>
 
+/*****************************************************************************/
+
+/** Grid()
+ * Purpose: Constructor of the Grid Object
+ * @param int ro Number of rows of the grid
+ * @param int co Number of columns of the grid
+ */
 Grid::Grid(int ro, int co): row(ro),
 col(co), BugGrid(new Organism**[ro])
 {
@@ -19,6 +28,12 @@ col(co), BugGrid(new Organism**[ro])
 	}
 }
 
+/*****************************************************************************/
+
+/** vector<Organism*> GetAllPred()
+ * Purpose: Returns a vector containing all the predator organisms
+ * @return vector<Organism*> Vector containing all the predators in the grid
+ */
 std::vector<Organism*> Grid::GetAllPred(){
 	std::vector<Organism*> AllPred;
 	for(int i = 0; i < row; i++){
@@ -32,6 +47,8 @@ std::vector<Organism*> Grid::GetAllPred(){
 	}
 	return AllPred;
 }
+
+/*****************************************************************************/
 
 std::vector<Organism*> Grid::GetAllPred(int r, int c){
 	std::vector<Organism*> AllPred;
@@ -58,6 +75,8 @@ std::vector<Organism*> Grid::GetAllPred(int r, int c){
 		return AllPred;
 }
 
+/*****************************************************************************/
+
 std::vector<Organism*> Grid::GetAllPrey(){
 	std::vector<Organism*> AllPrey;
 	for(int i = 0; i<row; i++){
@@ -71,6 +90,8 @@ std::vector<Organism*> Grid::GetAllPrey(){
 	}
 	return AllPrey;
 }
+
+/*****************************************************************************/
 
 std::vector<Organism*> Grid::GetAllPrey(int r, int c){
 	std::vector<Organism*> AllPrey;
@@ -96,6 +117,8 @@ std::vector<Organism*> Grid::GetAllPrey(int r, int c){
 	}
 		return AllPrey;
 }
+
+/*****************************************************************************/
 
 std::vector<int*> Grid::GetAllEmptyLoc(int r, int c){//THIS MAY HAVE SCOPE PROBLEMS IF SO CHANGE EACH LOC TO A NEW INT(2)
 	std::vector<int*> AllEmpty;
@@ -134,9 +157,13 @@ std::vector<int*> Grid::GetAllEmptyLoc(int r, int c){//THIS MAY HAVE SCOPE PROBL
 		return AllEmpty;
 }
 
+/*****************************************************************************/
+
 int Grid::getrow(){
 	return row;
 }
+
+/*****************************************************************************/
 
 int Grid::getcol(){
 	return col;
@@ -150,4 +177,3 @@ bool Grid::isValid(int r, int c){
 Grid::~Grid() {
 	// TODO Auto-generated destructor stub
 }
-
