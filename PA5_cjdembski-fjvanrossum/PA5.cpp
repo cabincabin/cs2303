@@ -107,7 +107,6 @@ int main(int argc, char *argv[]){
 	// Initialize the grid
 	Grid* PlayGrid = new Grid(gridsize,gridsize);
 
-
 	for(int i = 0; i < numDood; i++){
 		int rowOrg = rand()%gridsize;
 		int colOrg = rand()%gridsize;
@@ -166,9 +165,11 @@ int main(int argc, char *argv[]){
 		predsize = pred.size();
 		tstep++;
 	}
+	cout << "Final Grid:" << endl;
 	if(tstep!=0)
-	printGrid(PlayGrid);
-	cout<<"Gridsize: "<<gridsize<<" #doodlebugs: "<<numDood<<
+		printGrid(PlayGrid);
+
+	cout << endl << endl << "Gridsize: "<<gridsize<<" #doodlebugs: "<<numDood<<
 			" #ants: "<<numAnt<<" #time_steps: "<< timeSteps<<
 			" seed: "<<seed<<" pause: "<<pauses<<endl;
 	cout<<"Total Number of Steps Performed: "<<tstep<<endl;

@@ -2,7 +2,8 @@
  * Ant.h
  *
  *  Created on: Oct 9, 2017
- *      Author: student
+ *      Author: Clayton Dembski & Floris van Rossum
+ *      Purpose: Header file of the Ant class
  */
 
 #ifndef ANT_H_
@@ -13,10 +14,12 @@ class Grid;
 
 class Ant: public Organism{
 public:
+	// Ant Contstructor
 	Ant(Grid* gri, int rpos, int cpos);
+	// Virtual functions, base class functions to be used
 	virtual void move();
 	virtual void breed();
-
+	// Virtual deconstructor
 	virtual ~Ant();
 };
 
