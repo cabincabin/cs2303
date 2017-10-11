@@ -50,7 +50,12 @@ std::vector<Organism*> Grid::GetAllPred(){
 }
 
 /*****************************************************************************/
-
+/** vector<Organism*> GetAllPred(int r, int c)
+ * Purpose: Returns a vector of all predators in the grid
+ * @param int r Row maximum of the grid
+ * @param int c Column maximum of the grid
+ * @return vector<Organism*> Vector containing all the predators in a space
+ */
 std::vector<Organism*> Grid::GetAllPred(int r, int c){
 	std::vector<Organism*> AllPred;
 	if(r-1>=0){
@@ -77,7 +82,10 @@ std::vector<Organism*> Grid::GetAllPred(int r, int c){
 }
 
 /*****************************************************************************/
-
+/** vector<Organism*> GetAllPrey()
+ * Purpose: Returns a vector of all prey in the grid
+ * @return vector<Organism*> Vector containing all the prey in the grid
+ */
 std::vector<Organism*> Grid::GetAllPrey(){
 	std::vector<Organism*> AllPrey;
 	for(int i = 0; i<row; i++){
@@ -93,7 +101,12 @@ std::vector<Organism*> Grid::GetAllPrey(){
 }
 
 /*****************************************************************************/
-
+/** vector<Organism*> GetAllPrey(int r, int c)
+ * Purpose: Returns a vector of all prey in the grid
+ * @param int r Row maximum of the grid
+ * @param int c Column maximum of the grid
+ * @return vector<Organism*> Vector containing all the prey in the grid
+ */
 std::vector<Organism*> Grid::GetAllPrey(int r, int c){
 	std::vector<Organism*> AllPrey;
 	if(r-1>=0){
@@ -120,7 +133,12 @@ std::vector<Organism*> Grid::GetAllPrey(int r, int c){
 }
 
 /*****************************************************************************/
-
+/** vector<int*> GetAllEmptyLoc(int r, int c)
+ * Purpose: Returns a vector int of empty locations in the grid
+ * @param int r Row maximum of the grid
+ * @param int c Column maximum of the grid
+ * @return vector<Organism*> Vector containing all empty spaces
+ */
 std::vector<int*> Grid::GetAllEmptyLoc(int r, int c){//THIS MAY HAVE SCOPE PROBLEMS IF SO CHANGE EACH LOC TO A NEW INT(2)
 	std::vector<int*> AllEmpty;
 	if(r-1>=0){
@@ -159,39 +177,75 @@ std::vector<int*> Grid::GetAllEmptyLoc(int r, int c){//THIS MAY HAVE SCOPE PROBL
 }
 
 /*****************************************************************************/
-
+/** void updateTotNumAnts()
+ * Purpose: Update the total count of ants in the game
+ * @return void
+ */
 void Grid::updateTotNumAnts(){
 	totalAnts++;
 }
+
+/*****************************************************************************/
+/** void updateTotNumDoods()
+ * Purpose: Update the total count of doodlebugs in the game
+ * @return void
+ */
 void Grid::updateTotNumDoods(){
 	totalDoods++;
 }
+
+/*****************************************************************************/
+/** int getTotAnts()
+ * Purpose: Return the total count of ants in the game
+ * @return int The number of ants in the game
+ */
 int Grid::getTotAnts(){
 	return totalAnts;
 }
+
+/*****************************************************************************/
+/** int getTotDoods()
+ * Purpose: Return the total count of doodlebugs in the game
+ * @return int The total number of doodlebugs in the game
+ */
 int Grid::getTotDoods(){
 	return totalDoods;
 }
 
 /*****************************************************************************/
-
-
-
+/** int getrow()
+ * Purpose: Return the number of rows in the grid
+ * @return int The number of rows in the grid
+ */
 int Grid::getrow(){
 	return row;
 }
 
 /*****************************************************************************/
-
+/** int getcol()
+ * Purpose: Return the number of columns in the grid
+ * @return int The number of columns in the grid
+ */
 int Grid::getcol(){
 	return col;
 }
 
+/*****************************************************************************/
+/** bool isValid(int r, int c)
+ * Purpose: Function determines if a certain location is off the end of the grid
+ * @return bool Returns a boolean value based on whether (r,c) is off the grid
+ * (TRUE == in grid) (FALSE == not in grid)
+ */
 bool Grid::isValid(int r, int c){
 	if(r>=0&&r<row&&c>=0&&c<col)
 		return true;
 	return false;
 }
+
+/*****************************************************************************/
+/** ~Grid()
+ * Purpose: Deconstructor of the grid object
+ */
 Grid::~Grid() {
 	// TODO Auto-generated destructor stub
 }

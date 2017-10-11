@@ -5,7 +5,8 @@
  *      Author: Clayton Dembski and Floris van Rossum
  *      Purpose:
  */
-
+/*****************************************************************************/
+// Include statements
 #include "Doodlebug.h"
 #include "Grid.h"
 #include "Organism.h"
@@ -15,13 +16,25 @@
 
 #include <cstdlib>
 
-// Represented with x
+/*****************************************************************************/
+
+/** Doodlebug(Grid* gri, int rpos, int cpos)
+ * Purpose: Constructor of the doodlebug organism
+ * @param Grid* gri Pointer to the grid object
+ * @param int rpos Row position of the doodlebug
+ * @param int cpos Column position of the doodlebug
+ */
 Doodlebug::Doodlebug(Grid* gri, int rpos, int cpos):
 Organism(false,gri,rpos,cpos), eatcnt(0){
 
 
 }
 
+/*****************************************************************************/
+/** void move()
+ * Purpose: Move the doodlebug according to the rules
+ * @return void
+ */
 void Doodlebug::move(){// if need to dynamically allocate, free openSpace here
 	std::vector<Organism*> prey = grid->GetAllPrey(rPos(),cPos());
 	int size = prey.size();
@@ -58,6 +71,12 @@ void Doodlebug::move(){// if need to dynamically allocate, free openSpace here
 		}
 	}
 }
+
+/*****************************************************************************/
+/** void breed()
+ * Purpose: Breed the doodlebug, spawn another one nearby
+ * @return void
+ */
 void Doodlebug::breed(){
 	breedcount++;
 	if(breedcount >= 8){
@@ -71,8 +90,10 @@ void Doodlebug::breed(){
 	}
 }
 
-
+/*****************************************************************************/
+/** ~Doodlebug()
+ * Purpose: Doodlebug deconstructor
+ */
 Doodlebug::~Doodlebug() {
 	// TODO Auto-generated destructor stub
 }
-

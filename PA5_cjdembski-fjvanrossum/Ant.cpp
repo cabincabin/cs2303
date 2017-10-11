@@ -2,9 +2,11 @@
  * Ant.cpp
  *
  *  Created on: Oct 9, 2017
- *      Author: student
+ *      Author: Clayton Dembski and Floris van Rossum
+ *      Purpose:
  */
-
+/*****************************************************************************/
+// Include statements
 #include "Ant.h"
 #include "Grid.h"
 #include "Organism.h"
@@ -13,10 +15,22 @@
 #include <iostream>
 #include <cstdlib>
 
+/*****************************************************************************/
+/** Ant()
+ * Purpose: Constructor of the ant organism
+ * @param Grid* gri Pointer to the grid playing field
+ * @param int rpos The row position of the ant
+ * @param int cpos The column position of the ant
+ */
 Ant::Ant(Grid* gri, int rpos, int cpos):
 Organism(true,gri,rpos,cpos){
 }
 
+/*****************************************************************************/
+/** void move()
+ * Purpose: Move the ant according to the rules
+ * @return void
+ */
 void Ant::move(){// if need to dynamically allocate, free openSpace here
 	std::vector<int*> OpenSpaces = grid->GetAllEmptyLoc(rPos(),cPos());
 	int size = OpenSpaces.size();
@@ -30,6 +44,12 @@ void Ant::move(){// if need to dynamically allocate, free openSpace here
 	}
 	OpenSpaces.clear();
 }
+
+/*****************************************************************************/
+/** void breed()
+ * Purpose: Breed the ant, spawn another one nearby
+ * @return void
+ */
 void Ant::breed(){
 	breedcount++;
 	if(breedcount >=3){
@@ -43,6 +63,11 @@ void Ant::breed(){
 	}
 }
 
+/*****************************************************************************/
+/** ~Ant()
+ * Purpose: Deconstructor of the ant object
+ * @return void
+ */
 Ant::~Ant() {
 	// TODO Auto-generated destructor stub
 }
