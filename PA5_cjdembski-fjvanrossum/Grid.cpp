@@ -21,7 +21,8 @@
  * @param int co Number of columns of the grid
  */
 Grid::Grid(int ro, int co): row(ro),
-col(co), BugGrid(new Organism**[ro])
+col(co),totalAnts(0),totalDoods(0),
+BugGrid(new Organism**[ro])
 {
 	for(int i = 0; i < ro; i++){
 		BugGrid[i] = new Organism*[co];
@@ -158,6 +159,23 @@ std::vector<int*> Grid::GetAllEmptyLoc(int r, int c){//THIS MAY HAVE SCOPE PROBL
 }
 
 /*****************************************************************************/
+
+void Grid::updateTotNumAnts(){
+	totalAnts++;
+}
+void Grid::updateTotNumDoods(){
+	totalDoods++;
+}
+int Grid::getTotAnts(){
+	return totalAnts;
+}
+int Grid::getTotDoods(){
+	return totalDoods;
+}
+
+/*****************************************************************************/
+
+
 
 int Grid::getrow(){
 	return row;

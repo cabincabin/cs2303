@@ -20,29 +20,81 @@
 #include <iostream>
 using namespace std;
 
+
 #include "Grid.h"
 #include "Organism.h"
 #include "Doodlebug.h"
 #include "Ant.h"
 void printGrid(Grid* PlayGrid);
 
-int main(){
+int main(int argc, char *argv[]){
+int gridsize = 20;
+int numDood = 5;
+int numAnt = 100;
+int timeSteps = 1000;
+int seed = 1;
+int pauses = 0;
+	if(argc >= 2)
+		gridsize = atoi(argv[1]);
+	if(argc >= 3)
+		numDood = atoi(argv[2]);
+	if(argc >= 4)
+		numAnt = atoi(argv[3]);
+	if(argc >= 5)
+		timeSteps = atoi(argv[4]);
 
-	Grid* PlayGrid = new Grid(5,5);
-	PlayGrid -> BugGrid[1][1] = new Ant(PlayGrid, 1, 1);
-	PlayGrid -> BugGrid[1][2] = new Ant(PlayGrid, 1, 2); // This causes 1 prey to appear with GetAllPrey()
-	PlayGrid -> BugGrid[1][3] = new Doodlebug(PlayGrid, 1, 3);
-	//PlayGrid -> BugGrid[1][0] = new Doodlebug(PlayGrid, 1, 0);
+	if(argc >=6)
+		seed = atoi(argv[5]);
+
+	if(argc >=7){
+		pauses = atoi(argv[6]);
+	}
+
+	if(gridsize*gridsize < numAnt+numDood){
+		cout<<"ERROR: TOO MANY BUGS"<<endl;
+		exit(0);
+	}
+
+	srand(seed);
+
+
+
+	Grid* PlayGrid = new Grid(gridsize,gridsize);
+	for(int i = 0; i < numDood; i++){
+		int rowOrg = rand()%gridsize;
+		int colOrg = rand()%gridsize;
+		while(PlayGrid->BugGrid[rowOrg][colOrg]!=NULL){
+				rowOrg = rand()%gridsize;
+				colOrg = rand()%gridsize;
+		}
+		(new Doodlebug(PlayGrid, rowOrg, colOrg))->AddSelfToGrid();
+	}
+	for(int i = 0; i < numAnt; i++){
+		int rowOrg = rand()%gridsize;
+		int colOrg = rand()%gridsize;
+		while(PlayGrid->BugGrid[rowOrg][colOrg]!=NULL){
+				rowOrg = rand()%gridsize;
+				colOrg = rand()%gridsize;
+		}
+		(new Ant(PlayGrid, rowOrg, colOrg))->AddSelfToGrid();
+	}
+
 	std::vector<Organism*> pred = PlayGrid -> GetAllPred();
 	std::vector<Organism*> prey = PlayGrid -> GetAllPrey();
 	printGrid(PlayGrid);
 	int predsize = pred.size();
-	cout << "Number of predators: " << predsize << "\n";
 
 	int preysize = prey.size();
-	cout << "Number of prey: " << preysize << "\n";
-
-	for(int i = 0; i<10; i++){
+	int tstep = 0;
+	int pauseLoop = 0;
+	while(predsize > 0 && preysize > 0 && tstep < timeSteps){
+		if(pauses!=0){
+			if(pauseLoop%pauses==0 && pauseLoop!=0){//don't print on first time through
+				getchar();
+				printGrid(PlayGrid);
+			}
+			pauseLoop++;
+		}
 		for(int i = 0; i<predsize; i++){
 			pred.at(i)->move();
 		}
@@ -51,14 +103,23 @@ int main(){
 		for(int i = 0; i<preysize; i++){
 			prey.at(i)->move();
 		}
-		//prey.clear();
+		prey.clear();
 
-		//pred.clear(); //should not delete objects themselves if so, this could cause error
+		pred.clear(); //should not delete objects themselves if so, this could cause error
 		pred = PlayGrid->GetAllPred();
 		predsize = pred.size();
-		printGrid(PlayGrid);
+		tstep++;
 	}
-
+	if(tstep!=0)
+	printGrid(PlayGrid);
+	cout<<"Gridsize: "<<gridsize<<" #doodlebugs: "<<numDood<<
+			" #ants: "<<numAnt<<" #time_steps: "<< timeSteps<<
+			" seed: "<<seed<<" pause: "<<pauses<<endl;
+	cout<<"Total Number of Steps Performed: "<<tstep<<endl;
+	cout<<"Net Number of Ants On Board: "<<PlayGrid->getTotAnts()<<endl;
+	cout<<"Net Number of DoodleBugs On Board: "<<PlayGrid->getTotDoods()<<endl;
+	cout<<"Current Number Of Ants On Board: "<<(PlayGrid -> GetAllPrey()).size()<<endl;
+	cout<<"Current Number Of DoodleBugs On Board: "<<predsize<<endl;
 }
 
 void printGrid(Grid* PlayGrid){//copied from game of life, comments not changed

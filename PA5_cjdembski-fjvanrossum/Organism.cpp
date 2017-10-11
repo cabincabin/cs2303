@@ -56,6 +56,11 @@ void Organism::die(){
 void Organism::AddSelfToGrid(){
 	if(grid->isValid(r,c))
 		grid->BugGrid[r][c]=this;
+	if(isPrey()){
+		grid->updateTotNumAnts();
+	}
+	else
+		grid->updateTotNumDoods();
 }
 
 /*****************************************************************************/
