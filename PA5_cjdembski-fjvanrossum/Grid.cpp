@@ -109,11 +109,17 @@ std::vector<Organism*> Grid::GetAllPred(int r, int c){
  * @return vector<Organism*> Vector containing all the prey in the grid
  */
 std::vector<Organism*> Grid::GetAllPrey(){
+	// Return vector
 	std::vector<Organism*> AllPrey;
+
+	// Iterate through all the rows and columns
 	for(int i = 0; i<row; i++){
 		for(int j = 0; j<col; j++){
+			// Check if the grid is not zero
 			if(BugGrid[i][j] != NULL){
+				// Check if the grid is a prey
 				if((BugGrid[i][j] -> isPrey())){
+					// Grid space is prey, so add it to the vector
 					AllPrey.push_back(BugGrid[i][j]);
 				}
 			}
@@ -143,17 +149,21 @@ std::vector<Organism*> Grid::GetAllPrey(int r, int c){
 	if(r+1<row){
 		// Check the right grid space
 		if(BugGrid[r+1][c]!=NULL && BugGrid[r+1][c]->isPrey()){
-			// Right grid space is a predator
+			// Right grid space is prey, so add it to vector
 			AllPrey.push_back(BugGrid[r+1][c]);
 		}
 	}
 	if(c-1>=0){
+		// Check top grid space
 		if(BugGrid[r][c-1]!=NULL && BugGrid[r][c-1]->isPrey()){
+			// Top grid space is prey, so add it to vector
 			AllPrey.push_back(BugGrid[r][c-1]);
 		}
 	}
 	if(c+1<col){
+		// Check bottom grid space
 		if(BugGrid[r][c+1]!=NULL && BugGrid[r][c+1]->isPrey()){
+			// Bottom grid space is prey, so add it to vector
 			AllPrey.push_back(BugGrid[r][c+1]);
 		}
 	}
@@ -162,15 +172,26 @@ std::vector<Organism*> Grid::GetAllPrey(int r, int c){
 
 /*****************************************************************************/
 /** vector<int*> GetAllEmptyLoc(int r, int c)
- * Purpose: Returns a vector int of empty locations in the grid
+ * Purpose: Returns a vector int of empty locations around a grid space
  * @param int r Row maximum of the grid
  * @param int c Column maximum of the grid
  * @return vector<Organism*> Vector containing all empty spaces
  */
-std::vector<int*> Grid::GetAllEmptyLoc(int r, int c){//THIS MAY HAVE SCOPE PROBLEMS IF SO CHANGE EACH LOC TO A NEW INT(2)
+std::vector<int*> Grid::GetAllEmptyLoc(int r, int c){
+	/* Used if statements instead of a for loop because there are too little
+	 * spaces to make a for loop worth it. There is only left, right, top and
+	 * bottom. While it might make the code more concise it would increase the
+	 * workload for the program when creating a vector of empty locations.
+	 */
+	// Return vector
 	std::vector<int*> AllEmpty;
+
+	// First conditional statement is to check we are not running off the end
+	// of the grid
 	if(r-1>=0){
+		// Check the left grid space
 		if(BugGrid[r-1][c]==NULL){
+			// Add the left empty space to the vector
 			int* loc1 = new int[2];
 			 loc1[0]=r-1;
 			 loc1[1]=c;
@@ -178,7 +199,9 @@ std::vector<int*> Grid::GetAllEmptyLoc(int r, int c){//THIS MAY HAVE SCOPE PROBL
 		}
 	}
 	if(r+1<row){
+		// Check the right grid space
 		if(BugGrid[r+1][c]==NULL){
+			// Add the right empty space to the vector
 			int* loc2 = new int[2];
 			loc2[0]=r+1;
 			loc2[1]=c;
@@ -186,7 +209,9 @@ std::vector<int*> Grid::GetAllEmptyLoc(int r, int c){//THIS MAY HAVE SCOPE PROBL
 		}
 	}
 	if(c-1>=0){
+		// Check the top grid space
 		if(BugGrid[r][c-1]==NULL){
+			// Add the top grid space to the vector
 			int* loc3 = new int[2];
 			loc3[0]=r;
 			loc3[1]=c-1;
@@ -194,7 +219,9 @@ std::vector<int*> Grid::GetAllEmptyLoc(int r, int c){//THIS MAY HAVE SCOPE PROBL
 		}
 	}
 	if(c+1<col){
+		// Check the bottom grid space
 		if(BugGrid[r][c+1]==NULL){
+			// Add the bottom grid space to the vector
 			int* loc4 = new int[2];
 			loc4[0]=r;
 			loc4[1]=c+1;
@@ -277,5 +304,4 @@ bool Grid::isValid(int r, int c){
  * Purpose: Deconstructor of the grid object
  */
 Grid::~Grid() {
-	// TODO Auto-generated destructor stub
 }

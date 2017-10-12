@@ -31,16 +31,22 @@ Organism(true,gri,rpos,cpos){
  * Purpose: Move the ant according to the rules
  * @return void
  */
-void Ant::move(){// if need to dynamically allocate, free openSpace here
+void Ant::move(){
+	// Find all the empty locations surrounding the ant
 	std::vector<int*> OpenSpaces = grid->GetAllEmptyLoc(rPos(),cPos());
+	// Determine if there is a free location around the ant where it can move to
 	int size = OpenSpaces.size();
 	if(size!=0){
+		// Generate a random direction for the ant to travel in
 		int* loc = OpenSpaces.at((long)(rand()%size));
-		grid->BugGrid[loc[0]][loc[1]]=this;//move
-		grid->BugGrid[rPos()][cPos()]=NULL;//previous location is null
+		grid->BugGrid[loc[0]][loc[1]]=this; // Move the ant to the new location
+		grid->BugGrid[rPos()][cPos()]=NULL;// Set the previous location of the ant
+		// to null
+
+		// Update the ant object fields
 		r = loc[0];
 		c = loc[1];
-		breed();
+		breed(); // Update the breed status of the ant
 	}
 	OpenSpaces.clear();
 }
@@ -51,14 +57,18 @@ void Ant::move(){// if need to dynamically allocate, free openSpace here
  * @return void
  */
 void Ant::breed(){
-	breedcount++;
+	breedcount++; // Update the breed count variable
+	// If the breed count is above 3, breed the ant
 	if(breedcount >=3){
-		std::vector<int*> OpenSpaces = grid->GetAllEmptyLoc(rPos(),cPos());//will always be at least 1 location when invoked by self
+		// Find all empty locations surrounding the ant
+		std::vector<int*> OpenSpaces = grid->GetAllEmptyLoc(rPos(),cPos());
+		// Determine if there is a free location around the ant where it can breed to
 		int size = OpenSpaces.size();
-		if(size!=0){//for saftey
+		if(size!=0){
+			// Breed a new ant in a random direction
 			int* loc = OpenSpaces.at((long)(rand()%size));
 			(new Ant(grid,loc[0], loc[1]))->AddSelfToGrid();
-			breedcount = 0;
+			breedcount = 0; // Reset the ant breed count
 		}
 	}
 }
@@ -69,6 +79,4 @@ void Ant::breed(){
  * @return void
  */
 Ant::~Ant() {
-	// TODO Auto-generated destructor stub
 }
-

@@ -44,6 +44,7 @@ int Organism::rPos(){
  * @return void
  */
 void Organism::die(){
+	// Set the grid space of this object to null
 	grid->BugGrid[r][c]=NULL;
 	delete this;
 }
@@ -54,13 +55,16 @@ void Organism::die(){
  * @return void
  */
 void Organism::AddSelfToGrid(){
+	// Check if the grid space of the organism is within the user defined
+	// bounds of the grid
 	if(grid->isValid(r,c))
-		grid->BugGrid[r][c]=this;
+		grid->BugGrid[r][c]=this; // Add the organism to the grid
+	// Check if the organism is a prey or ant
 	if(isPrey()){
-		grid->updateTotNumAnts();
+		grid->updateTotNumAnts(); // Update total number of ants
 	}
 	else
-		grid->updateTotNumDoods();
+		grid->updateTotNumDoods(); // Update the total number of doodlebugs
 }
 
 /*****************************************************************************/

@@ -107,23 +107,33 @@ int main(int argc, char *argv[]){
 	// Initialize the grid
 	Grid* PlayGrid = new Grid(gridsize,gridsize);
 
+	// Add user specified number of doodle bugs to the grid in random locations
 	for(int i = 0; i < numDood; i++){
+		// Generate a random row and column
 		int rowOrg = rand()%gridsize;
 		int colOrg = rand()%gridsize;
+		// Check if the row and columns are empty, otherwise keep generating new
+		// rows and columns
 		while(PlayGrid->BugGrid[rowOrg][colOrg]!=NULL){
 				rowOrg = rand()%gridsize;
 				colOrg = rand()%gridsize;
 		}
+		// Instantiate a doodlebug object with random location and add it to the grid
 		(new Doodlebug(PlayGrid, rowOrg, colOrg))->AddSelfToGrid();
 	}
 
+	// Add user specified number of ants to random locations on the grid
 	for(int i = 0; i < numAnt; i++){
+		// Generate a random row and column location
 		int rowOrg = rand()%gridsize;
 		int colOrg = rand()%gridsize;
+		// Check if the row and column location is empty, otherwise
+		// keep generating new rows and columns
 		while(PlayGrid->BugGrid[rowOrg][colOrg]!=NULL){
 				rowOrg = rand()%gridsize;
 				colOrg = rand()%gridsize;
 		}
+		// Instantiate an Ant object with a random location and add it to the grid
 		(new Ant(PlayGrid, rowOrg, colOrg))->AddSelfToGrid();
 	}
 
@@ -135,6 +145,7 @@ int main(int argc, char *argv[]){
 	cout << "Initial Grid:";
 	printGrid(PlayGrid);
 
+	// Set-up variables equal to the number of predators and prey
 	int predsize = pred.size();
 	int preysize = prey.size();
 	int tstep = 0;
@@ -142,39 +153,52 @@ int main(int argc, char *argv[]){
 
 
 	// Main loop:
-	// Pre-condition:
+	// Runs until there are no more predators or prey or if the number of time
+	// steps is greater than the user specified number of time steps
 	while(predsize > 0 && preysize > 0 && tstep < timeSteps){
-
+		// Conditional statement that determines whether to pause in between
+		// grid print outs
 		if(pauses != 0){
-			if(pauseLoop % pauses == 0 && pauseLoop != 0){//don't print on first time through
-				getchar();
+			// This statement ensures that we do not print on the first pause loop
+			if(pauseLoop % pauses == 0 && pauseLoop != 0){
+				getchar(); // Wait for user input
 				cout << "Grid: " << tstep << endl;
 				printGrid(PlayGrid);
 			}
 			pauseLoop++;
 		}
 
+		// Move each predator
 		for(int i = 0; i < predsize; i++){
 			pred.at(i) -> move();
 		}
 
+		// Update the number of prey
 		prey = PlayGrid -> GetAllPrey();
 		preysize = prey.size();
 
+		// Move each prey
 		for(int i = 0; i < preysize; i++){
 			prey.at(i) -> move();
 		}
 
+		// Clear the used organism vectors
+		// should not delete objects themselves if so, this could cause error
 		prey.clear();
-		pred.clear(); //should not delete objects themselves if so, this could cause error
+		pred.clear();
+
+		// Update the predator vector
 		pred = PlayGrid -> GetAllPred();
 		predsize = pred.size();
 		tstep++;
 	}
+
 	cout << endl << "Final Grid:";
+	// Do not print out the playing field on the first run through
 	if(tstep != 0)
 		printGrid(PlayGrid);
 
+	// Print out the statistics of the run
 	cout << endl << endl << "Gridsize: " << gridsize << " #doodlebugs: " << numDood <<
 			" #ants: " << numAnt << " #time_steps: " << timeSteps <<
 			" seed: " << seed << " pause: " << pauses << endl;
@@ -183,6 +207,7 @@ int main(int argc, char *argv[]){
 	cout << "Net Number of DoodleBugs On Board: " << PlayGrid -> getTotDoods() << endl;
 	cout << "Current Number Of Ants On Board: " << (PlayGrid -> GetAllPrey()).size() << endl;
 	cout << "Current Number Of DoodleBugs On Board: " << predsize << endl;
+	delete PlayGrid;
 }
 
 
