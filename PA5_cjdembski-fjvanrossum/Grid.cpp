@@ -24,6 +24,7 @@ Grid::Grid(int ro, int co): row(ro),
 col(co),totalAnts(0),totalDoods(0),
 BugGrid(new Organism**[ro])
 {
+	// Fill the array with Organisms
 	for(int i = 0; i < ro; i++){
 		BugGrid[i] = new Organism*[co];
 	}
@@ -36,14 +37,22 @@ BugGrid(new Organism**[ro])
  * @return vector<Organism*> Vector containing all the predators in the grid
  */
 std::vector<Organism*> Grid::GetAllPred(){
+	// Return vector
 	std::vector<Organism*> AllPred;
+
 	for(int i = 0; i < row; i++){
 		for(int j = 0; j < col; j++){
+			// Check if this position in the grid is empty
 			if(BugGrid[i][j] != NULL){
+				// BugGrid[i][j] is not empty, loop invariant
+				// Check if this position in the grid is prey
 				if(!(BugGrid[i][j] -> isPrey())){
+					// The BugGrid[i][j] is a prey so add this location to the
+					// vector
 					AllPred.push_back(BugGrid[i][j]);
 				}
 			}
+
 		}
 	}
 	return AllPred;
@@ -51,30 +60,43 @@ std::vector<Organism*> Grid::GetAllPred(){
 
 /*****************************************************************************/
 /** vector<Organism*> GetAllPred(int r, int c)
- * Purpose: Returns a vector of all predators in the grid
+ * Purpose: Returns a vector of predator around a specific location
  * @param int r Row maximum of the grid
  * @param int c Column maximum of the grid
  * @return vector<Organism*> Vector containing all the predators in a space
  */
 std::vector<Organism*> Grid::GetAllPred(int r, int c){
+	// Return vector
 	std::vector<Organism*> AllPred;
+	// This conditional statement checks if there is a predator in the adjecent grid
+	// r,c
+	// First layer of conditional statement protects agains running off the end
+	// of the array
 	if(r-1>=0){
+		// Check left grid location
 		if(BugGrid[r-1][c]!=NULL && !BugGrid[r-1][c]->isPrey()){
+			// Left is a predator, add it to vector
 			AllPred.push_back(BugGrid[r-1][c]);
 		}
 	}
 	if(r+1<row){
+		// Check right grid location
 		if(BugGrid[r+1][c]!=NULL && !BugGrid[r+1][c]->isPrey()){
+			// Right is a predator, add it to vector
 			AllPred.push_back(BugGrid[r+1][c]);
 		}
 	}
 	if(c-1>=0){
+		// Check top grid location
 		if(BugGrid[r][c-1]!=NULL && !BugGrid[r][c-1]->isPrey()){
+			// Top is a predator, add it to vector
 			AllPred.push_back(BugGrid[r][c-1]);
 		}
 	}
 	if(c+1<col){
+		// Check bottom grid location
 		if(BugGrid[r][c+1]!=NULL && !BugGrid[r][c+1]->isPrey()){
+			// Bottom is a predator, add it to vector
 			AllPred.push_back(BugGrid[r][c+1]);
 		}
 	}
@@ -102,20 +124,26 @@ std::vector<Organism*> Grid::GetAllPrey(){
 
 /*****************************************************************************/
 /** vector<Organism*> GetAllPrey(int r, int c)
- * Purpose: Returns a vector of all prey in the grid
+ * Purpose: Returns a vector of all prey around a specific location
  * @param int r Row maximum of the grid
  * @param int c Column maximum of the grid
- * @return vector<Organism*> Vector containing all the prey in the grid
+ * @return vector<Organism*> Vector containing prey around parameter grid space
  */
 std::vector<Organism*> Grid::GetAllPrey(int r, int c){
+	// Return variable
 	std::vector<Organism*> AllPrey;
+	// Protection against running off the end of the grid
 	if(r-1>=0){
+		// Check the left grid
 		if(BugGrid[r-1][c]!=NULL && BugGrid[r-1][c]->isPrey()){
+			// Left grid is prey so add it to vector
 			AllPrey.push_back(BugGrid[r-1][c]);
 		}
 	}
 	if(r+1<row){
+		// Check the right grid space
 		if(BugGrid[r+1][c]!=NULL && BugGrid[r+1][c]->isPrey()){
+			// Right grid space is a predator
 			AllPrey.push_back(BugGrid[r+1][c]);
 		}
 	}
@@ -237,6 +265,8 @@ int Grid::getcol(){
  * (TRUE == in grid) (FALSE == not in grid)
  */
 bool Grid::isValid(int r, int c){
+	// This conditional statements checks if the location is off the end of the
+	// grid
 	if(r>=0&&r<row&&c>=0&&c<col)
 		return true;
 	return false;
