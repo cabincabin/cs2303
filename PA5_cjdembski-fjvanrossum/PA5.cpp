@@ -78,7 +78,7 @@ int main(int argc, char *argv[]){
 	int numAnt = 100;
 	int timeSteps = 1000;
 	int seed = 1;
-	int pauses = 1;
+	int pauses = 0;
 
 	// Parsing and storing the command line arguments based
 	// on number of arguments entered by the user
