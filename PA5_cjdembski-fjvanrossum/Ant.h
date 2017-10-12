@@ -16,7 +16,7 @@ class Ant: public Organism{
 public:
 	// Ant Contstructor
 	Ant(Grid* gri, int rpos, int cpos);
-	// Virtual functions, base class functions to be used
+
 	virtual void move();
 	virtual void breed();
 	// Virtual deconstructor

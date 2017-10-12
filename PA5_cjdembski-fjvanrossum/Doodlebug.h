@@ -19,13 +19,10 @@ public:
 	// Constructor of the doodlebug object
 	Doodlebug(Grid* gri, int rpos, int cpos);
 
-	// Virtual functions, base class method to be used
-	virtual void move();
-	virtual void breed();
-	virtual ~Doodlebug();
+	virtual void move(); // Move the doodlebug object
+	virtual void breed(); // Breed the doodlebug object
+	virtual ~Doodlebug(); // Doodlebug destructor
 
-	// Functions implemented in doodlebug
-	void Starve();
 };
 
 #endif /* DOODLEBUG_H_ */
