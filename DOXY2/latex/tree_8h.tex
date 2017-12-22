@@ -1,0 +1,59 @@
+\hypertarget{tree_8h}{}\section{tree.\+h File Reference}
+\label{tree_8h}\index{tree.\+h@{tree.\+h}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structnode}{node} $\ast$ \hyperlink{tree_8h_a67056e7e683577d1cce9de36b0b2c7a2}{new\+Node} (char $\ast$word)
+\item 
+void \hyperlink{tree_8h_ac7340921541fb6949fb8658eb7a760ee}{insert\+Word} (char $\ast$word, struct \hyperlink{structnode}{node} $\ast$\hyperlink{structnode}{node})
+\item 
+void \hyperlink{tree_8h_a0d654e0417654030c0e093959394d21f}{list\+Tree} (struct \hyperlink{structnode}{node} $\ast$\hyperlink{structnode}{node})
+\item 
+void \hyperlink{tree_8h_ae797a2419a0d72cfac54c4d258bbacce}{deref\+Tree} (struct \hyperlink{structnode}{node} $\ast$\hyperlink{structnode}{node})
+\item 
+void \hyperlink{tree_8h_a5e470164cddc2cb6c292388a20cae0ff}{num\+Unique\+Words} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{tree_8h_ae797a2419a0d72cfac54c4d258bbacce}\label{tree_8h_ae797a2419a0d72cfac54c4d258bbacce}} 
+\index{tree.\+h@{tree.\+h}!deref\+Tree@{deref\+Tree}}
+\index{deref\+Tree@{deref\+Tree}!tree.\+h@{tree.\+h}}
+\subsubsection{\texorpdfstring{deref\+Tree()}{derefTree()}}
+{\footnotesize\ttfamily void deref\+Tree (\begin{DoxyParamCaption}\item[{struct \hyperlink{structnode}{node} $\ast$}]{node }\end{DoxyParamCaption})}
+
+\hyperlink{tree_8c_ae797a2419a0d72cfac54c4d258bbacce}{deref\+Tree(struct node $\ast$ node)} frees every node in a given tree 
+\begin{DoxyParams}{Parameters}
+{\em struct} & node $\ast$ node the base node for all branches to be deleated \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{tree_8h_ac7340921541fb6949fb8658eb7a760ee}\label{tree_8h_ac7340921541fb6949fb8658eb7a760ee}} 
+\index{tree.\+h@{tree.\+h}!insert\+Word@{insert\+Word}}
+\index{insert\+Word@{insert\+Word}!tree.\+h@{tree.\+h}}
+\subsubsection{\texorpdfstring{insert\+Word()}{insertWord()}}
+{\footnotesize\ttfamily void insert\+Word (\begin{DoxyParamCaption}\item[{char $\ast$}]{word,  }\item[{struct \hyperlink{structnode}{node} $\ast$}]{node }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{tree_8h_a0d654e0417654030c0e093959394d21f}\label{tree_8h_a0d654e0417654030c0e093959394d21f}} 
+\index{tree.\+h@{tree.\+h}!list\+Tree@{list\+Tree}}
+\index{list\+Tree@{list\+Tree}!tree.\+h@{tree.\+h}}
+\subsubsection{\texorpdfstring{list\+Tree()}{listTree()}}
+{\footnotesize\ttfamily void list\+Tree (\begin{DoxyParamCaption}\item[{struct \hyperlink{structnode}{node} $\ast$}]{node }\end{DoxyParamCaption})}
+
+\hyperlink{tree_8c_a0d654e0417654030c0e093959394d21f}{list\+Tree(struct node $\ast$ node)} Purpose\+: prints all nodes to file in alphabetical order 
+\begin{DoxyParams}{Parameters}
+{\em struct} & node $\ast$ node The main node to generate the file off of \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{tree_8h_a67056e7e683577d1cce9de36b0b2c7a2}\label{tree_8h_a67056e7e683577d1cce9de36b0b2c7a2}} 
+\index{tree.\+h@{tree.\+h}!new\+Node@{new\+Node}}
+\index{new\+Node@{new\+Node}!tree.\+h@{tree.\+h}}
+\subsubsection{\texorpdfstring{new\+Node()}{newNode()}}
+{\footnotesize\ttfamily struct \hyperlink{structnode}{node}$\ast$ new\+Node (\begin{DoxyParamCaption}\item[{char $\ast$}]{word }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{tree_8h_a5e470164cddc2cb6c292388a20cae0ff}\label{tree_8h_a5e470164cddc2cb6c292388a20cae0ff}} 
+\index{tree.\+h@{tree.\+h}!num\+Unique\+Words@{num\+Unique\+Words}}
+\index{num\+Unique\+Words@{num\+Unique\+Words}!tree.\+h@{tree.\+h}}
+\subsubsection{\texorpdfstring{num\+Unique\+Words()}{numUniqueWords()}}
+{\footnotesize\ttfamily void num\+Unique\+Words (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\hyperlink{tree_8c_a5e470164cddc2cb6c292388a20cae0ff}{num\+Unique\+Words()} Prints the number of unique words in the tree. 
